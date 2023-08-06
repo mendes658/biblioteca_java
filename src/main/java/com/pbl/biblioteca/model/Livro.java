@@ -4,16 +4,23 @@ import java.util.ArrayList;
 
 public class Livro {
 
-    private Integer id; // primary key
+    private static Integer currentId = 0;
+
+    public Livro(){
+        currentId++;
+        id = currentId;
+    }
+
+    private final Integer id; // primary key
     private String titulo;
     private String autor;
     private String editora;
     private Integer ano;
     private String categoria;
     private String isbn; // unique
-    private static Integer exemplaresDisponiveis;
-    private static Integer exemplaresTotais;
-    private static final ArrayList<Integer> idEmprestimos = new ArrayList<>();
+    private Integer exemplaresDisponiveis;
+    private Integer exemplaresTotais;
+    private final ArrayList<Integer> idEmprestimos = new ArrayList<>();
 
 
     // Getters
@@ -28,6 +35,7 @@ public class Livro {
     public String getAutor() {
         return autor;
     }
+
 
     public String getEditora() {
         return editora;
@@ -45,24 +53,20 @@ public class Livro {
         return isbn;
     }
 
-    public static Integer getExemplaresDisponiveis() {
+    public Integer getExemplaresDisponiveis() {
         return exemplaresDisponiveis;
     }
 
-    public static Integer getExemplaresTotais() {
+    public Integer getExemplaresTotais() {
         return exemplaresTotais;
     }
 
-    public static ArrayList<Integer> getIdEmprestimos() {
+    public ArrayList<Integer> getIdEmprestimos() {
         return idEmprestimos;
     }
 
 
     // Setters
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -87,23 +91,23 @@ public class Livro {
         this.isbn = isbn;
     }
 
-    public static void setExemplaresTotais(Integer total) {
-        exemplaresTotais = total;
-        exemplaresDisponiveis = total;
+    public void setExemplaresTotais(Integer total) {
+        this.exemplaresTotais = total;
+        this.exemplaresDisponiveis = total;
     }
 
 
     // Controle de empréstimos
-    public static void addEmprestimo(Integer id){
-        idEmprestimos.add(id);
-        exemplaresDisponiveis --;
+    public void addEmprestimo(Integer idEmp){
+        this.idEmprestimos.add(idEmp);
+        this.exemplaresDisponiveis --;
     }
 
-    public static void removeEmprestimo(Integer id){
-        for (int i = 0; i < idEmprestimos.size(); i++) {
-            if (idEmprestimos.get(i).equals(id)) {
-                idEmprestimos.remove(i);
-                exemplaresDisponiveis++;
+    public void removeEmprestimo(Integer idEmp){
+        for (int i = 0; i < this.idEmprestimos.size(); i++) {
+            if (this.idEmprestimos.get(i).equals(idEmp)) {
+                this.idEmprestimos.remove(i);
+                this.exemplaresDisponiveis++;
                 break;
             }
         }
