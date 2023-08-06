@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Livro {
 
-    private Integer id;
+    private Integer id; // primary key
     private String titulo;
     private String autor;
     private String editora;
     private Integer ano;
     private String categoria;
-    private String isbn;
+    private String isbn; // unique
     private static Integer exemplaresDisponiveis;
     private static Integer exemplaresTotais;
     private static final ArrayList<Integer> idEmprestimos = new ArrayList<>();
@@ -87,18 +87,19 @@ public class Livro {
         this.isbn = isbn;
     }
 
-    public void setExemplaresTotais(Integer total) {
+    public static void setExemplaresTotais(Integer total) {
         exemplaresTotais = total;
+        exemplaresDisponiveis = total;
     }
 
 
     // Controle de empréstimos
-    public void addEmprestimo(Integer id){
+    public static void addEmprestimo(Integer id){
         idEmprestimos.add(id);
         exemplaresDisponiveis --;
     }
 
-    public void removeEmprestimo(Integer id){
+    public static void removeEmprestimo(Integer id){
         for (int i = 0; i < idEmprestimos.size(); i++) {
             if (idEmprestimos.get(i).equals(id)) {
                 idEmprestimos.remove(i);
@@ -109,3 +110,5 @@ public class Livro {
     }
 
 }
+
+
