@@ -1,5 +1,6 @@
 package com.pbl.biblioteca.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Usuario {
@@ -8,6 +9,7 @@ public class Usuario {
     public Usuario(){
         currentId++;
         id = currentId;
+        bloqueado = false;
     }
 
     private String username; // primary key
@@ -17,11 +19,13 @@ public class Usuario {
     private String telefone;
     private final Integer id;
     private String senha;
+    private Boolean bloqueado;
+    private LocalDate fimBloqueio = null;
 
 
     // Getters
-    public static Integer getCurrentId() {
-        return currentId;
+    public Boolean getBloqueado(){
+        return bloqueado;
     }
 
     public String getUsername() {
@@ -52,6 +56,10 @@ public class Usuario {
         return senha;
     }
 
+    public LocalDate getFimBloqueio(){
+        return fimBloqueio;
+    }
+
 
     // Setters
     public void setUsername(String username) {
@@ -73,4 +81,15 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public void blockUser(LocalDate dataFim){
+        this.bloqueado = true;
+        this.fimBloqueio = dataFim;
+    }
+
+    public void unblockUser(){
+        this.bloqueado = false;
+        this.fimBloqueio = null;
+    }
+
 }
