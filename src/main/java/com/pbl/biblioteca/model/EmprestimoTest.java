@@ -14,5 +14,9 @@ public class EmprestimoTest {
         System.out.println("Inicio Emp: " + test.getDataInicio());
         System.out.println("Fim Emp: " + test.getDataFim());
         System.out.println("Id: " + test.getId());
+
+        Emprestimo x = new Emprestimo();
+
+        System.out.println("Id: " + x.getId());
     }
 }

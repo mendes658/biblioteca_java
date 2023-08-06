@@ -3,7 +3,7 @@ package com.pbl.biblioteca.model;
 import java.time.LocalDate;
 
 public class Emprestimo {
-    private static Integer currentId = 1;
+    private static Integer currentId = 0;
 
     public Emprestimo(){
         currentId++;
@@ -48,9 +48,9 @@ public class Emprestimo {
         this.idUser = idUser;
     }
 
-    public void setDataInicio(LocalDate dataInicio, Integer days) {
+    public void setDataInicio(LocalDate dataInicio, Integer dias) {
         this.dataInicio = dataInicio;
-        this.dataFim = dataInicio.plusDays(days);
+        this.dataFim = dataInicio.plusDays(dias);
     }
 
 }
