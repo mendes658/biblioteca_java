@@ -37,8 +37,12 @@ public class Operador {
         this.username = username;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public Boolean setCargo(String cargo) {
+        if (cargo.equals("admin") || cargo.equals("biblio")){
+            this.cargo = cargo;
+            return true;
+        }
+        return false;
     }
 
     public void setSenha(String senha) {
