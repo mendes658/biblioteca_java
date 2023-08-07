@@ -1,9 +1,10 @@
 package com.pbl.biblioteca.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Usuario {
+public class Usuario implements Serializable {
     private static Integer currentId = 0;
 
     public Usuario(){
@@ -17,7 +18,7 @@ public class Usuario {
     private String nome;
     private String endereco;
     private String telefone;
-    private final Integer id;
+    private Integer id;
     private String senha;
     private Boolean bloqueado;
     private LocalDate fimBloqueio = null;

@@ -1,6 +1,7 @@
 package com.pbl.biblioteca.model;
+import java.io.Serializable;
 
-public class Operador {
+public class Operador implements Serializable {
     private static Integer currentId = 0;
 
     public Operador(){

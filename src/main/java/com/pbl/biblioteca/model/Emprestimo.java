@@ -1,8 +1,9 @@
 package com.pbl.biblioteca.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Emprestimo {
+public class Emprestimo implements Serializable {
     private static Integer currentId = 0;
 
     public Emprestimo(){

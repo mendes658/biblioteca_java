@@ -1,8 +1,9 @@
 package com.pbl.biblioteca.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Livro {
+public class Livro implements Serializable {
 
     private static Integer currentId = 0;
 
