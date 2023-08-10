@@ -2,14 +2,14 @@ package com.pbl.biblioteca.model;
 
 public class OperadorTest {
     public static void main(String[] args){
-        Operador teste = new Operador();
-        teste.setCargo("qdq");
-        System.out.println(teste.getCargo());
+        Operator teste = new Operator();
+        teste.setRole("qdq");
+        System.out.println(teste.getRole());
 
-        teste.setCargo("admin");
-        System.out.println(teste.getCargo());
+        teste.setRole("admin");
+        System.out.println(teste.getRole());
 
-        teste.setCargo("biblio");
-        System.out.println(teste.getCargo());
+        teste.setRole("biblio");
+        System.out.println(teste.getRole());
     }
 }

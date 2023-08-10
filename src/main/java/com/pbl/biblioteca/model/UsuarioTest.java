@@ -4,26 +4,26 @@ import java.time.LocalDate;
 
 public class UsuarioTest {
     public static void main(String[] args){
-        Usuario test = new Usuario();
-        test.setEndereco("Rua PAPAPSQ");
-        test.setNome("Pedro");
-        test.setSenha("1252");
-        test.setTelefone("784989");
-        test.setUsername("unfair");
+        User test = new User();
+        test.setAdress("Rua PAPAPSQ");
+        test.setName("Pedro");
+        test.setPassword("1252");
+        test.setTelephone("784989");
+        test.setNickname("unfair");
 
         LocalDate plus7 = LocalDate.now().plusDays(7);
 
-        System.out.println("Fim Bloqueio: " + test.getFimBloqueio());
+        System.out.println("Fim Bloqueio: " + test.getDateEndBlock());
 
         System.out.println("Id: " + test.getId());
         test.blockUser(plus7);
-        System.out.println("Blocked: " + test.getBloqueado());
-        System.out.println("Fim Bloqueio: " + test.getFimBloqueio());
+        System.out.println("Blocked: " + test.getBlocked());
+        System.out.println("Fim Bloqueio: " + test.getDateEndBlock());
         test.unblockUser();
-        System.out.println("Blocked: " + test.getBloqueado());
-        System.out.println("Fim Bloqueio: " + test.getFimBloqueio());
+        System.out.println("Blocked: " + test.getBlocked());
+        System.out.println("Fim Bloqueio: " + test.getDateEndBlock());
 
-        Usuario test2 = new Usuario();
+        User test2 = new User();
         System.out.println("Novo Id: " + test2.getId());
     }
 }

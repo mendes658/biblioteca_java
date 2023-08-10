@@ -4,18 +4,18 @@ import java.time.LocalDate;
 
 public class EmprestimoTest {
     public static void main(String[] args){
-        Emprestimo test = new Emprestimo();
-        test.setIdLivro(12);
-        test.setIdUser(1);
+        Loan test = new Loan();
+        test.setBookId(12);
+        test.setUserId(1);
 
         LocalDate data = LocalDate.now();
-        test.setDataInicio(data, 7);
+        test.setInitialDate(data, 7);
 
-        System.out.println("Inicio Emp: " + test.getDataInicio());
-        System.out.println("Fim Emp: " + test.getDataFim());
+        System.out.println("Inicio Emp: " + test.getInitialDate());
+        System.out.println("Fim Emp: " + test.getFinalDate());
         System.out.println("Id: " + test.getId());
 
-        Emprestimo x = new Emprestimo();
+        Loan x = new Loan();
 
         System.out.println("Id: " + x.getId());
     }
