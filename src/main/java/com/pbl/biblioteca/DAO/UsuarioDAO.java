@@ -14,6 +14,7 @@ public class UsuarioDAO {
         ObjectInputStream objetoIn;
         Usuario usuarioAtual;
 
+
         try{
             arquivoIn = new FileInputStream(url);
             objetoIn = new ObjectInputStream(arquivoIn);
