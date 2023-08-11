@@ -11,7 +11,6 @@ public class Operator implements Serializable {
 
     private String username;
     private final String id;
-    private String role;
     private String password;
 
 
@@ -24,10 +23,6 @@ public class Operator implements Serializable {
         return id;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -36,14 +31,6 @@ public class Operator implements Serializable {
     // Setters
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Boolean setRole(String newRole) {
-        if (newRole.equals("admin") || newRole.equals("biblio")){
-            this.role = newRole;
-            return true;
-        }
-        return false;
     }
 
     public void setPassword(String password) {

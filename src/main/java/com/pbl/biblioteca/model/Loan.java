@@ -6,16 +6,21 @@ import java.time.LocalDate;
 public class Loan implements Serializable {
     private static Integer currentId = 0;
 
-    public Loan(){
+    public Loan(String newBookISBN, String newUserId, LocalDate date, Integer loanDays){
         currentId++;
         id = currentId.toString();
+
+        this.bookISBN = newBookISBN;
+        this.userNickname = newUserId;
+        this.initialDate = date;
+        this.finalDate = date.plusDays(loanDays);
     }
 
     private final String id;
-    private Integer bookId;
-    private Integer userId;
-    private LocalDate initialDate;
-    private LocalDate finalDate;
+    private final String bookISBN;
+    private final String userNickname;
+    private final LocalDate initialDate;
+    private final LocalDate finalDate;
 
 
     // Getters
@@ -23,12 +28,12 @@ public class Loan implements Serializable {
         return id;
     }
 
-    public Integer getBookId() {
-        return bookId;
+    public String getbookISBN() {
+        return bookISBN;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getUserNickname() {
+        return userNickname;
     }
 
     public LocalDate getInitialDate() {
@@ -40,18 +45,5 @@ public class Loan implements Serializable {
     }
 
 
-    // Setters
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public void setInitialDate(LocalDate date, Integer loanDays) {
-        this.initialDate = date;
-        this.finalDate = date.plusDays(loanDays);
-    }
 
 }

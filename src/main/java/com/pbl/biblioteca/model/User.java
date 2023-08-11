@@ -5,27 +5,28 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class User implements Serializable {
+
     private static Integer currentId = 0;
-
-    public User(){
-        currentId++;
-        id = currentId.toString();
-        blocked = false;
-    }
-
     private String nickname; // primary key
-    private final ArrayList<Integer> loanHashmap = new ArrayList<>();
+    private final ArrayList<String> loanIds = new ArrayList<>();
     private String name;
     private String adress;
     private String telephone;
     private final String id;
     private String password;
     private Boolean blocked;
-    private LocalDate dateEndBlock = null;
+    private LocalDate dateEndBlock;
+
+    public User(){
+        currentId++;
+        id = currentId.toString();
+        blocked = false;
+        dateEndBlock = null;
+    }
 
 
     // Getters
-    public Boolean getBlocked(){
+    public Boolean isBlocked(){
         return blocked;
     }
 
@@ -33,8 +34,8 @@ public class User implements Serializable {
         return nickname;
     }
 
-    public ArrayList<Integer> getLoanHashmap() {
-        return loanHashmap;
+    public ArrayList<String> getLoanIds() {
+        return loanIds;
     }
 
     public String getName() {
@@ -91,6 +92,20 @@ public class User implements Serializable {
     public void unblockUser(){
         this.blocked = false;
         this.dateEndBlock = null;
+    }
+
+    public void updateLoanIds(String newLoanId){
+        this.loanIds.add(newLoanId);
+    }
+
+    public boolean deleteLoanId(String loanId){
+        for (int i = 0; i< loanIds.size(); i++){
+            if (loanIds.get(i).equals(loanId)){
+                loanIds.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
