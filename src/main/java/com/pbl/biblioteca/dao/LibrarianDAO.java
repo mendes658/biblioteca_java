@@ -8,13 +8,14 @@ public class LibrarianDAO extends ConnectionDAO{
 
     public static boolean saveLibrarian(Librarian librarianObject){
         HashMap<String, Librarian> librarianHM = getLibrarianHashmap();
-        if (librarianHM == null){
-            librarianHM = new HashMap<>();
-        }
 
         librarianHM.put(librarianObject.getUsername(),librarianObject);
 
-        return saveAnyHashmap(librarianHM, bookFileUrl);
+        return saveAnyHashmap(librarianHM, librarianFileUrl);
+    }
+
+    public static Librarian getLibrarianByUsername(String username){
+        return getLibrarianHashmap().get(username);
     }
 
 }

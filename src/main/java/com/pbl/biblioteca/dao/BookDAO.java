@@ -6,15 +6,16 @@ import java.util.HashMap;
 
 public class BookDAO extends ConnectionDAO{
 
+    protected static final String booksIdsByCategoryUrl = "books_ids_category.ser";
+
     public static boolean saveBook(Book bookObject){
         HashMap<String, Book> bookHM = getBookHashmap();
-        if (bookHM == null){
-            bookHM = new HashMap<>();
-        }
 
         bookHM.put(bookObject.getIsbn(),bookObject);
 
         return saveAnyHashmap(bookHM, bookFileUrl);
     }
+
+
 
 }

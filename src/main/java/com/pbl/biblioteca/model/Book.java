@@ -2,14 +2,17 @@ package com.pbl.biblioteca.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Book implements Serializable {
 
     private static Integer currentId = 0;
+    private static HashMap<String, String> bookIsbnsByCategory;
 
     public Book(){
         currentId++;
         id = currentId;
+        bookIsbnsByCategory = new HashMap<>();
     }
 
 

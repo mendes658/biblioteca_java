@@ -18,17 +18,17 @@ public class ConnectionDAO {
     protected static Object getAnySavedHashmap(String fileUrl){
         FileInputStream fileIn;
         ObjectInputStream objectIn;
-        Object anyHashmap;
+        Object anyHashmap = new Object();
 
         try{
-            fileIn = new FileInputStream(userFileUrl);
+            fileIn = new FileInputStream(fileUrl);
             objectIn = new ObjectInputStream(fileIn);
             anyHashmap = objectIn.readObject();
 
             objectIn.close();
 
         } catch (IOException | ClassNotFoundException e){
-            return null;
+            System.out.println(e.toString());;
         }
 
         return anyHashmap;
@@ -53,27 +53,72 @@ public class ConnectionDAO {
 
     @SuppressWarnings("unchecked")
     public static HashMap<String, User> getUserHashmap(){
-        return (HashMap<String, User>) getAnySavedHashmap(userFileUrl);
+        File testFile = new File(userFileUrl);
+        HashMap<String, User> userHM = new HashMap<>();
+
+        if (!testFile.isFile()) {
+            saveAnyHashmap(userHM, userFileUrl);
+        } else {
+            userHM = (HashMap<String, User>) getAnySavedHashmap(userFileUrl);
+        }
+
+        return userHM;
     }
 
     @SuppressWarnings("unchecked")
-    public static HashMap<String, Loan> getLoanHashmap(){
-        return (HashMap<String, Loan>) getAnySavedHashmap(loanFileUrl);
+    public static HashMap<String, Loan> getLoanHashmap() {
+        File testFile = new File(loanFileUrl);
+        HashMap<String, Loan> loanHM = new HashMap<>();
+
+        if (!testFile.isFile()) {
+            saveAnyHashmap(loanHM, loanFileUrl);
+        } else {
+            loanHM = (HashMap<String, Loan>) getAnySavedHashmap(loanFileUrl);
+        }
+
+        return loanHM;
     }
 
     @SuppressWarnings("unchecked")
     public static HashMap<String, Operator> getOperatorHashmap(){
-        return (HashMap<String, Operator>) getAnySavedHashmap(operatorFileUrl);
+        File testFile = new File(operatorFileUrl);
+        HashMap<String, Operator> operatorHM = new HashMap<>();
+
+        if (!testFile.isFile()) {
+            saveAnyHashmap(operatorHM, operatorFileUrl);
+        } else {
+            operatorHM = (HashMap<String, Operator>) getAnySavedHashmap(operatorFileUrl);
+        }
+
+        return operatorHM;
     }
 
     @SuppressWarnings("unchecked")
     public static HashMap<String, Book> getBookHashmap(){
-        return (HashMap<String, Book>) getAnySavedHashmap(bookFileUrl);
+        File testFile = new File(bookFileUrl);
+        HashMap<String, Book> bookHM = new HashMap<>();
+
+        if (!testFile.isFile()) {
+            saveAnyHashmap(bookHM, bookFileUrl);
+        } else {
+            bookHM = (HashMap<String, Book>) getAnySavedHashmap(bookFileUrl);
+        }
+
+        return bookHM;
     }
 
     @SuppressWarnings("unchecked")
     public static HashMap<String, Librarian> getLibrarianHashmap(){
-        return (HashMap<String, Librarian>) getAnySavedHashmap(librarianFileUrl);
+        File testFile = new File(librarianFileUrl);
+        HashMap<String, Librarian> librarianHM = new HashMap<>();
+
+        if (!testFile.isFile()) {
+            saveAnyHashmap(librarianHM, librarianFileUrl);
+        } else {
+            librarianHM = (HashMap<String, Librarian>) getAnySavedHashmap(librarianFileUrl);
+        }
+
+        return librarianHM;
     }
 
 }

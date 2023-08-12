@@ -1,5 +1,7 @@
 package com.pbl.biblioteca.model;
 
+import com.pbl.biblioteca.dao.LoanDAO;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 

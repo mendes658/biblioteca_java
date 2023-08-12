@@ -17,11 +17,18 @@ public class User implements Serializable {
     private Boolean blocked;
     private LocalDate dateEndBlock;
 
-    public User(){
+    public User(String newNickname, String newName,
+                String newAdress, String newTelephone, String newPassword){
         currentId++;
         id = currentId.toString();
         blocked = false;
         dateEndBlock = null;
+
+        this.nickname = newNickname;
+        this.name = newName;
+        this.adress = newAdress;
+        this.telephone = newTelephone;
+        this.password = newPassword;
     }
 
 

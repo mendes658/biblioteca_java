@@ -3,15 +3,18 @@ import java.io.Serializable;
 
 public class Operator implements Serializable {
     private static Integer currentId = 0;
-
-    public Operator(){
-        currentId++;
-        id = currentId.toString();
-    }
-
     private String username;
     private final String id;
     private String password;
+
+
+    public Operator(String newUsername, String newPassword){
+        currentId++;
+        id = currentId.toString();
+        this.username = newUsername;
+        this.password = newPassword;
+    }
+
 
 
     // Getters

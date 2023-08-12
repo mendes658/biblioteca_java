@@ -8,9 +8,6 @@ public class OperatorDAO extends ConnectionDAO{
 
     public static boolean saveOperator(Operator operatorObject){
         HashMap<String, Operator> operatorHM = getOperatorHashmap();
-        if (operatorHM == null){
-            operatorHM = new HashMap<String, Operator>();
-        }
 
         operatorHM.put(operatorObject.getId(),operatorObject);
 

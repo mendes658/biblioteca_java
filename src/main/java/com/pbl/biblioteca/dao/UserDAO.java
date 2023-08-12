@@ -9,9 +9,6 @@ public class UserDAO extends ConnectionDAO{
 
     public static boolean saveUser(User userObject){
         HashMap<String, User> userHM = getUserHashmap();
-        if (userHM == null){
-            userHM = new HashMap<String, User>();
-        }
 
         userHM.put(userObject.getNickname(),userObject);
 
