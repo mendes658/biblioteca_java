@@ -1,13 +1,14 @@
-package com.pbl.biblioteca.dao;
+package com.pbl.biblioteca.dao.Operator;
 
+import com.pbl.biblioteca.dao.ConnectionDAO;
 import com.pbl.biblioteca.model.Operator;
 
 import java.util.HashMap;
 
-public class OperatorDAO extends ConnectionDAO{
+public class OperatorDAOImpl extends ConnectionDAO {
 
     public static boolean saveOperator(Operator operatorObject){
-        HashMap<String, Operator> operatorHM = getOperatorHashmap();
+        HashMap<String, Operator> operatorHM = getAnySavedHashmap(operatorFileUrl);
 
         operatorHM.put(operatorObject.getId(),operatorObject);
 

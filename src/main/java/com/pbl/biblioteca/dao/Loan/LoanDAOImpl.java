@@ -1,14 +1,14 @@
-package com.pbl.biblioteca.dao;
+package com.pbl.biblioteca.dao.Loan;
 
+import com.pbl.biblioteca.dao.ConnectionDAO;
 import com.pbl.biblioteca.model.Loan;
 
-import java.io.File;
 import java.util.HashMap;
 
-public class LoanDAO extends ConnectionDAO{
+public class LoanDAOImpl extends ConnectionDAO {
 
     public static boolean saveLoan(Loan loanObject){
-        HashMap<String, Loan> loanHM = getLoanHashmap();
+        HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
 
         loanHM.put(loanObject.getId(),loanObject);
 
@@ -16,7 +16,7 @@ public class LoanDAO extends ConnectionDAO{
     }
 
     public static Loan getLoanById(String id){
-        HashMap<String, Loan> loanHM = getLoanHashmap();
+        HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
         return loanHM.get(id);
     }
 }

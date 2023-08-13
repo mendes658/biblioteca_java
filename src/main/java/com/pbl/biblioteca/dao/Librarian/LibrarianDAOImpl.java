@@ -1,13 +1,14 @@
-package com.pbl.biblioteca.dao;
+package com.pbl.biblioteca.dao.Librarian;
 
+import com.pbl.biblioteca.dao.ConnectionDAO;
 import com.pbl.biblioteca.model.Librarian;
 
 import java.util.HashMap;
 
-public class LibrarianDAO extends ConnectionDAO{
+public class LibrarianDAOImpl extends ConnectionDAO {
 
     public static boolean saveLibrarian(Librarian librarianObject){
-        HashMap<String, Librarian> librarianHM = getLibrarianHashmap();
+        HashMap<String, Librarian> librarianHM = getAnySavedHashmap(librarianFileUrl);
 
         librarianHM.put(librarianObject.getUsername(),librarianObject);
 
@@ -15,7 +16,9 @@ public class LibrarianDAO extends ConnectionDAO{
     }
 
     public static Librarian getLibrarianByUsername(String username){
-        return getLibrarianHashmap().get(username);
+        HashMap<String, Librarian> librarianHM = getAnySavedHashmap(librarianFileUrl);
+
+        return librarianHM.get(username);
     }
 
 }

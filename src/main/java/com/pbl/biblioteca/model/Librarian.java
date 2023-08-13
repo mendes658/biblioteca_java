@@ -1,6 +1,6 @@
 package com.pbl.biblioteca.model;
 
-import com.pbl.biblioteca.dao.LoanDAO;
+import com.pbl.biblioteca.dao.Loan.LoanDAOImpl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,10 +14,10 @@ public class Librarian extends Operator{
 
     }
 
-    public Loan setBookLoan(String bookISBN, User user, Integer days){
+    public Loan createBookLoan(Book book, User user, Integer days){
         if (!user.isBlocked()){
             LocalDate now = LocalDate.now();
-            Loan newLoan = new Loan(bookISBN, user.getNickname(), now, days);
+            Loan newLoan = new Loan(book.getIsbn(), user.getNickname(), now, days);
             this.libLoanIds.add(newLoan.getId());
             for (String loanId : this.libLoanIds) {
                 System.out.println("ID --->> " + loanId);
@@ -25,7 +25,7 @@ public class Librarian extends Operator{
 
             user.updateLoanIds(newLoan.getId());
 
-            LoanDAO.saveLoan(newLoan);
+            LoanDAOImpl.saveLoan(newLoan);
 
             return newLoan;
         }

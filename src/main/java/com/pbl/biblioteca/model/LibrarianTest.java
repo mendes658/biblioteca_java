@@ -1,10 +1,6 @@
 package com.pbl.biblioteca.model;
 
-import com.pbl.biblioteca.dao.LibrarianDAO;
-import com.pbl.biblioteca.dao.LoanDAO;
-
-import java.util.ArrayList;
-
+/*
 public class LibrarianTest {
 
     public static void main(String[] args){
@@ -12,8 +8,9 @@ public class LibrarianTest {
         LibrarianDAO.saveLibrarian(librarianTest);
         User user0 = new User("pedrin658", "Pedro M.", "Pampalona",
                 "7598191919", "12345");
-        Loan loanTest = librarianTest.setBookLoan("54321", user0, 7);
-        librarianTest.setBookLoan("521", user0, 7);
+        Book bookLoanTest = BookDAOImpl.getBookByISBN("12345");
+        Loan loanTest = librarianTest.createBookLoan(bookLoanTest, user0, 7);
+        librarianTest.createBookLoan(bookLoanTest, user0, 7);
         LibrarianDAO.saveLibrarian(librarianTest);
         String id = loanTest.getId();
 
@@ -32,4 +29,4 @@ public class LibrarianTest {
         ArrayList<String> loanIds = savedLibrarian.getLoanIds();
         System.out.println(loanIds.get(1));
     }
-}
+}*/
