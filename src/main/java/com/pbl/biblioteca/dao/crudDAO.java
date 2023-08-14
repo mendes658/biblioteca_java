@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 public interface crudDAO<T>{
 
-    public boolean update(T obj);
-    public boolean deleteByPK(String pk);
-    public boolean create(T obj);
-    public T getByPK(String pk);
-    public HashMap<String, T> getAll();
+    boolean update(T obj);
+    boolean deleteByPK(String pk);
+    boolean create(T obj);
+    T getByPK(String pk);
+    HashMap<String, T> getAll();
 
 }
