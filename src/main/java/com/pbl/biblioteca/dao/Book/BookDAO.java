@@ -8,4 +8,6 @@ import java.util.HashMap;
 public interface BookDAO<Book> extends crudDAO<Book> {
     public HashMap<String, ArrayList<String>> getAllBooksByCategory();
     public ArrayList<String> getAllBooksFromCategory(String category);
+
+    public String generateId();
 }

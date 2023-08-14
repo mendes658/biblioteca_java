@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class User implements Serializable {
 
     private static Integer currentId = 0;
-    private String nickname; // primary key
+    private String username; // primary key
     private final ArrayList<String> loanIds = new ArrayList<>();
     private String name;
     private String adress;
@@ -17,14 +17,14 @@ public class User implements Serializable {
     private Boolean blocked;
     private LocalDate dateEndBlock;
 
-    public User(String newNickname, String newName,
+    public User(String username, String newName,
                 String newAdress, String newTelephone, String newPassword){
         currentId++;
         id = currentId.toString();
         blocked = false;
         dateEndBlock = null;
 
-        this.nickname = newNickname;
+        this.username = username;
         this.name = newName;
         this.adress = newAdress;
         this.telephone = newTelephone;
@@ -37,8 +37,8 @@ public class User implements Serializable {
         return blocked;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
     public ArrayList<String> getLoanIds() {
@@ -71,8 +71,8 @@ public class User implements Serializable {
 
 
     // Setters
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setName(String name) {

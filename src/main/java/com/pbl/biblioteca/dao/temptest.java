@@ -14,23 +14,25 @@ public class temptest {
     protected static final String booksIsbnsByCategoryUrl = "books_ids_category.ser";
 
     public static void main(String[] args){
+        LoanDAOImpl loanDAO = new LoanDAOImpl();
+
         Loan test = new Loan("1212", "2222", LocalDate.now(), 7);
         Loan test2 = new Loan("45212", "3332", LocalDate.now(), 7);
         Loan test3 = new Loan("589212", "4442", LocalDate.now(), 7);
 
-        LoanDAOImpl.saveLoan(test);
-        LoanDAOImpl.saveLoan(test2);
-        LoanDAOImpl.saveLoan(test3);
+        loanDAO.create(test);
+        loanDAO.create(test2);
+        loanDAO.create(test3);
 
         HashMap<String, Loan> testHM = ConnectionDAO.getAnySavedHashmap(loanFileUrl);
 
-        LoanDAOImpl.saveLoan(test);
-        LoanDAOImpl.saveLoan(test2);
-        LoanDAOImpl.saveLoan(test3);
+        loanDAO.create(test);
+        loanDAO.create(test2);
+        loanDAO.create(test3);
 
-        System.out.println(LoanDAOImpl.getLoanById("1").getbookISBN());
-        System.out.println(LoanDAOImpl.getLoanById("2").getbookISBN());
-        System.out.println(LoanDAOImpl.getLoanById("3").getbookISBN());
+        System.out.println(loanDAO.getByPK("1").getbookISBN());
+        System.out.println(loanDAO.getByPK("2").getbookISBN());
+        System.out.println(loanDAO.getByPK("3").getbookISBN());
 
     }
 }

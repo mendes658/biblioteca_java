@@ -1,16 +1,18 @@
 package com.pbl.biblioteca.model;
+import com.pbl.biblioteca.dao.Book.BookDAOImpl;
+import com.pbl.biblioteca.dao.Operator.OperatorDAOImpl;
+
 import java.io.Serializable;
 
 public class Operator implements Serializable {
-    private static Integer currentId = 0;
     private String username;
     private final String id;
     private String password;
 
 
     public Operator(String newUsername, String newPassword){
-        currentId++;
-        id = currentId.toString();
+        OperatorDAOImpl operatorDAO = new OperatorDAOImpl();
+        this.id = operatorDAO.generateId();
         this.username = newUsername;
         this.password = newPassword;
     }

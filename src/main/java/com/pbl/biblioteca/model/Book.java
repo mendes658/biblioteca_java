@@ -1,5 +1,7 @@
 package com.pbl.biblioteca.model;
 
+import com.pbl.biblioteca.dao.Book.BookDAOImpl;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ public class Book implements Serializable {
     private Integer year;
     private String category;
     private String isbn; // unique
+    private final String id;
     private final ArrayList<BookCopy> allCopies = new ArrayList<>();
 
 
@@ -24,6 +27,8 @@ public class Book implements Serializable {
         this.category = category;
         this.isbn = isbn;
 
+        BookDAOImpl bookDAO = new BookDAOImpl();
+        this.id = bookDAO.generateId();
 
     }
 
@@ -35,6 +40,10 @@ public class Book implements Serializable {
 
     public String getAuthor() {
         return author;
+    }
+
+    public String getId() {
+        return id;
     }
 
 
@@ -85,7 +94,7 @@ public class Book implements Serializable {
 
         for (int i = lastIndex; i < total; i++){
             allCopies.add(new BookCopy(this.title, this.author, this.publisher, this.year, this.category,
-                    this.isbn, i));
+                    this.isbn));
 
         }
     }

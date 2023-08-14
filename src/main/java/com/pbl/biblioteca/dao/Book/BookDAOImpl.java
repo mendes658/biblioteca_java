@@ -2,7 +2,6 @@ package com.pbl.biblioteca.dao.Book;
 
 import com.pbl.biblioteca.dao.ConnectionDAO;
 import com.pbl.biblioteca.model.Book;
-import com.pbl.biblioteca.model.BookCopy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +14,7 @@ public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
         bookHM.put(bookObject.getIsbn(),bookObject);
         updateCategoryFile(bookObject);
 
-        return saveAnyHashmap(bookHM, bookFileUrl);
+        return saveAnyObject(bookHM, bookFileUrl);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
 
         updateCategoryFile(bookObj); // tem que ser chamada antes do salvamento
 
-        saveAnyHashmap(bookHM, bookFileUrl);
+        saveAnyObject(bookHM, bookFileUrl);
 
         return true;
     }
@@ -48,7 +47,7 @@ public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
             deleteFromCategoryFile(toDelete);
 
             bookHM.remove(isbn);
-            saveAnyHashmap(bookHM, bookFileUrl);
+            saveAnyObject(bookHM, bookFileUrl);
         }
 
         return true;
@@ -60,9 +59,19 @@ public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
     }
 
     @Override
+    public HashMap<String, Book> getAll(){
+        return getAnySavedHashmap(bookFileUrl);
+    }
+
+    @Override
     public ArrayList<String> getAllBooksFromCategory(String category) {
         HashMap<String, ArrayList<String>> booksByCatHM = getAnySavedHashmap(booksIsbnsByCategoryUrl);
         return booksByCatHM.get(category);
+    }
+
+    @Override
+    public String generateId() {
+        return ConnectionDAO.generateId(bookFileUrl);
     }
 
     private void updateCategoryFile(Book newBook){
@@ -87,7 +96,7 @@ public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
             bookByCatHM.put(newBook.getCategory(),newList);
         }
 
-        saveAnyHashmap(bookByCatHM, booksIsbnsByCategoryUrl);
+        saveAnyObject(bookByCatHM, booksIsbnsByCategoryUrl);
     }
 
     private void deleteFromCategoryFile(Book bookObj){
@@ -99,6 +108,6 @@ public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
         allBooksSameCat.removeIf(e -> e.equals(isbn));
 
         bookByCatHM.put(bookObj.getCategory(), allBooksSameCat);
-        saveAnyHashmap(bookByCatHM, booksIsbnsByCategoryUrl);
+        saveAnyObject(bookByCatHM, booksIsbnsByCategoryUrl);
     }
 }

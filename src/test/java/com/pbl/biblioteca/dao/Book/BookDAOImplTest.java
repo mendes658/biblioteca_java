@@ -99,6 +99,21 @@ class BookDAOImplTest {
 
     }
 
+    @Test
+    void getAll() {
+        Book b1, b2;
+        BookDAOImpl bookDAO = new BookDAOImpl();
 
+        b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
+                2002, "Mistério", "11111");
+        b2 = new Book("A batida do maneco", "Preto", "Azul",
+                2002, "Mistério", "22222");
 
+        bookDAO.create(b1);
+        bookDAO.create(b2);
+
+        HashMap<String, Book> all = bookDAO.getAll();
+        assertEquals(all.get("11111").getTitle(), "Teco teleco teco");
+        assertEquals(all.get("22222").getTitle(), "A batida do maneco");
+    }
 }

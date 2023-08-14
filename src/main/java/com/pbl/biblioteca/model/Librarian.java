@@ -15,9 +15,11 @@ public class Librarian extends Operator{
     }
 
     public Loan createBookLoan(Book book, User user, Integer days){
+        LoanDAOImpl loanDAO = new LoanDAOImpl();
+
         if (!user.isBlocked()){
             LocalDate now = LocalDate.now();
-            Loan newLoan = new Loan(book.getIsbn(), user.getNickname(), now, days);
+            Loan newLoan = new Loan(book.getIsbn(), user.getUsername(), now, days);
             this.libLoanIds.add(newLoan.getId());
             for (String loanId : this.libLoanIds) {
                 System.out.println("ID --->> " + loanId);
@@ -25,7 +27,7 @@ public class Librarian extends Operator{
 
             user.updateLoanIds(newLoan.getId());
 
-            LoanDAOImpl.saveLoan(newLoan);
+            loanDAO.create(newLoan);
 
             return newLoan;
         }

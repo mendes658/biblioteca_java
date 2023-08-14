@@ -15,6 +15,7 @@ public class ConnectionDAO {
     protected static  String bookFileUrl;
     protected static  String librarianFileUrl;
     protected static  String booksIsbnsByCategoryUrl;
+    protected static  String bookCopiesUrl;
 
     protected static  String defaultUserFileUrl = "users.ser";
     protected static  String defaultLoanFileUrl = "loans.ser";
@@ -22,6 +23,7 @@ public class ConnectionDAO {
     protected static  String defaultBookFileUrl = "books.ser";
     protected static  String defaultLibrarianFileUrl = "librarians.ser";
     protected static  String defaultBooksIsbnsByCategoryUrl = "books_ids_category.ser";
+    protected static  String defaultBookCopiesUrl = "books_copies.ser";
 
     public static void setTestFileUrls() {
         ConnectionDAO.userFileUrl = "test_" + defaultUserFileUrl;
@@ -30,6 +32,8 @@ public class ConnectionDAO {
         ConnectionDAO.operatorFileUrl = "test_" + defaultOperatorFileUrl;
         ConnectionDAO.librarianFileUrl = "test_" + defaultLibrarianFileUrl;
         ConnectionDAO.booksIsbnsByCategoryUrl = "test_" + defaultBooksIsbnsByCategoryUrl;
+        ConnectionDAO.bookCopiesUrl = "test_" + defaultBookCopiesUrl;
+
     }
 
     public static void setDefaultFileUrls() {
@@ -39,16 +43,18 @@ public class ConnectionDAO {
         ConnectionDAO.loanFileUrl = defaultLoanFileUrl;
         ConnectionDAO.booksIsbnsByCategoryUrl = defaultBooksIsbnsByCategoryUrl;
         ConnectionDAO.bookFileUrl = defaultBookFileUrl;
+        ConnectionDAO.bookCopiesUrl = defaultBookCopiesUrl;
     }
 
     public static void cleanTestFiles(){
 
-        saveAnyHashmap(new HashMap<String, User>() ,"test_" + defaultUserFileUrl);
-        saveAnyHashmap(new HashMap<String, Librarian>(),"test_" + defaultLibrarianFileUrl);
-        saveAnyHashmap(new HashMap<String, Operator>(),"test_" + defaultOperatorFileUrl);
-        saveAnyHashmap(new HashMap<String, Loan>(),"test_" + defaultLoanFileUrl);
-        saveAnyHashmap(new HashMap<String, ArrayList<String>>(),"test_" + defaultBooksIsbnsByCategoryUrl);
-        saveAnyHashmap(new HashMap<String, Book>(),"test_" + defaultBookFileUrl);
+        saveAnyObject(new HashMap<String, User>() ,"test_" + defaultUserFileUrl);
+        saveAnyObject(new HashMap<String, Librarian>(),"test_" + defaultLibrarianFileUrl);
+        saveAnyObject(new HashMap<String, Operator>(),"test_" + defaultOperatorFileUrl);
+        saveAnyObject(new HashMap<String, Loan>(),"test_" + defaultLoanFileUrl);
+        saveAnyObject(new HashMap<String, ArrayList<String>>(),"test_" + defaultBooksIsbnsByCategoryUrl);
+        saveAnyObject(new HashMap<String, Book>(),"test_" + defaultBookFileUrl);
+        saveAnyObject(new HashMap<String, BookCopy>(),"test_" + defaultBookCopiesUrl);
 
     }
 
@@ -61,7 +67,7 @@ public class ConnectionDAO {
         HashMap<String, V> anyHashmap = new HashMap<>();
 
         if (!testFile.isFile()) {
-            saveAnyHashmap(anyHashmap, fileUrl);
+            saveAnyObject(anyHashmap, fileUrl);
         }
 
         try {
@@ -79,7 +85,7 @@ public class ConnectionDAO {
     }
 
 
-    protected static boolean saveAnyHashmap(Object objectHM, String fileUrl) {
+    protected static boolean saveAnyObject(Object objectHM, String fileUrl) {
         ObjectOutputStream objectOut;
         FileOutputStream fileOut;
 
@@ -94,5 +100,33 @@ public class ConnectionDAO {
         }
 
         return true;
+    }
+
+    protected static String generateId(String idUrl){
+        idUrl = "id_" + idUrl;
+
+        FileInputStream fileIn;
+        ObjectInputStream objectIn;
+        File testFile = new File(idUrl);
+        Integer id = 0;
+
+        if (!testFile.isFile()) {
+            saveAnyObject(id, idUrl);
+            return id.toString();
+        }
+
+        try {
+            fileIn = new FileInputStream(idUrl);
+            objectIn = new ObjectInputStream(fileIn);
+            id = (Integer) objectIn.readObject();
+            id++;
+            saveAnyObject(id, idUrl);
+
+            objectIn.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return id.toString();
     }
 }
