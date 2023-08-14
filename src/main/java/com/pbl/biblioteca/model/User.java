@@ -1,12 +1,13 @@
 package com.pbl.biblioteca.model;
 
+import com.pbl.biblioteca.dao.User.UserDAOImpl;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class User implements Serializable {
 
-    private static Integer currentId = 0;
     private String username; // primary key
     private final ArrayList<String> loanIds = new ArrayList<>();
     private String name;
@@ -19,8 +20,8 @@ public class User implements Serializable {
 
     public User(String username, String newName,
                 String newAdress, String newTelephone, String newPassword){
-        currentId++;
-        id = currentId.toString();
+        UserDAOImpl userDAO = new UserDAOImpl();
+        id = userDAO.generateId();
         blocked = false;
         dateEndBlock = null;
 
