@@ -1,6 +1,7 @@
 package com.pbl.biblioteca.model;
 
 import com.pbl.biblioteca.dao.Book.BookDAOImpl;
+import com.pbl.biblioteca.dao.BookCopy.BookCopyDAOImpl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -91,11 +92,14 @@ public class Book implements Serializable {
 
     public void addCopies(Integer total) {
         int lastIndex = allCopies.size();
+        BookCopyDAOImpl copyDao = new BookCopyDAOImpl();
+        BookCopy newCopy;
 
         for (int i = lastIndex; i < total; i++){
-            allCopies.add(new BookCopy(this.title, this.author, this.publisher, this.year, this.category,
-                    this.isbn));
-
+            newCopy = new BookCopy(this.title, this.author, this.publisher, this.year, this.category,
+                    this.isbn);
+            copyDao.create(newCopy);
+            allCopies.add(newCopy);
         }
     }
 

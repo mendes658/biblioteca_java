@@ -7,20 +7,23 @@ import java.time.LocalDate;
 
 public class Loan implements Serializable {
 
-    public Loan(String bookISBN, String username, LocalDate date, Integer loanDays){
+    public Loan(String bookCopyId, String userUsername, LocalDate date, Integer loanDays,
+                String librarianUsername){
         LoanDAOImpl loanDAO = new LoanDAOImpl();
         this.id = loanDAO.generateId();
-        this.bookISBN = bookISBN;
-        this.username = username;
+        this.bookCopyId = bookCopyId;
+        this.username = userUsername;
         this.initialDate = date;
         this.finalDate = date.plusDays(loanDays);
+        this.librarianUsername = librarianUsername;
     }
 
     private final String id;
-    private final String bookISBN;
+    private final String bookCopyId;
     private String username;
     private final LocalDate initialDate;
     private final LocalDate finalDate;
+    private final String librarianUsername;
 
 
     // Getters
@@ -28,8 +31,8 @@ public class Loan implements Serializable {
         return id;
     }
 
-    public String getbookISBN() {
-        return bookISBN;
+    public String getbookCopyId() {
+        return bookCopyId;
     }
 
     public String getUsername() {
@@ -42,6 +45,10 @@ public class Loan implements Serializable {
 
     public LocalDate getFinalDate() {
         return finalDate;
+    }
+
+    public String getLibrarianUsername() {
+        return librarianUsername;
     }
 
     public void setUsername(String username){

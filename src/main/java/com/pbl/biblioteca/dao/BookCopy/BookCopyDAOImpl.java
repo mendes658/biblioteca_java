@@ -43,4 +43,8 @@ public class BookCopyDAOImpl extends ConnectionDAO implements BookCopyDAO<BookCo
         return getAnySavedHashmap(bookCopiesUrl);
     }
 
+    @Override
+    public String generateId() {
+        return ConnectionDAO.generateId(bookCopiesUrl);
+    }
 }

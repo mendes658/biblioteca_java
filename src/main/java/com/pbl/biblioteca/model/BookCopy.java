@@ -1,11 +1,17 @@
 package com.pbl.biblioteca.model;
 
+import com.pbl.biblioteca.dao.Book.BookDAO;
 import com.pbl.biblioteca.dao.Book.BookDAOImpl;
+import com.pbl.biblioteca.dao.BookCopy.BookCopyDAO;
+import com.pbl.biblioteca.dao.BookCopy.BookCopyDAOImpl;
 
-public class BookCopy extends Book{
+import java.io.Serial;
+import java.io.Serializable;
+
+public class BookCopy extends Book implements Serializable {
 
     private Boolean borrowed;
-    private String loanID;
+    private String loanId;
 
     public BookCopy(String title, String author, String publisher,
                     Integer year, String category, String isbn) {
@@ -21,16 +27,16 @@ public class BookCopy extends Book{
 
     public void borrow(String loanID){
         this.borrowed = true;
-        this.loanID = loanID;
+        this.loanId = loanID;
     }
 
     public void retrieve(){
         this.borrowed = false;
-        this.loanID = null;
+        this.loanId = null;
     }
 
-    public String getLoanID(){
-        return this.loanID;
+    public String getLoanId(){
+        return this.loanId;
     }
 
 }

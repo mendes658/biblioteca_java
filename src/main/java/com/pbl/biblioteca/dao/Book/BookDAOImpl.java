@@ -2,8 +2,10 @@ package com.pbl.biblioteca.dao.Book;
 
 import com.pbl.biblioteca.dao.ConnectionDAO;
 import com.pbl.biblioteca.model.Book;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
@@ -73,6 +75,7 @@ public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
     public String generateId() {
         return ConnectionDAO.generateId(bookFileUrl);
     }
+
 
     private void updateCategoryFile(Book newBook){
         HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);

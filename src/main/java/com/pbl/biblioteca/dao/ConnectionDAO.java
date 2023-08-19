@@ -16,6 +16,7 @@ public class ConnectionDAO {
     protected static  String librarianFileUrl;
     protected static  String booksIsbnsByCategoryUrl;
     protected static  String bookCopiesUrl;
+    protected static  String totalLoansByBookUrl;
 
     protected static  String defaultUserFileUrl = "users.ser";
     protected static  String defaultLoanFileUrl = "loans.ser";
@@ -24,6 +25,7 @@ public class ConnectionDAO {
     protected static  String defaultLibrarianFileUrl = "librarians.ser";
     protected static  String defaultBooksIsbnsByCategoryUrl = "books_ids_category.ser";
     protected static  String defaultBookCopiesUrl = "books_copies.ser";
+    protected static  String defaultTotalLoansByBookUrl = "total_loans.ser";
 
     public static void setTestFileUrls() {
         ConnectionDAO.userFileUrl = "test_" + defaultUserFileUrl;
@@ -33,6 +35,7 @@ public class ConnectionDAO {
         ConnectionDAO.librarianFileUrl = "test_" + defaultLibrarianFileUrl;
         ConnectionDAO.booksIsbnsByCategoryUrl = "test_" + defaultBooksIsbnsByCategoryUrl;
         ConnectionDAO.bookCopiesUrl = "test_" + defaultBookCopiesUrl;
+        ConnectionDAO.totalLoansByBookUrl = "test_" + defaultTotalLoansByBookUrl;
 
     }
 
@@ -44,6 +47,7 @@ public class ConnectionDAO {
         ConnectionDAO.booksIsbnsByCategoryUrl = defaultBooksIsbnsByCategoryUrl;
         ConnectionDAO.bookFileUrl = defaultBookFileUrl;
         ConnectionDAO.bookCopiesUrl = defaultBookCopiesUrl;
+        ConnectionDAO.totalLoansByBookUrl = defaultTotalLoansByBookUrl;
     }
 
     public static void cleanTestFiles(){
@@ -55,6 +59,7 @@ public class ConnectionDAO {
         saveAnyObject(new HashMap<String, ArrayList<String>>(),"test_" + defaultBooksIsbnsByCategoryUrl);
         saveAnyObject(new HashMap<String, Book>(),"test_" + defaultBookFileUrl);
         saveAnyObject(new HashMap<String, BookCopy>(),"test_" + defaultBookCopiesUrl);
+        saveAnyObject(new HashMap<String, Integer>(),"test_" + defaultTotalLoansByBookUrl);
 
     }
 
