@@ -1,6 +1,9 @@
 package com.pbl.biblioteca.model;
 
+import com.pbl.biblioteca.dao.Book.BookDAOImpl;
+import com.pbl.biblioteca.dao.BookCopy.BookCopyDAOImpl;
 import com.pbl.biblioteca.dao.Loan.LoanDAOImpl;
+import com.pbl.biblioteca.dao.User.UserDAOImpl;
 import com.pbl.biblioteca.exceptionHandler.*;
 
 import java.time.LocalDate;
@@ -8,7 +11,6 @@ import java.util.ArrayList;
 
 public class Librarian extends Operator{
 
-    private final ArrayList<String> loanIds = new ArrayList<>();
 
     public Librarian(String newUsername, String newPassword){
         super(newUsername, newPassword);
@@ -35,22 +37,33 @@ public class Librarian extends Operator{
         }
 
         if (!found){
-            throw new CopyNotFoundException("All copies are borrowed.");
+            throw new CopyNotFoundException("All copies are currently borrowed.");
         }
 
         LocalDate today = LocalDate.now();
 
         LoanDAOImpl loanDAO = new LoanDAOImpl();
+        BookCopyDAOImpl bookCopyDAO = new BookCopyDAOImpl();
+
         Loan newLoan = new Loan(freeCopy.getId(), user.getUsername(), today, days, this.getUsername());
         freeCopy.borrow(newLoan.getId());
-        loanIds.add(newLoan.getId());
+        bookCopyDAO.update(freeCopy);
+
         loanDAO.create(newLoan);
 
         return newLoan;
     }
 
-    public ArrayList<String> getLoanIds(){
-        System.out.println(this.loanIds.toString());
-        return loanIds;
+    public void deleteBookLoan(String loanId){
+        LoanDAOImpl loanDAO = new LoanDAOImpl();
+        BookCopyDAOImpl bookCopyDAO = new BookCopyDAOImpl();
+
+        Loan toDelete = loanDAO.getByPK(loanId);
+
+        BookCopy bookCopy = bookCopyDAO.getByPK(toDelete.getbookCopyId());
+        bookCopy.retrieve();
+
+        loanDAO.deleteByPK(loanId);
+        bookCopyDAO.update(bookCopy);
     }
 }

@@ -11,7 +11,6 @@ import java.io.Serializable;
 public class BookCopy extends Book implements Serializable {
 
     private Boolean borrowed;
-    private String loanId;
 
     public BookCopy(String title, String author, String publisher,
                     Integer year, String category, String isbn) {
@@ -27,16 +26,10 @@ public class BookCopy extends Book implements Serializable {
 
     public void borrow(String loanID){
         this.borrowed = true;
-        this.loanId = loanID;
     }
 
     public void retrieve(){
         this.borrowed = false;
-        this.loanId = null;
-    }
-
-    public String getLoanId(){
-        return this.loanId;
     }
 
 }

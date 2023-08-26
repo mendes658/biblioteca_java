@@ -4,14 +4,12 @@ import com.pbl.biblioteca.dao.User.UserDAOImpl;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class User implements Serializable {
 
     private String username; // primary key
-    private final ArrayList<String> loanIds = new ArrayList<>();
     private String name;
-    private String adress;
+    private String address;
     private String telephone;
     private final String id;
     private String password;
@@ -27,7 +25,7 @@ public class User implements Serializable {
 
         this.username = username;
         this.name = newName;
-        this.adress = newAdress;
+        this.address = newAdress;
         this.telephone = newTelephone;
         this.password = newPassword;
     }
@@ -42,16 +40,12 @@ public class User implements Serializable {
         return username;
     }
 
-    public ArrayList<String> getLoanIds() {
-        return loanIds;
-    }
-
     public String getName() {
         return name;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
     public String getTelephone() {
@@ -80,8 +74,8 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setTelephone(String telephone) {
@@ -100,20 +94,6 @@ public class User implements Serializable {
     public void unblockUser(){
         this.blocked = false;
         this.dateEndBlock = null;
-    }
-
-    public void updateLoanIds(String newLoanId){
-        this.loanIds.add(newLoanId);
-    }
-
-    public boolean deleteLoanId(String loanId){
-        for (int i = 0; i< loanIds.size(); i++){
-            if (loanIds.get(i).equals(loanId)){
-                loanIds.remove(i);
-                return true;
-            }
-        }
-        return false;
     }
 
 }

@@ -14,18 +14,18 @@ public class ConnectionDAO {
     protected static  String operatorFileUrl;
     protected static  String bookFileUrl;
     protected static  String librarianFileUrl;
-    protected static  String booksIsbnsByCategoryUrl;
     protected static  String bookCopiesUrl;
     protected static  String totalLoansByBookUrl;
+    protected static  String bookReserveUrl;
 
     protected static  String defaultUserFileUrl = "users.ser";
     protected static  String defaultLoanFileUrl = "loans.ser";
     protected static  String defaultOperatorFileUrl = "operators.ser";
     protected static  String defaultBookFileUrl = "books.ser";
     protected static  String defaultLibrarianFileUrl = "librarians.ser";
-    protected static  String defaultBooksIsbnsByCategoryUrl = "books_ids_category.ser";
     protected static  String defaultBookCopiesUrl = "books_copies.ser";
     protected static  String defaultTotalLoansByBookUrl = "total_loans.ser";
+    protected static  String defaultBookReserveUrl = "book_reserves.ser";
 
     public static void setTestFileUrls() {
         ConnectionDAO.userFileUrl = "test_" + defaultUserFileUrl;
@@ -33,9 +33,9 @@ public class ConnectionDAO {
         ConnectionDAO.bookFileUrl = "test_" + defaultBookFileUrl;
         ConnectionDAO.operatorFileUrl = "test_" + defaultOperatorFileUrl;
         ConnectionDAO.librarianFileUrl = "test_" + defaultLibrarianFileUrl;
-        ConnectionDAO.booksIsbnsByCategoryUrl = "test_" + defaultBooksIsbnsByCategoryUrl;
         ConnectionDAO.bookCopiesUrl = "test_" + defaultBookCopiesUrl;
         ConnectionDAO.totalLoansByBookUrl = "test_" + defaultTotalLoansByBookUrl;
+        ConnectionDAO.bookReserveUrl = "test_" + defaultBookReserveUrl;
 
     }
 
@@ -44,10 +44,10 @@ public class ConnectionDAO {
         ConnectionDAO.librarianFileUrl = defaultLibrarianFileUrl;
         ConnectionDAO.operatorFileUrl = defaultOperatorFileUrl;
         ConnectionDAO.loanFileUrl = defaultLoanFileUrl;
-        ConnectionDAO.booksIsbnsByCategoryUrl = defaultBooksIsbnsByCategoryUrl;
         ConnectionDAO.bookFileUrl = defaultBookFileUrl;
         ConnectionDAO.bookCopiesUrl = defaultBookCopiesUrl;
         ConnectionDAO.totalLoansByBookUrl = defaultTotalLoansByBookUrl;
+        ConnectionDAO.bookReserveUrl = defaultBookReserveUrl;
     }
 
     public static void cleanTestFiles(){
@@ -56,10 +56,10 @@ public class ConnectionDAO {
         saveAnyObject(new HashMap<String, Librarian>(),"test_" + defaultLibrarianFileUrl);
         saveAnyObject(new HashMap<String, Operator>(),"test_" + defaultOperatorFileUrl);
         saveAnyObject(new HashMap<String, Loan>(),"test_" + defaultLoanFileUrl);
-        saveAnyObject(new HashMap<String, ArrayList<String>>(),"test_" + defaultBooksIsbnsByCategoryUrl);
         saveAnyObject(new HashMap<String, Book>(),"test_" + defaultBookFileUrl);
         saveAnyObject(new HashMap<String, BookCopy>(),"test_" + defaultBookCopiesUrl);
         saveAnyObject(new HashMap<String, Integer>(),"test_" + defaultTotalLoansByBookUrl);
+        saveAnyObject(new HashMap<String, BookReserve>(),"test_" + defaultBookReserveUrl);
 
     }
 
@@ -83,7 +83,7 @@ public class ConnectionDAO {
             objectIn.close();
 
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return anyHashmap;
@@ -129,7 +129,7 @@ public class ConnectionDAO {
 
             objectIn.close();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return id.toString();

@@ -93,9 +93,9 @@ class BookDAOImplTest {
         bookDAO.update(b1);
         bookDAO.deleteByPK("44444");
 
-        assertEquals(bookDAO.getAllBooksFromCategory("Mistério").get(0), "22222");
-        assertEquals(bookDAO.getAllBooksByCategory().get("Mistério").get(0), "22222");
-        assertEquals(bookDAO.getAllBooksFromCategory("Terror").toString(), "[]");
+        assertEquals(bookDAO.getAllBooksFromCategory("Ação").size(), 1);
+        assertEquals(bookDAO.getAllBooksFromCategory("Mistério").size(), 1);
+        assertEquals(bookDAO.getAllBooksFromCategory("Terror").size(), 0);
 
     }
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface BookDAO<Book> extends crudDAO<Book> {
-    HashMap<String, ArrayList<String>> getAllBooksByCategory();
-    ArrayList<String> getAllBooksFromCategory(String category);
+    ArrayList<Book> getAllBooksFromCategory(String category);
     String generateId();
 }

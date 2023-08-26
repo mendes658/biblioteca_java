@@ -18,7 +18,6 @@ public class LoanDAOImpl extends ConnectionDAO implements LoanDAO<Loan>{
         loanHM.put(loanObject.getId(),loanObject);
 
         saveAnyObject(loanHM, loanFileUrl);
-        updateTotalLoansFile(loanObject);
 
         return true;
     }
@@ -55,26 +54,6 @@ public class LoanDAOImpl extends ConnectionDAO implements LoanDAO<Loan>{
     @Override
     public String generateId() {
         return ConnectionDAO.generateId(loanFileUrl);
-    }
-
-    private void updateTotalLoansFile(Loan loanObject){
-        HashMap<String, Integer> totalLoansHM = getAnySavedHashmap(totalLoansByBookUrl);
-        BookCopyDAOImpl copyDAO = new BookCopyDAOImpl();
-        BookCopy bookObj = null;
-        String bookIsbnName = null;
-        try {
-            bookObj = copyDAO.getByPK(loanObject.getbookCopyId());
-            bookIsbnName = bookObj.getIsbn() + " " + bookObj.getTitle();
-        } catch (Exception e){
-            e.printStackTrace();
-            return;
-        }
-
-
-        Integer total = totalLoansHM.computeIfAbsent(bookIsbnName, k -> 0);
-        totalLoansHM.put(bookIsbnName, total+1);
-
-        saveAnyObject(totalLoansHM, totalLoansByBookUrl);
     }
 
     @Override
