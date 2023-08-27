@@ -4,11 +4,11 @@ import com.pbl.biblioteca.dao.ConnectionDAO;
 import com.pbl.biblioteca.model.Book;
 import org.junit.jupiter.api.*;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 class BookDAOImplTest {
 
@@ -24,7 +24,6 @@ class BookDAOImplTest {
     }
 
     @Test
-
     void createAndGet() {
         Book b1, b2;
         BookDAOImpl bookDAO = new BookDAOImpl();

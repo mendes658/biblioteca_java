@@ -14,6 +14,7 @@
         <junit.version>5.9.2</junit.version>
     </properties>
 
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -58,10 +59,37 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.9.3</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- Allow JUnit to access the test classes -->
+                    <argLine>--add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.User=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.BookCopy=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Book=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.BookReserve=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Librarian=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Loan=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Operator=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.User=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.model=ALL-UNNAMED
+                    </argLine>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

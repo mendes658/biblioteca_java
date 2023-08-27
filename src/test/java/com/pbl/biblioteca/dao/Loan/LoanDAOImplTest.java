@@ -174,6 +174,7 @@ class LoanDAOImplTest {
         loanDAO.create(l6);
 
         ArrayList<Pair<String, Integer>> popular = loanDAO.getPopularBooksAllTime();
+
         assertEquals(popular.get(0).getKey(), "11111 Teco teleco teco");
         assertEquals(popular.get(1).getKey(), "22222 A batida do maneco");
         assertEquals(popular.get(2).getKey(), "33333 A volta dos que não foram");

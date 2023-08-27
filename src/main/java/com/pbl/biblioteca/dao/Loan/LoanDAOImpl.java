@@ -58,7 +58,26 @@ public class LoanDAOImpl extends ConnectionDAO implements LoanDAO<Loan>{
 
     @Override
     public ArrayList<Pair<String, Integer>> getPopularBooksAllTime() {
-        HashMap<String, Integer> totalLoansHM = getAnySavedHashmap(totalLoansByBookUrl);
+        HashMap<String, Integer> totalLoansHM = new HashMap<>();
+        HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
+        HashMap<String, BookCopy> bookCopyHM = getAnySavedHashmap(bookCopiesUrl);
+
+        String newKey;
+        Book nowBook;
+
+        for (String key : loanHM.keySet()){
+
+            nowBook = bookCopyHM.get(loanHM.get(key).getbookCopyId());
+            newKey = nowBook.getIsbn() + " " + nowBook.getTitle();
+
+            if (totalLoansHM.get(newKey) == null){
+                totalLoansHM.put(newKey, 1);
+            } else {
+                totalLoansHM.put(newKey, totalLoansHM.get(newKey) + 1);
+            }
+        }
+
+
         ArrayList<Pair<String, Integer>> popularOrdered = new ArrayList<>();
 
         for (String key : totalLoansHM.keySet()){
