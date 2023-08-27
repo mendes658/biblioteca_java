@@ -5,7 +5,7 @@ import com.pbl.biblioteca.dao.BookReserve.BookReserveDAOImpl;
 import java.io.Serializable;
 
 public class BookReserve implements Serializable {
-    private final String username;
+    private String username;
     private final String bookIsbn;
     private final String id;
 
@@ -20,6 +20,10 @@ public class BookReserve implements Serializable {
 
     public String getUsername() {
         return this.username;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
     }
 
     public String getBookIsbn() {

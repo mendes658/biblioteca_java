@@ -66,7 +66,16 @@ public class BookReserveDAOImpl extends ConnectionDAO implements BookReserveDAO<
 
     @Override
     public HashMap<String, BookReserve> getAll() {
-        return getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> all = new HashMap<>();
+        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+
+        for (String key : bookReserveHM.keySet()){
+            for(BookReserve reserve : bookReserveHM.get(key)){
+                all.put(reserve.getId(), reserve);
+            }
+        }
+
+        return all;
     }
 
     @Override
@@ -89,7 +98,7 @@ public class BookReserveDAOImpl extends ConnectionDAO implements BookReserveDAO<
         for (String key : bookReserveHM.keySet()){
 
             int i = 0;
-            while (bookReserveHM.get(key).get(i) != null){
+            while (bookReserveHM.get(key).size() > i){
                 if (bookReserveHM.get(key).get(i).getUsername().equals(username)){
                     deleted = true;
                     bookReserveHM.get(key).remove(i);
@@ -129,7 +138,7 @@ public class BookReserveDAOImpl extends ConnectionDAO implements BookReserveDAO<
 
         for (String key : bookReserveHM.keySet()){
             int i = 0;
-            while (bookReserveHM.get(key).get(i) != null){
+            while (bookReserveHM.get(key).size() > i){
                 if (bookReserveHM.get(key).get(i).getUsername().equals(username)){
                     allFromUser.add((bookReserveHM).get(key).get(i));
                 }
