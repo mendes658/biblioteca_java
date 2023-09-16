@@ -1,18 +1,17 @@
 package com.pbl.biblioteca.dao;
 
 import com.pbl.biblioteca.dao.Book.BookDAO;
-import com.pbl.biblioteca.dao.Book.BookDAOImpl;
+import com.pbl.biblioteca.dao.Book.BookFileImpl;
 import com.pbl.biblioteca.dao.BookReserve.BookReserveDAO;
-import com.pbl.biblioteca.dao.BookReserve.BookReserveDAOImpl;
+import com.pbl.biblioteca.dao.BookReserve.BookReserveFileImpl;
 import com.pbl.biblioteca.dao.Librarian.LibrarianDAO;
-import com.pbl.biblioteca.dao.Librarian.LibrarianDAOImpl;
+import com.pbl.biblioteca.dao.Librarian.LibrarianFileImpl;
 import com.pbl.biblioteca.dao.Loan.LoanDAO;
-import com.pbl.biblioteca.dao.Loan.LoanDAOImpl;
+import com.pbl.biblioteca.dao.Loan.LoanFileImpl;
 import com.pbl.biblioteca.dao.Operator.OperatorDAO;
-import com.pbl.biblioteca.dao.Operator.OperatorDAOImpl;
+import com.pbl.biblioteca.dao.Operator.OperatorFileImpl;
 import com.pbl.biblioteca.dao.User.UserDAO;
-import com.pbl.biblioteca.dao.User.UserDAOImpl;
-import com.pbl.biblioteca.model.BookReserve;
+import com.pbl.biblioteca.dao.User.UserFileImpl;
 
 public class DAO {
 
@@ -25,7 +24,7 @@ public class DAO {
 
     public static BookDAO getBookDAO() {
         if (bookDAO == null){
-            bookDAO = new BookDAOImpl();
+            bookDAO = new BookFileImpl();
         }
 
         return bookDAO;
@@ -33,7 +32,7 @@ public class DAO {
 
     public static LoanDAO getLoanDAO() {
         if (loanDAO == null){
-            loanDAO = new LoanDAOImpl();
+            loanDAO = new LoanFileImpl();
         }
 
         return loanDAO;
@@ -41,7 +40,7 @@ public class DAO {
 
     public static OperatorDAO getOperatorDAO() {
         if (operatorDAO == null){
-            operatorDAO = new OperatorDAOImpl();
+            operatorDAO = new OperatorFileImpl();
         }
 
         return operatorDAO;
@@ -49,7 +48,7 @@ public class DAO {
 
     public static UserDAO getUserDAO() {
         if (userDAO == null){
-            userDAO = new UserDAOImpl();
+            userDAO = new UserFileImpl();
         }
 
         return userDAO;
@@ -57,7 +56,7 @@ public class DAO {
 
     public static LibrarianDAO getLibrarianDAO() {
         if ( librarianDAO == null){
-            librarianDAO = new LibrarianDAOImpl();
+            librarianDAO = new LibrarianFileImpl();
         }
 
         return librarianDAO;
@@ -65,7 +64,7 @@ public class DAO {
 
     public static BookReserveDAO getBookReserve() {
         if (bookReserve == null){
-            bookReserve = new BookReserveDAOImpl();
+            bookReserve = new BookReserveFileImpl();
         }
 
         return bookReserve;

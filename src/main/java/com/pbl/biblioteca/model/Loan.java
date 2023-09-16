@@ -1,6 +1,6 @@
 package com.pbl.biblioteca.model;
 
-import com.pbl.biblioteca.dao.Loan.LoanDAOImpl;
+import com.pbl.biblioteca.dao.Loan.LoanFileImpl;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ public class Loan implements Serializable {
 
     public Loan(String bookId, String userUsername, LocalDate date, Integer loanDays,
                 String librarianUsername){
-        LoanDAOImpl loanDAO = new LoanDAOImpl();
+        LoanFileImpl loanDAO = new LoanFileImpl();
         this.id = loanDAO.generateId();
         this.bookId = bookId;
         this.username = userUsername;

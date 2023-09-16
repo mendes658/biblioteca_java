@@ -1,11 +1,11 @@
 package com.pbl.biblioteca.model;
 
-import com.pbl.biblioteca.dao.Book.BookDAOImpl;
-import com.pbl.biblioteca.dao.BookCopy.BookCopyDAOImpl;
-import com.pbl.biblioteca.dao.ConnectionDAO;
-import com.pbl.biblioteca.dao.Librarian.LibrarianDAOImpl;
-import com.pbl.biblioteca.dao.Loan.LoanDAOImpl;
-import com.pbl.biblioteca.dao.User.UserDAOImpl;
+import com.pbl.biblioteca.dao.Book.BookFileImpl;
+import com.pbl.biblioteca.dao.BookCopy.BookCopyFileImpl;
+import com.pbl.biblioteca.dao.ConnectionFile;
+import com.pbl.biblioteca.dao.Librarian.LibrarianFileImpl;
+import com.pbl.biblioteca.dao.Loan.LoanFileImpl;
+import com.pbl.biblioteca.dao.User.UserFileImpl;
 import com.pbl.biblioteca.exceptionHandler.CopyNotFoundException;
 import com.pbl.biblioteca.exceptionHandler.UserIsBlockedException;
 import org.junit.jupiter.api.AfterEach;
@@ -17,21 +17,21 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibrarianTest {
-    private final UserDAOImpl userDAO = new UserDAOImpl();
-    private final BookDAOImpl bookDAO = new BookDAOImpl();
-    private final LibrarianDAOImpl librarianDAO = new LibrarianDAOImpl();
-    private final LoanDAOImpl loanDAO = new LoanDAOImpl();
-    private final BookCopyDAOImpl bookCopyDAO = new BookCopyDAOImpl();
+    private final UserFileImpl userDAO = new UserFileImpl();
+    private final BookFileImpl bookDAO = new BookFileImpl();
+    private final LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
+    private final LoanFileImpl loanDAO = new LoanFileImpl();
+    private final BookCopyFileImpl bookCopyDAO = new BookCopyFileImpl();
 
     @BeforeEach
     void setUp() {
-        ConnectionDAO.setTestFileUrls();
+        ConnectionFile.setTestFileUrls();
 
     }
 
     @AfterEach
     void tearDown() {
-        ConnectionDAO.cleanTestFiles();
+        ConnectionFile.cleanTestFiles();
     }
 
     @Test

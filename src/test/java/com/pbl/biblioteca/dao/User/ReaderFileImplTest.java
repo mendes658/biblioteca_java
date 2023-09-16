@@ -1,6 +1,6 @@
 package com.pbl.biblioteca.dao.User;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Reader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,21 +8,21 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReaderDAOImplTest {
+class ReaderFileImplTest {
 
     @BeforeEach
     void setUp() {
-        ConnectionDAO.setTestFileUrls();
+        ConnectionFile.setTestFileUrls();
     }
 
     @AfterEach
     void tearDown() {
-        ConnectionDAO.setDefaultFileUrls();
+        ConnectionFile.setDefaultFileUrls();
     }
 
     @Test
     void create() {
-        UserDAOImpl userDAO = new UserDAOImpl();
+        UserFileImpl userDAO = new UserFileImpl();
         Reader u1 = new Reader("pedromendes", "Pedro Mendes", "te tete",
                 "79585959", "12345");
         userDAO.create(u1);
@@ -31,7 +31,7 @@ class ReaderDAOImplTest {
 
     @Test
     void getByPK() {
-        UserDAOImpl userDAO = new UserDAOImpl();
+        UserFileImpl userDAO = new UserFileImpl();
         Reader u1 = new Reader("pedromendes", "Pedro Mendes", "te tete",
                 "79585959", "12345");
         userDAO.create(u1);
@@ -40,7 +40,7 @@ class ReaderDAOImplTest {
 
     @Test
     void update() {
-        UserDAOImpl userDAO = new UserDAOImpl();
+        UserFileImpl userDAO = new UserFileImpl();
         Reader u1 = new Reader("pedromendes", "Pedro Mendes", "te tete",
                 "79585959", "12345");
         userDAO.create(u1);
@@ -51,7 +51,7 @@ class ReaderDAOImplTest {
 
     @Test
     void deleteByPK() {
-        UserDAOImpl userDAO = new UserDAOImpl();
+        UserFileImpl userDAO = new UserFileImpl();
         Reader u1 = new Reader("pedromendes", "Pedro Mendes", "te tete",
                 "79585959", "12345");
         userDAO.create(u1);
@@ -61,7 +61,7 @@ class ReaderDAOImplTest {
 
     @Test
     void generateId() {
-        UserDAOImpl userDAO = new UserDAOImpl();
+        UserFileImpl userDAO = new UserFileImpl();
         int a = Integer.parseInt(userDAO.generateId());
         int b = Integer.parseInt(userDAO.generateId());
         assertTrue(b > a);
@@ -69,7 +69,7 @@ class ReaderDAOImplTest {
 
     @Test
     void getAll() {
-        UserDAOImpl userDAO = new UserDAOImpl();
+        UserFileImpl userDAO = new UserFileImpl();
         Reader u1 = new Reader("pedromendes", "Pedro Mendes", "te tete",
                 "79585959", "12345");
         userDAO.create(u1);

@@ -1,11 +1,11 @@
 package com.pbl.biblioteca.dao.Operator;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Operator;
 
 import java.util.HashMap;
 
-public class OperatorDAOImpl extends ConnectionDAO implements OperatorDAO{
+public class OperatorFileImpl extends ConnectionFile implements OperatorDAO{
 
     @Override
     public boolean create(Operator operatorObject){
@@ -38,7 +38,7 @@ public class OperatorDAOImpl extends ConnectionDAO implements OperatorDAO{
 
     @Override
     public String generateId() {
-        return ConnectionDAO.generateId(operatorFileUrl);
+        return ConnectionFile.generateId(operatorFileUrl);
     }
 
     @Override

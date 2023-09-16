@@ -1,11 +1,11 @@
 package com.pbl.biblioteca.dao.Librarian;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Librarian;
 
 import java.util.HashMap;
 
-public class LibrarianDAOImpl extends ConnectionDAO implements LibrarianDAO{
+public class LibrarianFileImpl extends ConnectionFile implements LibrarianDAO{
 
     @Override
     public boolean create(Librarian librarianObject){

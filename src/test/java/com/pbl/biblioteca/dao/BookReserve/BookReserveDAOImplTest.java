@@ -1,7 +1,7 @@
 package com.pbl.biblioteca.dao.BookReserve;
 
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.BookReserve;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,16 +13,16 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookReserveDAOImplTest {
-    private final BookReserveDAOImpl bookReserveDAO = new BookReserveDAOImpl();
+    private final BookReserveFileImpl bookReserveDAO = new BookReserveFileImpl();
 
     @BeforeEach
     void setUp() {
-        ConnectionDAO.setTestFileUrls();
+        ConnectionFile.setTestFileUrls();
     }
 
     @AfterEach
     void tearDown() {
-        ConnectionDAO.cleanTestFiles();
+        ConnectionFile.cleanTestFiles();
     }
 
     @Test

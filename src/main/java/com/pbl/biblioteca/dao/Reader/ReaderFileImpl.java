@@ -4,7 +4,7 @@ import com.pbl.biblioteca.model.Reader;
 
 import java.util.HashMap;
 
-public class ReaderDAOImpl implements ReaderDAO{
+public class ReaderFileImpl implements ReaderDAO{
     @Override
     public boolean update(Reader obj) {
         return false;

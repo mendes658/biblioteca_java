@@ -2,7 +2,7 @@ package com.pbl.biblioteca.dao.System;
 
 import java.util.HashMap;
 
-public class SystemDAOImpl implements SystemDAO{
+public class SystemFileImpl implements SystemDAO{
 
     @Override
     public boolean update(System obj) {

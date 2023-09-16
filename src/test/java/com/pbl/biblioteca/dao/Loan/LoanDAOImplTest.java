@@ -1,11 +1,8 @@
 package com.pbl.biblioteca.dao.Loan;
 
-import com.pbl.biblioteca.dao.Book.BookDAOImpl;
-import com.pbl.biblioteca.dao.BookCopy.BookCopyDAOImpl;
-import com.pbl.biblioteca.dao.ConnectionDAO;
-import com.pbl.biblioteca.dao.Operator.OperatorDAOImpl;
+import com.pbl.biblioteca.dao.Book.BookFileImpl;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Book;
-import com.pbl.biblioteca.model.BookCopy;
 import com.pbl.biblioteca.model.Loan;
 import javafx.util.Pair;
 import org.junit.jupiter.api.AfterEach;
@@ -22,25 +19,25 @@ class LoanDAOImplTest {
 
     @BeforeEach
     void setUp() {
-        ConnectionDAO.setTestFileUrls();
+        ConnectionFile.setTestFileUrls();
     }
 
     @AfterEach
     void tearDown() {
-        ConnectionDAO.setDefaultFileUrls();
+        ConnectionFile.setDefaultFileUrls();
     }
 
     @Test
     void createAndGet() {
         Book b1;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");
         b1.addCopies(2);
 
         bookDAO.create(b1);
 
-        LoanDAOImpl loanDAO= new LoanDAOImpl();
+        LoanFileImpl loanDAO= new LoanFileImpl();
         Loan l1 = new Loan(b1.getAllCopies().get(0).getId(), "pedromendes33", LocalDate.now(), 7, "zezinho");
         loanDAO.create(l1);
         Loan getL1 = loanDAO.getByPK(l1.getId());
@@ -51,14 +48,14 @@ class LoanDAOImplTest {
     @Test
     void getByPK() {
         Book b1;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");
         b1.addCopies(2);
 
         bookDAO.create(b1);
 
-        LoanDAOImpl loanDAO= new LoanDAOImpl();
+        LoanFileImpl loanDAO= new LoanFileImpl();
         Loan l1 = new Loan(b1.getAllCopies().get(0).getId(), "pedromendes33", LocalDate.now(), 7, "zezinho");
         loanDAO.create(l1);
         assertEquals(loanDAO.getByPK(l1.getId()).getUsername(), l1.getUsername());
@@ -68,14 +65,14 @@ class LoanDAOImplTest {
     @Test
     void update() {
         Book b1;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");
         b1.addCopies(2);
 
         bookDAO.create(b1);
 
-        LoanDAOImpl loanDAO= new LoanDAOImpl();
+        LoanFileImpl loanDAO= new LoanFileImpl();
         Loan l1 = new Loan(b1.getAllCopies().get(0).getId(), "pedromendes33", LocalDate.now(), 7, "zezinho");
         loanDAO.create(l1);
         l1.setUsername("cavalo");
@@ -89,14 +86,14 @@ class LoanDAOImplTest {
     @Test
     void deleteByPK() {
         Book b1;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");
         b1.addCopies(2);
 
         bookDAO.create(b1);
 
-        LoanDAOImpl loanDAO = new LoanDAOImpl();
+        LoanFileImpl loanDAO = new LoanFileImpl();
         Loan l1 = new Loan(b1.getAllCopies().get(0).getId(), "pedromendes33", LocalDate.now(), 7, "zezinho");
         loanDAO.create(l1);
         loanDAO.deleteByPK(l1.getId());
@@ -107,14 +104,14 @@ class LoanDAOImplTest {
     @Test
     void getAll() {
         Book b1;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");
         b1.addCopies(2);
 
         bookDAO.create(b1);
 
-        LoanDAOImpl loanDAO = new LoanDAOImpl();
+        LoanFileImpl loanDAO = new LoanFileImpl();
         Loan l1 = new Loan(b1.getAllCopies().get(0).getId(), "pedromendes33", LocalDate.now(), 7, "zezinho");
         loanDAO.create(l1);
         HashMap<String, Loan> all = loanDAO.getAll();
@@ -123,7 +120,7 @@ class LoanDAOImplTest {
 
     @Test
     void generateId() {
-        LoanDAOImpl loanDAO = new LoanDAOImpl();
+        LoanFileImpl loanDAO = new LoanFileImpl();
         int a = Integer.parseInt(loanDAO.generateId());
         int b = Integer.parseInt(loanDAO.generateId());
         assertTrue(b > a);
@@ -132,8 +129,8 @@ class LoanDAOImplTest {
     @Test
     void getPopularBooksAllTime(){
         Book b1, b2, b3;
-        BookDAOImpl bookDAO = new BookDAOImpl();
-        LoanDAOImpl loanDAO = new LoanDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
+        LoanFileImpl loanDAO = new LoanFileImpl();
 
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");

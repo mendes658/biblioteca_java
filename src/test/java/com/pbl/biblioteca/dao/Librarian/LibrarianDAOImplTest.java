@@ -1,13 +1,11 @@
 package com.pbl.biblioteca.dao.Librarian;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
-import com.pbl.biblioteca.dao.Loan.LoanDAOImpl;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Librarian;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.net.ConnectException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,17 +14,17 @@ class LibrarianDAOImplTest {
 
     @BeforeEach
     void setUp() {
-        ConnectionDAO.setTestFileUrls();
+        ConnectionFile.setTestFileUrls();
     }
 
     @AfterEach
     void tearDown() {
-        ConnectionDAO.setDefaultFileUrls();
+        ConnectionFile.setDefaultFileUrls();
     }
 
     @Test
     void createAndGetByPK() {
-        LibrarianDAOImpl librarianDAO = new LibrarianDAOImpl();
+        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
         Librarian l1 = new Librarian("pedromendes", "12345");
         librarianDAO.create(l1);
         assertEquals(librarianDAO.getByPK("pedromendes").getUsername(), "pedromendes");
@@ -34,7 +32,7 @@ class LibrarianDAOImplTest {
 
     @Test
     void update() {
-        LibrarianDAOImpl librarianDAO = new LibrarianDAOImpl();
+        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
         Librarian l1 = new Librarian("pedromendes", "12345");
         librarianDAO.create(l1);
         l1.setUsername("joaquim");
@@ -44,7 +42,7 @@ class LibrarianDAOImplTest {
 
     @Test
     void deleteByPK() {
-        LibrarianDAOImpl librarianDAO = new LibrarianDAOImpl();
+        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
         Librarian l1 = new Librarian("pedromendes", "12345");
         Librarian l2 = new Librarian("mendes22", "12345");
         librarianDAO.create(l1);
@@ -56,7 +54,7 @@ class LibrarianDAOImplTest {
 
     @Test
     void getAll() {
-        LibrarianDAOImpl librarianDAO = new LibrarianDAOImpl();
+        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
         Librarian l1 = new Librarian("pedromendes", "12345");
         Librarian l2 = new Librarian("mendes22", "12345");
         librarianDAO.create(l1);
@@ -68,7 +66,7 @@ class LibrarianDAOImplTest {
 
     @Test
     void generateId() {
-        LibrarianDAOImpl librarianDAO = new LibrarianDAOImpl();
+        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
         Librarian l1 = new Librarian("pedromendes", "12345");
         Librarian l2 = new Librarian("pedromendes22", "12345");
         librarianDAO.create(l1);

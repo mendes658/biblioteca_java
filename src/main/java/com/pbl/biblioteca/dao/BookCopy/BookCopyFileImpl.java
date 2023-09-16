@@ -1,11 +1,11 @@
 package com.pbl.biblioteca.dao.BookCopy;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.BookCopy;
 
 import java.util.HashMap;
 
-public class BookCopyDAOImpl extends ConnectionDAO implements BookCopyDAO<BookCopy> {
+public class BookCopyFileImpl extends ConnectionFile implements BookCopyDAO<BookCopy> {
 
     @Override
     public boolean create(BookCopy bookCopyObj) {
@@ -45,6 +45,6 @@ public class BookCopyDAOImpl extends ConnectionDAO implements BookCopyDAO<BookCo
 
     @Override
     public String generateId() {
-        return ConnectionDAO.generateId(bookCopiesUrl);
+        return ConnectionFile.generateId(bookCopiesUrl);
     }
 }

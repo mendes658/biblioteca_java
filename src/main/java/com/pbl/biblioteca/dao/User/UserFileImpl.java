@@ -3,10 +3,10 @@ package com.pbl.biblioteca.dao.User;
 
 import java.util.HashMap;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.*;
 
-public class UserDAOImpl extends ConnectionDAO implements UserDAO{
+public class UserFileImpl extends ConnectionFile implements UserDAO{
 
     @Override
     public boolean create(Reader readerObject){
@@ -42,7 +42,7 @@ public class UserDAOImpl extends ConnectionDAO implements UserDAO{
 
     @Override
     public String generateId() {
-        return ConnectionDAO.generateId(userFileUrl);
+        return ConnectionFile.generateId(userFileUrl);
     }
 
     @Override

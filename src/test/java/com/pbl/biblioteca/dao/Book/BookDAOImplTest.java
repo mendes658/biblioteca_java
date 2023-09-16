@@ -1,11 +1,10 @@
 package com.pbl.biblioteca.dao.Book;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Book;
 import org.junit.jupiter.api.*;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,18 +14,18 @@ class BookDAOImplTest {
 
     @BeforeEach
     void setUp() {
-        ConnectionDAO.setTestFileUrls();
+        ConnectionFile.setTestFileUrls();
     }
 
     @AfterEach
     void tearDown() {
-        ConnectionDAO.cleanTestFiles();
+        ConnectionFile.cleanTestFiles();
     }
 
     @Test
     void createAndGet() {
         Book b1, b2;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
 
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");
@@ -47,7 +46,7 @@ class BookDAOImplTest {
     @Test
     void update() {
         Book b1, b2;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
 
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");
@@ -73,7 +72,7 @@ class BookDAOImplTest {
     @Test
     void deleteAndGetBooksByCategory() {
         Book b1, b2, b4;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
 
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");
@@ -101,7 +100,7 @@ class BookDAOImplTest {
     @Test
     void getAll() {
         Book b1, b2;
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
 
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111");

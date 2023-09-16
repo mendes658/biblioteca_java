@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.HashMap;
 
 
-public class ConnectionDAO {
+public class ConnectionFile {
 
     protected static  String userFileUrl;
     protected static  String loanFileUrl;
@@ -28,26 +28,26 @@ public class ConnectionDAO {
     protected static  String defaultBookReserveUrl = "book_reserves.ser";
 
     public static void setTestFileUrls() {
-        ConnectionDAO.userFileUrl = "test_" + defaultUserFileUrl;
-        ConnectionDAO.loanFileUrl = "test_" + defaultLoanFileUrl;
-        ConnectionDAO.bookFileUrl = "test_" + defaultBookFileUrl;
-        ConnectionDAO.operatorFileUrl = "test_" + defaultOperatorFileUrl;
-        ConnectionDAO.librarianFileUrl = "test_" + defaultLibrarianFileUrl;
-        ConnectionDAO.bookCopiesUrl = "test_" + defaultBookCopiesUrl;
-        ConnectionDAO.totalLoansByBookUrl = "test_" + defaultTotalLoansByBookUrl;
-        ConnectionDAO.bookReserveUrl = "test_" + defaultBookReserveUrl;
+        ConnectionFile.userFileUrl = "test_" + defaultUserFileUrl;
+        ConnectionFile.loanFileUrl = "test_" + defaultLoanFileUrl;
+        ConnectionFile.bookFileUrl = "test_" + defaultBookFileUrl;
+        ConnectionFile.operatorFileUrl = "test_" + defaultOperatorFileUrl;
+        ConnectionFile.librarianFileUrl = "test_" + defaultLibrarianFileUrl;
+        ConnectionFile.bookCopiesUrl = "test_" + defaultBookCopiesUrl;
+        ConnectionFile.totalLoansByBookUrl = "test_" + defaultTotalLoansByBookUrl;
+        ConnectionFile.bookReserveUrl = "test_" + defaultBookReserveUrl;
 
     }
 
     public static void setDefaultFileUrls() {
-        ConnectionDAO.userFileUrl = defaultUserFileUrl;
-        ConnectionDAO.librarianFileUrl = defaultLibrarianFileUrl;
-        ConnectionDAO.operatorFileUrl = defaultOperatorFileUrl;
-        ConnectionDAO.loanFileUrl = defaultLoanFileUrl;
-        ConnectionDAO.bookFileUrl = defaultBookFileUrl;
-        ConnectionDAO.bookCopiesUrl = defaultBookCopiesUrl;
-        ConnectionDAO.totalLoansByBookUrl = defaultTotalLoansByBookUrl;
-        ConnectionDAO.bookReserveUrl = defaultBookReserveUrl;
+        ConnectionFile.userFileUrl = defaultUserFileUrl;
+        ConnectionFile.librarianFileUrl = defaultLibrarianFileUrl;
+        ConnectionFile.operatorFileUrl = defaultOperatorFileUrl;
+        ConnectionFile.loanFileUrl = defaultLoanFileUrl;
+        ConnectionFile.bookFileUrl = defaultBookFileUrl;
+        ConnectionFile.bookCopiesUrl = defaultBookCopiesUrl;
+        ConnectionFile.totalLoansByBookUrl = defaultTotalLoansByBookUrl;
+        ConnectionFile.bookReserveUrl = defaultBookReserveUrl;
     }
 
     public static void cleanTestFiles(){

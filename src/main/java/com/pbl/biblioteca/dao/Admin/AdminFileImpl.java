@@ -4,7 +4,7 @@ import com.pbl.biblioteca.model.Admin;
 
 import java.util.HashMap;
 
-public class AdminDAOImpl implements AdminDAO{
+public class AdminFileImpl implements AdminDAO{
     @Override
     public boolean update(Admin obj) {
         return false;

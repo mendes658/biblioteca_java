@@ -1,11 +1,9 @@
 package com.pbl.biblioteca.model;
 
-import com.pbl.biblioteca.dao.Book.BookDAOImpl;
-import com.pbl.biblioteca.dao.BookCopy.BookCopyDAOImpl;
+import com.pbl.biblioteca.dao.Book.BookFileImpl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Book implements Serializable {
 
@@ -34,7 +32,7 @@ public class Book implements Serializable {
         this.totalCopies = totalCopies;
         this.availableCopies = totalCopies;
 
-        BookDAOImpl bookDAO = new BookDAOImpl();
+        BookFileImpl bookDAO = new BookFileImpl();
         this.id = bookDAO.generateId();
 
     }

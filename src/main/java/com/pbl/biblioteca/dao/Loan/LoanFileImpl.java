@@ -1,6 +1,6 @@
 package com.pbl.biblioteca.dao.Loan;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Book;
 import com.pbl.biblioteca.model.BookCopy;
 import com.pbl.biblioteca.model.Loan;
@@ -8,7 +8,7 @@ import javafx.util.Pair;
 
 import java.util.*;
 
-public class LoanDAOImpl extends ConnectionDAO implements LoanDAO{
+public class LoanFileImpl extends ConnectionFile implements LoanDAO{
 
     @Override
     public boolean create(Loan loanObject){
@@ -51,7 +51,7 @@ public class LoanDAOImpl extends ConnectionDAO implements LoanDAO{
 
     @Override
     public String generateId() {
-        return ConnectionDAO.generateId(loanFileUrl);
+        return ConnectionFile.generateId(loanFileUrl);
     }
 
     @Override

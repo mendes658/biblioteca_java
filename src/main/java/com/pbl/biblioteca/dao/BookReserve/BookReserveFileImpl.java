@@ -1,12 +1,12 @@
 package com.pbl.biblioteca.dao.BookReserve;
 
-import com.pbl.biblioteca.dao.ConnectionDAO;
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.BookReserve;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BookReserveDAOImpl extends ConnectionDAO implements BookReserveDAO{
+public class BookReserveFileImpl extends ConnectionFile implements BookReserveDAO{
 
     @Override
     public boolean create(BookReserve bookReserveObj) {
@@ -80,7 +80,7 @@ public class BookReserveDAOImpl extends ConnectionDAO implements BookReserveDAO{
 
     @Override
     public String generateId() {
-        return ConnectionDAO.generateId(bookReserveUrl);
+        return ConnectionFile.generateId(bookReserveUrl);
     }
 
     @Override
