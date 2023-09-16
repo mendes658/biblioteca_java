@@ -5,7 +5,7 @@ import com.pbl.biblioteca.model.Operator;
 
 import java.util.HashMap;
 
-public class OperatorDAOImpl extends ConnectionDAO implements OperatorDAO<Operator>{
+public class OperatorDAOImpl extends ConnectionDAO implements OperatorDAO{
 
     @Override
     public boolean create(Operator operatorObject){

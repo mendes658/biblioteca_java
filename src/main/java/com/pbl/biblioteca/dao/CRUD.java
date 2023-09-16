@@ -2,7 +2,7 @@ package com.pbl.biblioteca.dao;
 
 import java.util.HashMap;
 
-public interface crudDAO<T>{
+public interface CRUD<T>{
 
     boolean update(T obj);
     boolean deleteByPK(String pk);

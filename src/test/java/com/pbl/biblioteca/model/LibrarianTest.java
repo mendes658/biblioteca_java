@@ -42,9 +42,9 @@ class LibrarianTest {
                 2002, "Mistério", "11111");
         Book b2 = new Book("A batida do maneco", "Preto", "Azul",
                 2002, "Mistério", "22222");
-        User u1 = new User("pedromendes", "Pedro Mendes", "te tete",
+        Reader u1 = new Reader("pedromendes", "Pedro Mendes", "te tete",
                 "79585959", "12345");
-        User u2 = new User("pedroca22", "Pedroca", "te tete",
+        Reader u2 = new Reader("pedroca22", "Pedroca", "te tete",
                 "79585959", "12345");
 
         b1.addCopies(1);
@@ -99,7 +99,7 @@ class LibrarianTest {
             System.out.println(d.getMessage() + ".");
         }
 
-        assertTrue(bookCopyDAO.getByPK(newLoan2.getbookCopyId()).isBorrowed());
+        assertTrue(bookCopyDAO.getByPK(newLoan2.getBookId()).isBorrowed());
     }
 
     @Test
@@ -110,9 +110,9 @@ class LibrarianTest {
                 2002, "Mistério", "11111");
         Book b2 = new Book("A batida do maneco", "Preto", "Azul",
                 2002, "Mistério", "22222");
-        User u1 = new User("pedromendes", "Pedro Mendes", "te tete",
+        Reader u1 = new Reader("pedromendes", "Pedro Mendes", "te tete",
                 "79585959", "12345");
-        User u2 = new User("pedroca22", "Pedroca", "te tete",
+        Reader u2 = new Reader("pedroca22", "Pedroca", "te tete",
                 "79585959", "12345");
 
         b1.addCopies(1);
@@ -141,12 +141,12 @@ class LibrarianTest {
         }
 
 
-        assertTrue(bookCopyDAO.getByPK(newLoan2.getbookCopyId()).isBorrowed());
-        assertTrue(bookCopyDAO.getByPK(newLoan.getbookCopyId()).isBorrowed());
+        assertTrue(bookCopyDAO.getByPK(newLoan2.getBookId()).isBorrowed());
+        assertTrue(bookCopyDAO.getByPK(newLoan.getBookId()).isBorrowed());
 
         l1.deleteBookLoan(newLoan2.getId());
 
-        assertFalse(bookCopyDAO.getByPK(newLoan2.getbookCopyId()).isBorrowed());
+        assertFalse(bookCopyDAO.getByPK(newLoan2.getBookId()).isBorrowed());
 
     }
 }

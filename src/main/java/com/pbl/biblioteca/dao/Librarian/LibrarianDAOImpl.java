@@ -5,7 +5,7 @@ import com.pbl.biblioteca.model.Librarian;
 
 import java.util.HashMap;
 
-public class LibrarianDAOImpl extends ConnectionDAO implements LibrarianDAO<Librarian>{
+public class LibrarianDAOImpl extends ConnectionDAO implements LibrarianDAO{
 
     @Override
     public boolean create(Librarian librarianObject){

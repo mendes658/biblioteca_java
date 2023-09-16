@@ -1,9 +1,9 @@
 package com.pbl.biblioteca.dao;
 
 import com.pbl.biblioteca.model.*;
+import com.pbl.biblioteca.model.Reader;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -52,7 +52,7 @@ public class ConnectionDAO {
 
     public static void cleanTestFiles(){
 
-        saveAnyObject(new HashMap<String, User>() ,"test_" + defaultUserFileUrl);
+        saveAnyObject(new HashMap<String, Reader>() ,"test_" + defaultUserFileUrl);
         saveAnyObject(new HashMap<String, Librarian>(),"test_" + defaultLibrarianFileUrl);
         saveAnyObject(new HashMap<String, Operator>(),"test_" + defaultOperatorFileUrl);
         saveAnyObject(new HashMap<String, Loan>(),"test_" + defaultLoanFileUrl);

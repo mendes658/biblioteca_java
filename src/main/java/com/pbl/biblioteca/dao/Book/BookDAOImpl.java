@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class BookDAOImpl extends ConnectionDAO implements BookDAO<Book> {
+public class BookDAOImpl extends ConnectionDAO implements BookDAO{
 
     @Override
     public boolean create(Book bookObject) {

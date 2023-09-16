@@ -6,7 +6,7 @@ import com.pbl.biblioteca.model.BookReserve;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BookReserveDAOImpl extends ConnectionDAO implements BookReserveDAO<BookReserve> {
+public class BookReserveDAOImpl extends ConnectionDAO implements BookReserveDAO{
 
     @Override
     public boolean create(BookReserve bookReserveObj) {

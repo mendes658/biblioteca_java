@@ -1,11 +1,11 @@
 package com.pbl.biblioteca.dao.Book;
 
-import com.pbl.biblioteca.dao.crudDAO;
+import com.pbl.biblioteca.dao.CRUD;
+import com.pbl.biblioteca.model.Book;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public interface BookDAO<Book> extends crudDAO<Book> {
+public interface BookDAO extends CRUD<Book> {
     ArrayList<Book> getAllBooksFromCategory(String category);
     String generateId();
 }

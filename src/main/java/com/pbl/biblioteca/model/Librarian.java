@@ -1,9 +1,7 @@
 package com.pbl.biblioteca.model;
 
-import com.pbl.biblioteca.dao.Book.BookDAOImpl;
 import com.pbl.biblioteca.dao.BookCopy.BookCopyDAOImpl;
 import com.pbl.biblioteca.dao.Loan.LoanDAOImpl;
-import com.pbl.biblioteca.dao.User.UserDAOImpl;
 import com.pbl.biblioteca.exceptionHandler.*;
 
 import java.time.LocalDate;
@@ -17,10 +15,10 @@ public class Librarian extends Operator{
 
     }
 
-    public Loan createBookLoan(Book book, User user, Integer days) throws
+    public Loan createBookLoan(Book book, Reader reader, Integer days) throws
             UserIsBlockedException, CopyNotFoundException {
 
-        if (user.isBlocked()){
+        if (reader.isBlocked()){
             throw new UserIsBlockedException("User is blocked.");
         }
 
@@ -45,7 +43,7 @@ public class Librarian extends Operator{
         LoanDAOImpl loanDAO = new LoanDAOImpl();
         BookCopyDAOImpl bookCopyDAO = new BookCopyDAOImpl();
 
-        Loan newLoan = new Loan(freeCopy.getId(), user.getUsername(), today, days, this.getUsername());
+        Loan newLoan = new Loan(freeCopy.getId(), reader.getUsername(), today, days, this.getUsername());
         freeCopy.borrow(newLoan.getId());
         bookCopyDAO.update(freeCopy);
 
@@ -60,7 +58,7 @@ public class Librarian extends Operator{
 
         Loan toDelete = loanDAO.getByPK(loanId);
 
-        BookCopy bookCopy = bookCopyDAO.getByPK(toDelete.getbookCopyId());
+        BookCopy bookCopy = bookCopyDAO.getByPK(toDelete.getBookId());
         bookCopy.retrieve();
 
         loanDAO.deleteByPK(loanId);
