@@ -56,7 +56,7 @@ public class DAO {
     }
 
     public static LibrarianDAO getLibrarianDAO() {
-        if (librarianDAO == null){
+        if ( librarianDAO == null){
             librarianDAO = new LibrarianDAOImpl();
         }
 
