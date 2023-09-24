@@ -9,8 +9,8 @@ import com.pbl.biblioteca.model.*;
 public class UserFileImpl extends ConnectionFile implements UserDAO{
 
     @Override
-    public boolean create(Reader readerObject){
-        HashMap<String, Reader> userHM = getAnySavedHashmap(userFileUrl);
+    public boolean create(User readerObject){
+        HashMap<String, User> userHM = getAnySavedHashmap(userFileUrl);
 
         userHM.put(readerObject.getUsername(), readerObject);
 
@@ -18,15 +18,15 @@ public class UserFileImpl extends ConnectionFile implements UserDAO{
     }
 
     @Override
-    public Reader getByPK(String nickname){
-        HashMap<String, Reader> userHM = getAnySavedHashmap(userFileUrl);
+    public User getByPK(String nickname){
+        HashMap<String, User> userHM = getAnySavedHashmap(userFileUrl);
 
         return userHM.get(nickname);
     }
 
     @Override
-    public boolean update(Reader readerObj) {
-        HashMap<String, Reader> userHM = getAnySavedHashmap(userFileUrl);
+    public boolean update(User readerObj) {
+        HashMap<String, User> userHM = getAnySavedHashmap(userFileUrl);
         userHM.put(readerObj.getUsername(), readerObj);
 
         return saveAnyObject(userHM, userFileUrl);
@@ -34,7 +34,7 @@ public class UserFileImpl extends ConnectionFile implements UserDAO{
 
     @Override
     public boolean deleteByPK(String username) {
-        HashMap<String, Reader> userHM = getAnySavedHashmap(userFileUrl);
+        HashMap<String, User> userHM = getAnySavedHashmap(userFileUrl);
         userHM.remove(username);
 
         return saveAnyObject(userHM, userFileUrl);
@@ -46,7 +46,7 @@ public class UserFileImpl extends ConnectionFile implements UserDAO{
     }
 
     @Override
-    public HashMap<String, Reader> getAll() {
+    public HashMap<String, User> getAll() {
         return getAnySavedHashmap(userFileUrl);
     }
 }

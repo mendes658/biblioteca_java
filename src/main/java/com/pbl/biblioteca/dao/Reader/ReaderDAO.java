@@ -5,4 +5,5 @@ import com.pbl.biblioteca.model.Reader;
 
 public interface ReaderDAO extends CRUD<Reader> {
 
+    String generateId();
 }

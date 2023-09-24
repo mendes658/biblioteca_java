@@ -39,7 +39,6 @@ public class BookFileImpl extends ConnectionFile implements BookDAO{
         if (!bookHM.containsKey(isbn)) {
             return false;
         } else {
-            Book toDelete = bookHM.get(isbn);
             bookHM.remove(isbn);
             saveAnyObject(bookHM, bookFileUrl);
         }

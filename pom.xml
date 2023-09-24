@@ -79,7 +79,6 @@
                 <configuration>
                     <!-- Allow JUnit to access the test classes -->
                     <argLine>--add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.User=ALL-UNNAMED
-                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.BookCopy=ALL-UNNAMED
                         --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Book=ALL-UNNAMED
                         --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.BookReserve=ALL-UNNAMED
                         --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Librarian=ALL-UNNAMED

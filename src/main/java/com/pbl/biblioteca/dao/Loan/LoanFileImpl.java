@@ -2,7 +2,6 @@ package com.pbl.biblioteca.dao.Loan;
 
 import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Book;
-import com.pbl.biblioteca.model.BookCopy;
 import com.pbl.biblioteca.model.Loan;
 import javafx.util.Pair;
 
@@ -58,14 +57,14 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
     public ArrayList<Pair<String, Integer>> getPopularBooksAllTime() {
         HashMap<String, Integer> totalLoansHM = new HashMap<>();
         HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
-        HashMap<String, BookCopy> bookCopyHM = getAnySavedHashmap(bookCopiesUrl);
+        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
 
         String newKey;
         Book nowBook;
 
         for (String key : loanHM.keySet()){
 
-            nowBook = bookCopyHM.get(loanHM.get(key).getBookId());
+            nowBook = bookHM.get(loanHM.get(key).getBookIsbn());
             newKey = nowBook.getIsbn() + " " + nowBook.getTitle();
 
             if (totalLoansHM.get(newKey) == null){

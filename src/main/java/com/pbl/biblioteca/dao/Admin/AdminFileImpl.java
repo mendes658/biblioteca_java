@@ -1,32 +1,50 @@
 package com.pbl.biblioteca.dao.Admin;
 
+import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.Admin;
 
 import java.util.HashMap;
 
-public class AdminFileImpl implements AdminDAO{
+public class AdminFileImpl extends ConnectionFile implements AdminDAO{
+
     @Override
-    public boolean update(Admin obj) {
-        return false;
+    public boolean create(Admin adminObject){
+        HashMap<String, Admin> operatorHM = getAnySavedHashmap(adminUrl);
+
+        operatorHM.put(adminObject.getUsername(),adminObject);
+
+        return saveAnyObject(operatorHM, adminUrl);
     }
 
     @Override
-    public boolean deleteByPK(String pk) {
-        return false;
-    }
-
-    @Override
-    public boolean create(Admin obj) {
-        return false;
-    }
-
-    @Override
-    public Admin getByPK(String pk) {
-        return null;
+    public Admin getByPK(String username) {
+        HashMap<String, Admin> operatorHM = getAnySavedHashmap(adminUrl);
+        return operatorHM.get(username);
     }
 
     @Override
     public HashMap<String, Admin> getAll() {
-        return null;
+        return getAnySavedHashmap(adminUrl);
+    }
+
+    @Override
+    public boolean update(Admin operatorObj) {
+        HashMap<String, Admin> operatorHM = getAnySavedHashmap(adminUrl);
+        operatorHM.put(operatorObj.getUsername(), operatorObj);
+
+        saveAnyObject(operatorHM, adminUrl);
+        return true;
+    }
+
+    @Override
+    public String generateId() {
+        return ConnectionFile.generateId(adminUrl);
+    }
+
+    @Override
+    public boolean deleteByPK(String username) {
+        HashMap<String, Admin> operatorHM = getAnySavedHashmap(adminUrl);
+        operatorHM.remove(username);
+        return true;
     }
 }

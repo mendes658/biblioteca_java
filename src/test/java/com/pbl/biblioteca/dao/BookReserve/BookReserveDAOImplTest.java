@@ -144,7 +144,7 @@ class BookReserveDAOImplTest {
         bookReserveDAO.create(res2);
         bookReserveDAO.create(res3);
 
-        assertEquals(bookReserveDAO.getAllFromUser("mendes").size(), 2);
-        assertEquals(bookReserveDAO.getAllFromUser("pedromendes").size(), 1);
+        assertEquals(bookReserveDAO.getAllFromReader("mendes").size(), 2);
+        assertEquals(bookReserveDAO.getAllFromReader("pedromendes").size(), 1);
     }
 }

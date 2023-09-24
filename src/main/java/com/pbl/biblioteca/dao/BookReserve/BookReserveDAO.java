@@ -9,7 +9,6 @@ public interface BookReserveDAO extends CRUD<BookReserve> {
     String generateId();
     boolean removeAllFromUser(String username);
     ArrayList<BookReserve> getReservesFromBook(String bookIsbn);
-    ArrayList<BookReserve> getAllFromUser(String username);
-    boolean removeReserve(String bookIsbn, String username);
+    ArrayList<BookReserve> getAllFromReader(String username);
 
 }

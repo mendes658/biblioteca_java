@@ -14,40 +14,46 @@ public class ConnectionFile {
     protected static  String operatorFileUrl;
     protected static  String bookFileUrl;
     protected static  String librarianFileUrl;
-    protected static  String bookCopiesUrl;
     protected static  String totalLoansByBookUrl;
     protected static  String bookReserveUrl;
+    protected static  String readerUrl;
+    protected static  String adminUrl;
+
 
     protected static  String defaultUserFileUrl = "users.ser";
     protected static  String defaultLoanFileUrl = "loans.ser";
     protected static  String defaultOperatorFileUrl = "operators.ser";
     protected static  String defaultBookFileUrl = "books.ser";
     protected static  String defaultLibrarianFileUrl = "librarians.ser";
-    protected static  String defaultBookCopiesUrl = "books_copies.ser";
     protected static  String defaultTotalLoansByBookUrl = "total_loans.ser";
     protected static  String defaultBookReserveUrl = "book_reserves.ser";
+    protected static  String defaultReaderUrl = "reader.ser";
+    protected static  String defaultAdminUrl = "admin.ser";
 
     public static void setTestFileUrls() {
-        ConnectionFile.userFileUrl = "test_" + defaultUserFileUrl;
-        ConnectionFile.loanFileUrl = "test_" + defaultLoanFileUrl;
-        ConnectionFile.bookFileUrl = "test_" + defaultBookFileUrl;
-        ConnectionFile.operatorFileUrl = "test_" + defaultOperatorFileUrl;
-        ConnectionFile.librarianFileUrl = "test_" + defaultLibrarianFileUrl;
-        ConnectionFile.bookCopiesUrl = "test_" + defaultBookCopiesUrl;
-        ConnectionFile.totalLoansByBookUrl = "test_" + defaultTotalLoansByBookUrl;
-        ConnectionFile.bookReserveUrl = "test_" + defaultBookReserveUrl;
+        userFileUrl = "test_" + defaultUserFileUrl;
+        loanFileUrl = "test_" + defaultLoanFileUrl;
+        bookFileUrl = "test_" + defaultBookFileUrl;
+        operatorFileUrl = "test_" + defaultOperatorFileUrl;
+        librarianFileUrl = "test_" + defaultLibrarianFileUrl;
+        totalLoansByBookUrl = "test_" + defaultTotalLoansByBookUrl;
+        bookReserveUrl = "test_" + defaultBookReserveUrl;
+        readerUrl = "test_" + defaultReaderUrl;
+        adminUrl = "test_" + defaultAdminUrl;
+
 
     }
 
     public static void setDefaultFileUrls() {
-        ConnectionFile.userFileUrl = defaultUserFileUrl;
-        ConnectionFile.librarianFileUrl = defaultLibrarianFileUrl;
-        ConnectionFile.operatorFileUrl = defaultOperatorFileUrl;
-        ConnectionFile.loanFileUrl = defaultLoanFileUrl;
-        ConnectionFile.bookFileUrl = defaultBookFileUrl;
-        ConnectionFile.bookCopiesUrl = defaultBookCopiesUrl;
-        ConnectionFile.totalLoansByBookUrl = defaultTotalLoansByBookUrl;
-        ConnectionFile.bookReserveUrl = defaultBookReserveUrl;
+        userFileUrl = defaultUserFileUrl;
+        librarianFileUrl = defaultLibrarianFileUrl;
+        operatorFileUrl = defaultOperatorFileUrl;
+        loanFileUrl = defaultLoanFileUrl;
+        bookFileUrl = defaultBookFileUrl;
+        totalLoansByBookUrl = defaultTotalLoansByBookUrl;
+        bookReserveUrl = defaultBookReserveUrl;
+        readerUrl = defaultReaderUrl;
+        adminUrl = defaultAdminUrl;
     }
 
     public static void cleanTestFiles(){
@@ -57,9 +63,10 @@ public class ConnectionFile {
         saveAnyObject(new HashMap<String, Operator>(),"test_" + defaultOperatorFileUrl);
         saveAnyObject(new HashMap<String, Loan>(),"test_" + defaultLoanFileUrl);
         saveAnyObject(new HashMap<String, Book>(),"test_" + defaultBookFileUrl);
-        saveAnyObject(new HashMap<String, BookCopy>(),"test_" + defaultBookCopiesUrl);
         saveAnyObject(new HashMap<String, Integer>(),"test_" + defaultTotalLoansByBookUrl);
         saveAnyObject(new HashMap<String, BookReserve>(),"test_" + defaultBookReserveUrl);
+        saveAnyObject(new HashMap<String, Reader>(), "test_" + defaultReaderUrl);
+        saveAnyObject(new HashMap<String, Admin>(), "test_" + defaultAdminUrl);
 
     }
 

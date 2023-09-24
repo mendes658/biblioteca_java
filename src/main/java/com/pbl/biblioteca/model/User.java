@@ -8,17 +8,19 @@ public class User implements Serializable {
 
     private final String username;
     private final String id;
+    private final String type;
     private String password;
     private String address;
     private String telephone;
     private String name;
 
-    public User(String username, String password, String address, String telephone, String name){
+    protected User(String username, String password, String address, String telephone, String name, String type){
         this.username = username;
         this.password = password;
         this.address = address;
         this.telephone = telephone;
         this.name = name;
+        this.type = type;
 
         this.id = DAO.getUserDAO().generateId();
     }
@@ -45,6 +47,10 @@ public class User implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setName(String name) {

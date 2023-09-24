@@ -10,72 +10,40 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
 
     @Override
     public boolean create(BookReserve bookReserveObj) {
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
-        ArrayList<BookReserve> reserveArray = bookReserveHM.get(bookReserveObj.getBookIsbn());
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
 
-        if (reserveArray == null){
-            reserveArray = new ArrayList<>();
-        }
-
-        reserveArray.add(bookReserveObj);
-
-        bookReserveHM.put(bookReserveObj.getBookIsbn(),reserveArray);
+        bookReserveHM.put(bookReserveObj.getId(),bookReserveObj);
 
         return saveAnyObject(bookReserveHM, bookReserveUrl);
     }
 
-    @Override
-    public boolean deleteByPK(String isbn) {
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
-        bookReserveHM.remove(isbn);
+    @Override //trocar o isbn por pk em todas aí, padroniza essa porra
+    public boolean deleteByPK(String id) {
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        bookReserveHM.remove(id);
 
         return saveAnyObject(bookReserveHM, bookReserveUrl);
     }
 
     @Override
     public boolean update(BookReserve bookReserveObj) {
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
-        ArrayList<BookReserve> mainArray = bookReserveHM.get(bookReserveObj.getBookIsbn());
-        String nowId = bookReserveObj.getId();
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        bookReserveHM.put(bookReserveObj.getId(), bookReserveObj);
 
-        for(int i = 0; i<mainArray.size(); i++){
-            if (mainArray.get(i).getId().equals(nowId)){
-                mainArray.set(i, bookReserveObj);
-                bookReserveHM.put(bookReserveObj.getBookIsbn(), mainArray);
-                return saveAnyObject(bookReserveHM, bookReserveUrl);
-            }
-        }
-
-        return false;
+        return saveAnyObject(bookReserveHM, bookReserveUrl);
     }
 
     @Override
     public BookReserve getByPK(String id) {
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
 
-        for (String key : bookReserveHM.keySet()){
-            for(BookReserve reserve : bookReserveHM.get(key)){
-                if (reserve.getId().equals(id)){
-                    return reserve;
-                }
-            }
-        }
-
-        return null;
+        return bookReserveHM.get(id);
     }
 
     @Override
     public HashMap<String, BookReserve> getAll() {
-        HashMap<String, BookReserve> all = new HashMap<>();
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
-
-        for (String key : bookReserveHM.keySet()){
-            for(BookReserve reserve : bookReserveHM.get(key)){
-                all.put(reserve.getId(), reserve);
-            }
-        }
-
-        return all;
+        //HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        return  getAnySavedHashmap(bookReserveUrl);
     }
 
     @Override
@@ -85,27 +53,28 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
 
     @Override
     public ArrayList<BookReserve> getReservesFromBook(String bookIsbn) {
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
-        return bookReserveHM.get(bookIsbn);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        ArrayList<BookReserve> allFromBook = new ArrayList<>();
+
+        for (String key : bookReserveHM.keySet()){
+            if(bookReserveHM.get(key).getBookIsbn().equals(bookIsbn)){
+                allFromBook.add(bookReserveHM.get(key));
+            }
+        }
+
+        return allFromBook;
     }
 
     @Override
     public boolean removeAllFromUser(String username) {
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
 
         boolean deleted = false;
 
         for (String key : bookReserveHM.keySet()){
-
-            int i = 0;
-            while (bookReserveHM.get(key).size() > i){
-                if (bookReserveHM.get(key).get(i).getUsername().equals(username)){
-                    deleted = true;
-                    bookReserveHM.get(key).remove(i);
-                }
-                i++;
+            if (bookReserveHM.get(key).getUsername().equals(username)){
+                bookReserveHM.remove(key);
             }
-
         }
 
         saveAnyObject(bookReserveHM, bookReserveUrl);
@@ -113,36 +82,13 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
     }
 
     @Override
-    public boolean removeReserve(String bookIsbn, String username) {
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
-        ArrayList<BookReserve> bookReserveArray = bookReserveHM.get(bookIsbn);
-
-        boolean deleted = false;
-        int size = bookReserveArray.size();
-        for(int i = 0; i<size; i++){
-            if (bookReserveArray.get(i).getUsername().equals(username)){
-                bookReserveArray.remove(i);
-                deleted = true;
-                break;
-            }
-        }
-
-        return deleted;
-    }
-
-    @Override
-    public ArrayList<BookReserve> getAllFromUser(String username) {
-        HashMap<String, ArrayList<BookReserve>> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+    public ArrayList<BookReserve> getAllFromReader(String username) {
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
         ArrayList<BookReserve> allFromUser = new ArrayList<>();
 
-
         for (String key : bookReserveHM.keySet()){
-            int i = 0;
-            while (bookReserveHM.get(key).size() > i){
-                if (bookReserveHM.get(key).get(i).getUsername().equals(username)){
-                    allFromUser.add((bookReserveHM).get(key).get(i));
-                }
-                i++;
+            if (bookReserveHM.get(key).getUsername().equals(username)){
+                allFromUser.add(bookReserveHM.get(key));
             }
         }
 

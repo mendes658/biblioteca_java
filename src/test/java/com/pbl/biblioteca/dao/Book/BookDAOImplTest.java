@@ -28,7 +28,7 @@ class BookDAOImplTest {
         BookFileImpl bookDAO = new BookFileImpl();
 
         b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
-                2002, "Mistério", "11111");
+                2002, "Mistério", "11111", );
         b2 = new Book("A batida do maneco", "Preto", "Azul",
                 2002, "Mistério", "22222");
 

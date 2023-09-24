@@ -38,7 +38,7 @@ public class OperatorFileImpl extends ConnectionFile implements OperatorDAO{
 
     @Override
     public String generateId() {
-        return ConnectionFile.generateId(operatorFileUrl);
+        return generateId(operatorFileUrl);
     }
 
     @Override

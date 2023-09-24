@@ -1,6 +1,6 @@
 package com.pbl.biblioteca.model;
 
-import com.pbl.biblioteca.dao.BookReserve.BookReserveFileImpl;
+import com.pbl.biblioteca.dao.DAO;
 
 import java.io.Serializable;
 
@@ -13,8 +13,7 @@ public class BookReserve implements Serializable {
         this.username = user;
         this.bookIsbn = isbn;
 
-        BookReserveFileImpl bookReserveDAO = new BookReserveFileImpl();
-        this.id = bookReserveDAO.generateId();
+        this.id = DAO.getBookReserveDAO().generateId();
 
     }
 

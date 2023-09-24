@@ -5,4 +5,5 @@ import com.pbl.biblioteca.model.Admin;
 
 public interface AdminDAO extends CRUD<Admin> {
 
+    String generateId();
 }
