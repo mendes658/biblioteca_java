@@ -9,4 +9,8 @@ import java.util.ArrayList;
 public interface LoanDAO extends CRUD<Loan> {
     String generateId();
     ArrayList<Pair<String, Integer>> getPopularBooksAllTime();
+
+    Integer getTotalLoans();
+
+    Integer getTotalOverdueLoans();
 }

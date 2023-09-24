@@ -5,6 +5,7 @@ import com.pbl.biblioteca.model.Book;
 import com.pbl.biblioteca.model.Loan;
 import javafx.util.Pair;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class LoanFileImpl extends ConnectionFile implements LoanDAO{
@@ -50,7 +51,7 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
 
     @Override
     public String generateId() {
-        return ConnectionFile.generateId(loanFileUrl);
+        return generateId(loanFileUrl);
     }
 
     @Override
@@ -84,5 +85,24 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
         popularOrdered.sort(Comparator.comparingInt(Pair<String, Integer>::getValue).reversed());
 
         return popularOrdered;
+    }
+
+    @Override
+    public Integer getTotalLoans(){
+        return getAnySavedHashmap(loanFileUrl).size();
+    }
+
+    @Override
+    public Integer getTotalOverdueLoans(){
+        HashMap<String, Loan> allLoans = getAnySavedHashmap(loanFileUrl);
+        Integer total = 0;
+
+        for (String key : allLoans.keySet()){
+            if (allLoans.get(key).getFinalDate().isBefore(LocalDate.now())){
+                total ++;
+            }
+        }
+
+        return total;
     }
 }
