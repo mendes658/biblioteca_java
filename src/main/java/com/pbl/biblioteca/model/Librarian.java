@@ -67,14 +67,25 @@ public class Librarian extends Operator{
         return newLoan;
     }
 
-    public void deleteBookLoan(String loanId){
+    public int deleteBookLoan(String loanId){
         Loan toDelete = DAO.getLoanDAO().getByPK(loanId);
         Book book = DAO.getBookDAO().getByPK(toDelete.getBookIsbn());
+        Reader reader = DAO.getReaderDAO().getByPK(toDelete.getUsername());
+        int daysBlock = -1;
 
         book.retrieveCopy();
 
+        if (toDelete.getFinalDate().isBefore(LocalDate.now())){
+            daysBlock = (int) (LocalDate.now().toEpochDay() - toDelete.getFinalDate().toEpochDay());
+            reader.setBlocked(true);
+            reader.setDateEndBlock(LocalDate.now().plusDays(daysBlock));
+        }
+
         DAO.getLoanDAO().deleteByPK(loanId);
         DAO.getBookDAO().update(book);
+        DAO.getReaderDAO().update(reader);
+
+        return daysBlock;
     }
 
     public ArrayList<Book> searchBookByTitle(String title){
