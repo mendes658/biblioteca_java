@@ -70,7 +70,34 @@ public class BookFileImpl extends ConnectionFile implements BookDAO{
 
     @Override
     public String generateId() {
-        return ConnectionFile.generateId(bookFileUrl);
+        return generateId(bookFileUrl);
+    }
+
+    @Override
+    public ArrayList<Book> searchByTitle(String title){
+        ArrayList<Book> matches = new ArrayList<>();
+        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
+        Book nowBook;
+        String nowTitle;
+        title = title.toLowerCase();
+
+        for (String key : bookHM.keySet()){
+            nowBook = bookHM.get(key);
+            nowTitle = nowBook.getTitle().toLowerCase();
+
+            if(nowTitle.equals(title)){ // Acerto exato sempre ficará em primeiro
+                if (matches.isEmpty()){
+                    matches.add(nowBook);
+                } else {
+                    matches.add(matches.get(0));
+                    matches.set(0, nowBook);
+                }
+            } else if (nowTitle.matches(".*" + title + ".*")){
+                matches.add(nowBook);
+            }
+        }
+
+        return matches;
     }
 }
 

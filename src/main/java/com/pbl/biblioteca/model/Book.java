@@ -4,7 +4,6 @@ import com.pbl.biblioteca.dao.Book.BookFileImpl;
 import com.pbl.biblioteca.exceptionHandler.notFoundException;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Book implements Serializable {
 
@@ -99,20 +98,6 @@ public class Book implements Serializable {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-
-    /*
-    public void addCopies(Integer total) {
-        int lastIndex = allCopies.size();
-        BookCopyDAOImpl copyDao = new BookCopyDAOImpl();
-        BookCopy newCopy;
-
-        for (int i = lastIndex; i < total; i++){
-            newCopy = new BookCopy(this.title, this.author, this.publisher, this.year, this.category,
-                    this.isbn);
-            copyDao.create(newCopy);
-            allCopies.add(newCopy);
-        }
-    } */
 
 
     public void addCopies(Integer total){

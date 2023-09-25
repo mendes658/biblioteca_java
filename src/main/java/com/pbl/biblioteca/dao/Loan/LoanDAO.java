@@ -13,4 +13,6 @@ public interface LoanDAO extends CRUD<Loan> {
     Integer getTotalLoans();
 
     Integer getTotalOverdueLoans();
+
+    ArrayList<Loan> getAllFromUser(String username);
 }
