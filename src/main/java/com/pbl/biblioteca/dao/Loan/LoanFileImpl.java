@@ -66,7 +66,7 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
         for (String key : loanHM.keySet()){
 
             nowBook = bookHM.get(loanHM.get(key).getBookIsbn());
-            newKey = nowBook.getIsbn() + " " + nowBook.getTitle();
+            newKey = nowBook.getIsbn();
 
             if (totalLoansHM.get(newKey) == null){
                 totalLoansHM.put(newKey, 1);
@@ -74,7 +74,6 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
                 totalLoansHM.put(newKey, totalLoansHM.get(newKey) + 1);
             }
         }
-
 
         ArrayList<Pair<String, Integer>> popularOrdered = new ArrayList<>();
 

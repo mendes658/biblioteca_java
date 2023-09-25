@@ -2,8 +2,10 @@ package com.pbl.biblioteca.dao.BookReserve;
 
 import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.model.BookReserve;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class BookReserveFileImpl extends ConnectionFile implements BookReserveDAO{
@@ -42,7 +44,6 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
 
     @Override
     public HashMap<String, BookReserve> getAll() {
-        //HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
         return  getAnySavedHashmap(bookReserveUrl);
     }
 
@@ -61,6 +62,8 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
                 allFromBook.add(bookReserveHM.get(key));
             }
         }
+
+        allFromBook.sort(Comparator.comparingInt(BookReserve::epochDateSetReserve).reversed());
 
         return allFromBook;
     }
@@ -93,5 +96,30 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         }
 
         return allFromUser;
+    }
+
+    @Override
+    public HashMap<String, ArrayList<BookReserve>> getAllByBook(){
+        HashMap<String, ArrayList<BookReserve>> allByBook = new HashMap<>();
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        BookReserve nowReserve;
+        ArrayList<BookReserve> nowArray;
+
+        for (String key : bookReserveHM.keySet()){
+            nowReserve = bookReserveHM.get(key);
+            nowArray = allByBook.getOrDefault(nowReserve.getBookIsbn(), new ArrayList<>());
+
+            nowArray.add(nowReserve);
+
+            allByBook.put(nowReserve.getBookIsbn(), nowArray);
+        }
+
+        for (String key : allByBook.keySet()){
+            nowArray = allByBook.get(key);
+            nowArray.sort(Comparator.comparingInt(BookReserve::epochDateSetReserve).reversed());
+            allByBook.put(key, nowArray);
+        }
+
+        return allByBook;
     }
 }
