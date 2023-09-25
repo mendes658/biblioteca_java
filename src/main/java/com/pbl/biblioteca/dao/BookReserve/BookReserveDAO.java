@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public interface BookReserveDAO extends CRUD<BookReserve> {
     String generateId();
-    boolean removeAllFromUser(String username);
+    void removeAllFromReader(String username);
     ArrayList<BookReserve> getReservesFromBook(String bookIsbn);
     ArrayList<BookReserve> getAllFromReader(String username);
 

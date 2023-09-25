@@ -69,19 +69,21 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
     }
 
     @Override
-    public boolean removeAllFromUser(String username) {
+    public void removeAllFromReader(String username) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
-
-        boolean deleted = false;
+        ArrayList<String> toRemove = new ArrayList<>();
 
         for (String key : bookReserveHM.keySet()){
             if (bookReserveHM.get(key).getUsername().equals(username)){
-                bookReserveHM.remove(key);
+                toRemove.add(key);
             }
         }
 
+        for (String key : toRemove){
+            bookReserveHM.remove(key);
+        }
+
         saveAnyObject(bookReserveHM, bookReserveUrl);
-        return deleted;
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.pbl.biblioteca.dao.DAO;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 
 public class BookReserve implements Serializable {
     private String username;
@@ -16,7 +18,7 @@ public class BookReserve implements Serializable {
         this.username = user;
         this.bookIsbn = isbn;
         this.dateEndReserve = null;
-        this.epochDateSetReserve = (int) LocalDate.now().toEpochDay();
+        this.epochDateSetReserve = (int) LocalDate.now().toEpochSecond(LocalTime.now(), ZoneOffset.UTC);
 
         this.id = DAO.getBookReserveDAO().generateId();
 
