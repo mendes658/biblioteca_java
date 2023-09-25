@@ -76,4 +76,8 @@ public class Librarian extends Operator{
         DAO.getLoanDAO().deleteByPK(loanId);
         DAO.getBookDAO().update(book);
     }
+
+    public ArrayList<Book> searchBookByTitle(String title){
+        return DAO.getBookDAO().searchByTitle(title);
+    }
 }

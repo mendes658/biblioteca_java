@@ -4,6 +4,7 @@ import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.exceptionHandler.notFoundException;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Admin extends Operator implements Serializable {
 
@@ -84,5 +85,21 @@ public class Admin extends Operator implements Serializable {
         }
 
         throw new notFoundException("User not found");
+    }
+
+    public void blockReader(Reader reader, Integer days){
+        if (days == -1){
+            reader.setDateEndBlock(null);
+        } else {
+            reader.setDateEndBlock(LocalDate.now().plusDays(days));
+        }
+
+        reader.setBlocked(true);
+        DAO.getReaderDAO().update(reader);
+    }
+
+    public void unblockReader(Reader reader){
+        reader.setBlocked(false);
+        DAO.getReaderDAO().update(reader);
     }
 }

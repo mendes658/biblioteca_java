@@ -77,15 +77,8 @@ public class Reader extends User implements Serializable {
 
     }
 
-    /*
-    public void blockUser(LocalDate dataFim){
-        this.blocked = true;
-        this.dateEndBlock = dataFim;
+    public ArrayList<Book> searchBookByTitle(String title){
+        return DAO.getBookDAO().searchByTitle(title);
     }
-
-    public void unblockUser(){
-        this.blocked = false;
-        this.dateEndBlock = null;
-    } */
 
 }
