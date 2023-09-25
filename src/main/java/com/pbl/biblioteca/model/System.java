@@ -8,16 +8,10 @@ import java.util.HashMap;
 
 public class System implements Serializable {
 
+    //opaopoapoap
     public void updateReservesAndUserStatus(){
-        HashMap<String, BookReserve> allReserves = DAO.getBookReserveDAO().getAll();
+        HashMap<String, ArrayList<BookReserve>> allReserves = DAO.getBookReserveDAO().getAllByBook();
         Book nowBook;
         BookReserve nowReserve;
-
-        for (String key : allReserves.keySet()){
-            nowReserve = allReserves.get(key);
-            nowBook = DAO.getBookDAO().getByPK(nowReserve.getBookIsbn());
-
-            if (nowBook.getAvailableCopies()){
-        }
     }
 }

@@ -1,6 +1,7 @@
 package com.pbl.biblioteca.dao.Librarian;
 
 import com.pbl.biblioteca.dao.ConnectionFile;
+import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.model.Librarian;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,58 +23,34 @@ class LibrarianDAOImplTest {
         ConnectionFile.setDefaultFileUrls();
     }
 
-    @Test
-    void createAndGetByPK() {
-        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
-        Librarian l1 = new Librarian("pedromendes", "12345");
-        librarianDAO.create(l1);
-        assertEquals(librarianDAO.getByPK("pedromendes").getUsername(), "pedromendes");
-    }
 
     @Test
-    void update() {
-        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
-        Librarian l1 = new Librarian("pedromendes", "12345");
-        librarianDAO.create(l1);
-        l1.setUsername("joaquim");
-        librarianDAO.update(l1);
-        assertEquals(librarianDAO.getByPK("joaquim").getUsername(), "joaquim");
+    void crud(){
+        Librarian l1 = new Librarian("pedromendes",
+                "12345", "rua rua", "5259", "Joao");
+        Librarian l2 = new Librarian("pedrouou",
+                "12345", "rua rua", "5259", "Joao");
+
+        DAO.getLibrarianDAO().create(l1);
+        DAO.getLibrarianDAO().create(l2);
+
+        assertEquals(2, DAO.getLibrarianDAO().getAll().size());
+
+        l1 = DAO.getLibrarianDAO().getByPK("pedromendes");
+
+        assertNotNull(l1);
+
+        l1.setName("Joaquim");
+        DAO.getLibrarianDAO().update(l1);
+        l1 = DAO.getLibrarianDAO().getByPK("pedromendes");
+
+        assertEquals("Joaquim", l1.getName());
+
+        DAO.getLibrarianDAO().deleteByPK("pedromendes");
+        l1 = DAO.getLibrarianDAO().getByPK("pedromendes");
+
+        assertNull(l1);
+        assertEquals(1, DAO.getLibrarianDAO().getAll().size());
     }
 
-    @Test
-    void deleteByPK() {
-        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
-        Librarian l1 = new Librarian("pedromendes", "12345");
-        Librarian l2 = new Librarian("mendes22", "12345");
-        librarianDAO.create(l1);
-        librarianDAO.create(l2);
-        librarianDAO.deleteByPK("pedromendes");
-        assertNull(librarianDAO.getByPK("pedromendes"));
-        assertEquals(librarianDAO.getByPK("mendes22").getUsername(), "mendes22");
-    }
-
-    @Test
-    void getAll() {
-        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
-        Librarian l1 = new Librarian("pedromendes", "12345");
-        Librarian l2 = new Librarian("mendes22", "12345");
-        librarianDAO.create(l1);
-        librarianDAO.create(l2);
-        HashMap<String, Librarian> all = librarianDAO.getAll();
-        assertEquals(all.get("pedromendes").getUsername(), "pedromendes");
-        assertEquals(all.get("mendes22").getUsername(), "mendes22");
-    }
-
-    @Test
-    void generateId() {
-        LibrarianFileImpl librarianDAO = new LibrarianFileImpl();
-        Librarian l1 = new Librarian("pedromendes", "12345");
-        Librarian l2 = new Librarian("pedromendes22", "12345");
-        librarianDAO.create(l1);
-        librarianDAO.create(l2);
-
-        int a = Integer.parseInt(l1.getId());
-        int b = Integer.parseInt(l2.getId());
-        assertTrue(b > a);
-    }
 }

@@ -95,10 +95,6 @@ public class Book implements Serializable {
         this.category = category;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
 
     public void addCopies(Integer total){
         this.totalCopies++;

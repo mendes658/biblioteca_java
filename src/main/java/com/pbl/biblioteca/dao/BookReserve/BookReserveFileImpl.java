@@ -63,7 +63,7 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
             }
         }
 
-        allFromBook.sort(Comparator.comparingInt(BookReserve::epochDateSetReserve).reversed());
+        allFromBook.sort(Comparator.comparingInt(BookReserve::epochDateSetReserve));
 
         return allFromBook;
     }
@@ -116,7 +116,7 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
 
         for (String key : allByBook.keySet()){
             nowArray = allByBook.get(key);
-            nowArray.sort(Comparator.comparingInt(BookReserve::epochDateSetReserve).reversed());
+            nowArray.sort(Comparator.comparingInt(BookReserve::epochDateSetReserve));
             allByBook.put(key, nowArray);
         }
 

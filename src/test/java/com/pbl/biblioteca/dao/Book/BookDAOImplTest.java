@@ -1,10 +1,12 @@
 package com.pbl.biblioteca.dao.Book;
 
 import com.pbl.biblioteca.dao.ConnectionFile;
+import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.model.Book;
 import org.junit.jupiter.api.*;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,97 +25,82 @@ class BookDAOImplTest {
     }
 
     @Test
-    void createAndGet() {
-        Book b1, b2;
-        BookFileImpl bookDAO = new BookFileImpl();
+    void crud(){
+        Book b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
+                2002, "Mistério", "11111", 2);
+        Book b2 = new Book("A batida do maneco", "Preto", "Azul",
+                2002, "Mistério", "22222", 2);
 
-        b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
-                2002, "Mistério", "11111", );
-        b2 = new Book("A batida do maneco", "Preto", "Azul",
-                2002, "Mistério", "22222");
+        DAO.getBookDAO().create(b1);
+        DAO.getBookDAO().create(b2);
 
-        bookDAO.create(b1);
-        bookDAO.create(b2);
+        assertEquals(2, DAO.getBookDAO().getAll().size());
 
-        assertEquals(b1.getTitle(), bookDAO.getByPK("11111").getTitle());
-        assertEquals(b1.getCategory(), bookDAO.getByPK("11111").getCategory());
-        assertEquals(b1.getYear(), bookDAO.getByPK("11111").getYear());
-        assertEquals(b1.getPublisher(), bookDAO.getByPK("11111").getPublisher());
-        assertEquals(b2.getTitle(), bookDAO.getByPK("22222").getTitle());
-    }
+        b1.setTitle("Atualizou");
 
+        DAO.getBookDAO().update(b1);
 
-    @Test
-    void update() {
-        Book b1, b2;
-        BookFileImpl bookDAO = new BookFileImpl();
+        assertNotNull(DAO.getBookDAO().getByPK("22222"));
+        assertEquals("Atualizou", DAO.getBookDAO().getByPK("11111").getTitle());
 
-        b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
-                2002, "Mistério", "11111");
-        b2 = new Book("A viagem de", "Amarelo", "Vermelho",
-                2002, "Mistério", "22222");
+        DAO.getBookDAO().deleteByPK("22222");
 
-        bookDAO.create(b1);
-        bookDAO.create(b2);
-
-        b1.setTitle("Trafegando por aí");
-        b1.setCategory("Ação");
-
-        bookDAO.update(b1);
-
-        assertEquals(bookDAO.getByPK("11111").getTitle(), "Trafegando por aí");
-        assertEquals(bookDAO.getByPK("11111").getCategory(), "Ação");
-
-        assertEquals(bookDAO.getByPK("22222").getTitle(), "A viagem de");
-        assertEquals(bookDAO.getByPK("22222").getCategory(), "Mistério");
-    }
-
-
-    @Test
-    void deleteAndGetBooksByCategory() {
-        Book b1, b2, b4;
-        BookFileImpl bookDAO = new BookFileImpl();
-
-        b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
-                2002, "Mistério", "11111");
-        b2 = new Book("A viagem de", "Amarelo", "Vermelho",
-                2002, "Mistério", "22222");
-        b4 = new Book("O fim do começo", "Amarelo", "Vermelho",
-                2002, "Terror", "44444");
-
-        bookDAO.create(b1);
-        bookDAO.create(b2);
-        bookDAO.create(b4);
-
-        b1.setTitle("Trafegando por aí");
-        b1.setCategory("Ação");
-
-        bookDAO.update(b1);
-        bookDAO.deleteByPK("44444");
-
-        assertEquals(bookDAO.getAllBooksFromCategory("Ação").size(), 1);
-        assertEquals(bookDAO.getAllBooksFromCategory("Mistério").size(), 1);
-        assertEquals(bookDAO.getAllBooksFromCategory("Terror").size(), 0);
-
+        assertNull(DAO.getBookDAO().getByPK("22222"));
     }
 
     @Test
-    void getAll() {
-        Book b1, b2;
-        BookFileImpl bookDAO = new BookFileImpl();
+    void getAllBooksFromCategory(){
+        Book b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
+                2002, "Mistério", "11111", 2);
+        Book b2 = new Book("A batida do maneco", "Preto", "Azul",
+                2002, "Mistério", "22222", 2);
+        Book b3 = new Book("A batida do maneco", "Preto", "Azul",
+                2002, "Ação", "33333", 2);
 
-        b1 = new Book("Teco teleco teco", "Amarelo", "Vermelho",
-                2002, "Mistério", "11111");
-        b2 = new Book("A batida do maneco", "Preto", "Azul",
-                2002, "Mistério", "22222");
+        DAO.getBookDAO().create(b1);
+        DAO.getBookDAO().create(b2);
+        DAO.getBookDAO().create(b3);
 
-        bookDAO.create(b1);
-        bookDAO.create(b2);
+        ArrayList<Book> misterio = DAO.getBookDAO().getAllBooksFromCategory("Mistério");
+        ArrayList<Book> acao = DAO.getBookDAO().getAllBooksFromCategory("Ação");
+        ArrayList<Book> wrong = DAO.getBookDAO().getAllBooksFromCategory("Terror");
 
-        HashMap<String, Book> all = bookDAO.getAll();
-        assertEquals(all.get("11111").getTitle(), "Teco teleco teco");
-        assertEquals(all.get("22222").getTitle(), "A batida do maneco");
+        assertEquals(2, misterio.size());
+        assertEquals(1, acao.size());
+        assertEquals(0, wrong.size());
     }
 
+    @Test
+    void searchByTitle(){
+        Book b1 = new Book("A viagem de coisinho", "Amarelo", "Vermelho",
+                2002, "Mistério", "11111", 2);
+        Book b2 = new Book("A viagem de coisão", "Preto", "Azul",
+                2002, "Mistério", "22222", 2);
+        Book b3 = new Book("A conversa fiada 2", "Preto", "Azul",
+                2002, "Ação", "33333", 2);
+        Book b4 = new Book("A conversa fiada", "Preto", "Azul",
+                2002, "Ação", "44444", 2);
+        Book b5 = new Book("A conversa", "Preto", "Azul",
+                2002, "Ação", "55555", 2);
+
+        DAO.getBookDAO().create(b1);
+        DAO.getBookDAO().create(b2);
+        DAO.getBookDAO().create(b3);
+        DAO.getBookDAO().create(b4);
+        DAO.getBookDAO().create(b5);
+
+        ArrayList<Book> like = DAO.getBookDAO().searchByTitle("A viagem de");
+
+        assertEquals(2, like.size());
+
+        like = DAO.getBookDAO().searchByTitle("A conversa");
+
+        assertEquals(3, like.size());
+        assertEquals("A conversa", like.get(0).getTitle());
+
+        like = DAO.getBookDAO().searchByTitle("A viagem de coisinho");
+
+        assertEquals(1, like.size());
+    }
 
 }
