@@ -8,7 +8,6 @@ import org.junit.jupiter.api.*;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +22,7 @@ class BookDAOImplTest {
 
     @AfterEach
     void tearDown() {
-        ConnectionFile.cleanTestFiles();
+        ConnectionFile.clearTestFiles();
         ConnectionMemory.clearMemory();
     }
 

@@ -23,7 +23,7 @@ class BookReserveFileImplTest {
 
     @AfterEach
     void tearDown() {
-        ConnectionFile.cleanTestFiles();
+        ConnectionFile.clearTestFiles();
         ConnectionMemory.clearMemory();
     }
 

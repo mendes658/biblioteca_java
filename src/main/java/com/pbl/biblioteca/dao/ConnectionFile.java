@@ -18,6 +18,7 @@ public class ConnectionFile {
     protected static  String readerUrl;
     protected static  String adminUrl;
 
+    private static final String BASE_FOLDER = "./storage";
 
     protected static  String defaultUserFileUrl = "users.ser";
     protected static  String defaultLoanFileUrl = "loans.ser";
@@ -28,40 +29,46 @@ public class ConnectionFile {
     protected static  String defaultReaderUrl = "reader.ser";
     protected static  String defaultAdminUrl = "admin.ser";
 
+
+    public ConnectionFile(){
+        new File (BASE_FOLDER).mkdirs();
+        new File (BASE_FOLDER + "/ids/storage").mkdirs();
+    }
+
     public static void setTestFileUrls() {
-        userFileUrl = "test_" + defaultUserFileUrl;
-        loanFileUrl = "test_" + defaultLoanFileUrl;
-        bookFileUrl = "test_" + defaultBookFileUrl;
-        operatorFileUrl = "test_" + defaultOperatorFileUrl;
-        librarianFileUrl = "test_" + defaultLibrarianFileUrl;
-        bookReserveUrl = "test_" + defaultBookReserveUrl;
-        readerUrl = "test_" + defaultReaderUrl;
-        adminUrl = "test_" + defaultAdminUrl;
+        userFileUrl = BASE_FOLDER + "/test_" + defaultUserFileUrl;
+        loanFileUrl = BASE_FOLDER + "/test_" + defaultLoanFileUrl;
+        bookFileUrl = BASE_FOLDER + "/test_" + defaultBookFileUrl;
+        operatorFileUrl = BASE_FOLDER + "/test_" + defaultOperatorFileUrl;
+        librarianFileUrl = BASE_FOLDER + "/test_" + defaultLibrarianFileUrl;
+        bookReserveUrl = BASE_FOLDER + "/test_" + defaultBookReserveUrl;
+        readerUrl = BASE_FOLDER + "/test_" + defaultReaderUrl;
+        adminUrl = BASE_FOLDER + "/test_" + defaultAdminUrl;
 
 
     }
 
     public static void setDefaultFileUrls() {
-        userFileUrl = defaultUserFileUrl;
-        librarianFileUrl = defaultLibrarianFileUrl;
-        operatorFileUrl = defaultOperatorFileUrl;
-        loanFileUrl = defaultLoanFileUrl;
-        bookFileUrl = defaultBookFileUrl;
-        bookReserveUrl = defaultBookReserveUrl;
-        readerUrl = defaultReaderUrl;
-        adminUrl = defaultAdminUrl;
+        userFileUrl = BASE_FOLDER + "/" + defaultUserFileUrl;
+        librarianFileUrl = BASE_FOLDER + "/" + defaultLibrarianFileUrl;
+        operatorFileUrl = BASE_FOLDER + "/" + defaultOperatorFileUrl;
+        loanFileUrl = BASE_FOLDER + "/" + defaultLoanFileUrl;
+        bookFileUrl = BASE_FOLDER + "/" + defaultBookFileUrl;
+        bookReserveUrl = BASE_FOLDER + "/" + defaultBookReserveUrl;
+        readerUrl = BASE_FOLDER + "/" + defaultReaderUrl;
+        adminUrl = BASE_FOLDER + "/" + defaultAdminUrl;
     }
 
-    public static void cleanTestFiles(){
+    public static void clearTestFiles(){
 
-        saveAnyObject(new HashMap<String, Reader>() ,"test_" + defaultUserFileUrl);
-        saveAnyObject(new HashMap<String, Librarian>(),"test_" + defaultLibrarianFileUrl);
-        saveAnyObject(new HashMap<String, Operator>(),"test_" + defaultOperatorFileUrl);
-        saveAnyObject(new HashMap<String, Loan>(),"test_" + defaultLoanFileUrl);
-        saveAnyObject(new HashMap<String, Book>(),"test_" + defaultBookFileUrl);
-        saveAnyObject(new HashMap<String, BookReserve>(),"test_" + defaultBookReserveUrl);
-        saveAnyObject(new HashMap<String, Reader>(), "test_" + defaultReaderUrl);
-        saveAnyObject(new HashMap<String, Admin>(), "test_" + defaultAdminUrl);
+        saveAnyObject(new HashMap<String, Reader>() ,BASE_FOLDER + "/test_" + defaultUserFileUrl);
+        saveAnyObject(new HashMap<String, Librarian>(),BASE_FOLDER + "/test_" + defaultLibrarianFileUrl);
+        saveAnyObject(new HashMap<String, Operator>(),BASE_FOLDER + "/test_" + defaultOperatorFileUrl);
+        saveAnyObject(new HashMap<String, Loan>(),BASE_FOLDER + "/test_" + defaultLoanFileUrl);
+        saveAnyObject(new HashMap<String, Book>(),BASE_FOLDER + "/test_" + defaultBookFileUrl);
+        saveAnyObject(new HashMap<String, BookReserve>(),BASE_FOLDER + "/test_" + defaultBookReserveUrl);
+        saveAnyObject(new HashMap<String, Reader>(), BASE_FOLDER + "/test_" + defaultReaderUrl);
+        saveAnyObject(new HashMap<String, Admin>(), BASE_FOLDER + "/test_" + defaultAdminUrl);
 
     }
 
@@ -109,7 +116,7 @@ public class ConnectionFile {
     }
 
     protected static String generateId(String idUrl){
-        idUrl = "id_" + idUrl;
+        idUrl = BASE_FOLDER + "/ids" + idUrl;
 
         FileInputStream fileIn;
         ObjectInputStream objectIn;
