@@ -10,6 +10,5 @@ public class Operator extends User implements Serializable {
         super(username, password, address, telephone, name, type);
     }
 
-
 }
 

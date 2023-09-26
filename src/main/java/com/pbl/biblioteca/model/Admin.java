@@ -2,6 +2,7 @@ package com.pbl.biblioteca.model;
 
 import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.exceptionHandler.notFoundException;
+import com.pbl.biblioteca.exceptionHandler.usernameAlreadyInUseException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,21 +16,39 @@ public class Admin extends Operator implements Serializable {
     }
 
     public User createUser(String username, String password, String address, String telephone,
-                           String name, String type){
+                           String name, String type) throws usernameAlreadyInUseException {
 
         switch (type) {
             case "reader" -> {
-                Reader reader = new Reader(username, name, address, telephone, password);
+                Reader reader = DAO.getReaderDAO().getByPK(username);
+
+                if (reader == null){
+                    throw new usernameAlreadyInUseException("Username in use");
+                }
+
+                reader = new Reader(username, name, address, telephone, password);
                 DAO.getReaderDAO().create(reader);
                 return reader;
             }
             case "librarian" -> {
-                Librarian librarian = new Librarian(username, password, address, telephone, name);
+                Librarian librarian = DAO.getLibrarianDAO().getByPK(username);
+
+                if (librarian == null){
+                    throw new usernameAlreadyInUseException("Username in use");
+                }
+
+                librarian = new Librarian(username, password, address, telephone, name);
                 DAO.getLibrarianDAO().create(librarian);
                 return librarian;
             }
             case "admin" -> {
-                Admin admin = new Admin(username, password, address, telephone, name);
+                Admin admin = DAO.getAdminDAO().getByPK(username);
+
+                if (admin == null){
+                    throw new usernameAlreadyInUseException("Username in use");
+                }
+
+                admin = new Admin(username, password, address, telephone, name);
                 DAO.getAdminDAO().create(admin);
                 return admin;
             }

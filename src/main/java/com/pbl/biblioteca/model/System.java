@@ -52,12 +52,12 @@ public class System implements Serializable {
         for(String isbn : allReserves.keySet()){
             nowArray = allReserves.get(isbn);
 
-            for (int i = 0; i < nowArray.size(); i++){
-                nowReserve = nowArray.get(i);
+            for (BookReserve bookReserve : nowArray) {
+                nowReserve = bookReserve;
                 nowEndReserveDate = nowReserve.getDateEndReserve();
                 nowReader = DAO.getReaderDAO().getByPK(nowReserve.getUsername());
 
-                if (nowEndReserveDate != null && nowEndReserveDate.isBefore(LocalDate.now())){
+                if (nowEndReserveDate != null && nowEndReserveDate.isBefore(LocalDate.now())) {
                     nowReader.setBlocked(true);
                     nowReader.setDateEndBlock(LocalDate.now().plusDays(7));
 

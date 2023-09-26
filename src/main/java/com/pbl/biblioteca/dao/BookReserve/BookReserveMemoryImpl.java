@@ -123,4 +123,9 @@ public class BookReserveMemoryImpl extends ConnectionMemory implements BookReser
 
         return allByBook;
     }
+
+    @Override
+    public Integer getTotalReserves(){
+        return getAll().size();
+    }
 }

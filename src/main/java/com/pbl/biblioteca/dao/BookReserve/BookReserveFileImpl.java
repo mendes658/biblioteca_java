@@ -124,4 +124,9 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
 
         return allByBook;
     }
+
+    @Override
+    public Integer getTotalReserves(){
+        return getAll().size();
+    }
 }
