@@ -91,12 +91,15 @@ public class LoanMemoryImpl extends ConnectionMemory implements LoanDAO{
     }
 
     @Override
-    public Integer getTotalOverdueLoans(){
+    public Integer getTotalOverdueLoans(LocalDate now){
+        if (now == null){
+            now = LocalDate.now();
+        }
         HashMap<String, Loan> allLoans = getAnySavedHashmap("loan");
         Integer total = 0;
 
         for (String key : allLoans.keySet()){
-            if (allLoans.get(key).getFinalDate().isBefore(LocalDate.now())){
+            if (allLoans.get(key).getFinalDate().isBefore(now)){
                 total ++;
             }
         }

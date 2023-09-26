@@ -58,8 +58,7 @@ public class Librarian extends Operator{
         }
 
         book.borrowCopy();
-        LocalDate today = LocalDate.now();
-        Loan newLoan = new Loan(book.getIsbn(), reader.getUsername(), today, days, this.getUsername());
+        Loan newLoan = new Loan(book.getIsbn(), reader.getUsername(), days, this.getUsername());
 
         DAO.getLoanDAO().create(newLoan);
         DAO.getBookDAO().update(book);

@@ -56,15 +56,11 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
     public ArrayList<Pair<String, Integer>> getPopularBooksAllTime() {
         HashMap<String, Integer> totalLoansHM = new HashMap<>();
         HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
-        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
 
         String newKey;
-        Book nowBook;
 
         for (String key : loanHM.keySet()){
-
-            nowBook = bookHM.get(loanHM.get(key).getBookIsbn());
-            newKey = nowBook.getIsbn();
+            newKey = loanHM.get(key).getBookIsbn();
 
             if (totalLoansHM.get(newKey) == null){
                 totalLoansHM.put(newKey, 1);
@@ -90,12 +86,15 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
     }
 
     @Override
-    public Integer getTotalOverdueLoans(){
+    public Integer getTotalOverdueLoans(LocalDate now){
+        if (now == null){
+            now = LocalDate.now();
+        }
         HashMap<String, Loan> allLoans = getAnySavedHashmap(loanFileUrl);
         Integer total = 0;
 
         for (String key : allLoans.keySet()){
-            if (allLoans.get(key).getFinalDate().isBefore(LocalDate.now())){
+            if (allLoans.get(key).getFinalDate().isBefore(now)){
                 total ++;
             }
         }

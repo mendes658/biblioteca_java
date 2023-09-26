@@ -14,14 +14,14 @@ public class Loan implements Serializable {
     private final String librarianUsername;
 
 
-    public Loan(String bookIsbn, String userUsername, LocalDate date, Integer loanDays,
+    public Loan(String bookIsbn, String userUsername, Integer loanDays,
                 String librarianUsername){
         LoanFileImpl loanDAO = new LoanFileImpl();
         this.id = loanDAO.generateId();
         this.bookIsbn = bookIsbn;
         this.username = userUsername;
-        this.initialDate = date;
-        this.finalDate = date.plusDays(loanDays);
+        this.initialDate = LocalDate.now();
+        this.finalDate = LocalDate.now().plusDays(loanDays);
         this.librarianUsername = librarianUsername;
     }
 

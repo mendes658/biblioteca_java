@@ -8,22 +8,22 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-class LibrarianDAOImplTest {
+class LibrarianDAOTest {
 
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();
         ConnectionMemory.clearMemory();
+        ConnectionFile.clearTestFiles();
     }
 
     @AfterEach
     void tearDown() {
         ConnectionFile.setDefaultFileUrls();
         ConnectionMemory.clearMemory();
+        ConnectionFile.clearTestFiles();
     }
 
 

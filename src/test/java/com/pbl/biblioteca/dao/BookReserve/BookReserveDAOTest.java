@@ -13,16 +13,18 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BookReserveFileImplTest {
+class BookReserveDAOTest {
 
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();
         ConnectionMemory.clearMemory();
+        ConnectionFile.clearTestFiles();
     }
 
     @AfterEach
     void tearDown() {
+        ConnectionFile.setDefaultFileUrls();
         ConnectionFile.clearTestFiles();
         ConnectionMemory.clearMemory();
     }

@@ -11,17 +11,19 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BookDAOImplTest {
+class BookDAOTest {
 
 
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();
         ConnectionMemory.clearMemory();
+        ConnectionFile.clearTestFiles();
     }
 
     @AfterEach
     void tearDown() {
+        ConnectionFile.setDefaultFileUrls();
         ConnectionFile.clearTestFiles();
         ConnectionMemory.clearMemory();
     }

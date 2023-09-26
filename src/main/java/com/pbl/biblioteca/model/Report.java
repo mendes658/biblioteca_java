@@ -16,7 +16,7 @@ public class Report {
     }
 
     public Integer getTotalOverdueLoans(){
-        return DAO.getLoanDAO().getTotalOverdueLoans();
+        return DAO.getLoanDAO().getTotalOverdueLoans(null);
     }
 
     public Integer getTotalReserves(){

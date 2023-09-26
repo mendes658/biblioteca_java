@@ -4,6 +4,7 @@ import com.pbl.biblioteca.dao.CRUD;
 import com.pbl.biblioteca.model.Loan;
 import javafx.util.Pair;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface LoanDAO extends CRUD<Loan> {
@@ -12,7 +13,7 @@ public interface LoanDAO extends CRUD<Loan> {
 
     Integer getTotalLoans();
 
-    Integer getTotalOverdueLoans();
+    Integer getTotalOverdueLoans(LocalDate now);
 
     ArrayList<Loan> getAllFromUser(String username);
 }
