@@ -1,6 +1,7 @@
 package com.pbl.biblioteca.dao.Loan;
 
 import com.pbl.biblioteca.dao.ConnectionFile;
+import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.model.Book;
 import com.pbl.biblioteca.model.Loan;
 import javafx.util.Pair;
@@ -8,55 +9,55 @@ import javafx.util.Pair;
 import java.time.LocalDate;
 import java.util.*;
 
-public class LoanFileImpl extends ConnectionFile implements LoanDAO{
+public class LoanMemoryImpl extends ConnectionMemory implements LoanDAO{
 
     @Override
     public void create(Loan loanObject){
-        HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
+        HashMap<String, Loan> loanHM = getAnySavedHashmap("loan");
         loanHM.put(loanObject.getId(),loanObject);
 
-        saveAnyObject(loanHM, loanFileUrl);
+        saveAnyObject(loanHM, "loan");
 
     }
 
     @Override
     public Loan getByPK(String id){
-        HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
+        HashMap<String, Loan> loanHM = getAnySavedHashmap("loan");
         return loanHM.get(id);
     }
 
     @Override
     public void update(Loan loanObj) {
-        HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
+        HashMap<String, Loan> loanHM = getAnySavedHashmap("loan");
         loanHM.put(loanObj.getId(), loanObj);
 
-        saveAnyObject(loanHM, loanFileUrl);
+        saveAnyObject(loanHM, "loan");
 
     }
 
     @Override
     public void deleteByPK(String id) {
-        HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
+        HashMap<String, Loan> loanHM = getAnySavedHashmap("loan");
         loanHM.remove(id);
 
-        saveAnyObject(loanHM, loanFileUrl);
+        saveAnyObject(loanHM, "loan");
     }
 
     @Override
     public HashMap<String, Loan> getAll(){
-        return getAnySavedHashmap(loanFileUrl);
+        return getAnySavedHashmap("loan");
     }
 
     @Override
     public String generateId() {
-        return generateId(loanFileUrl);
+        return generateId("loan");
     }
 
     @Override
     public ArrayList<Pair<String, Integer>> getPopularBooksAllTime() {
         HashMap<String, Integer> totalLoansHM = new HashMap<>();
-        HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
-        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
+        HashMap<String, Loan> loanHM = getAnySavedHashmap("loan");
+        HashMap<String, Book> bookHM = getAnySavedHashmap("loan");
 
         String newKey;
         Book nowBook;
@@ -86,12 +87,12 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
 
     @Override
     public Integer getTotalLoans(){
-        return getAnySavedHashmap(loanFileUrl).size();
+        return getAnySavedHashmap("loan").size();
     }
 
     @Override
     public Integer getTotalOverdueLoans(){
-        HashMap<String, Loan> allLoans = getAnySavedHashmap(loanFileUrl);
+        HashMap<String, Loan> allLoans = getAnySavedHashmap("loan");
         Integer total = 0;
 
         for (String key : allLoans.keySet()){
@@ -105,7 +106,7 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
 
     @Override
     public ArrayList<Loan> getAllFromUser(String username){
-        HashMap<String, Loan> allLoans = getAnySavedHashmap(loanFileUrl);
+        HashMap<String, Loan> allLoans = getAnySavedHashmap("loan");
         ArrayList<Loan> fromUser = new ArrayList<>();
 
         for (String key : allLoans.keySet()){

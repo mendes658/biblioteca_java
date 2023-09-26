@@ -84,4 +84,11 @@ public class System implements Serializable {
             }
         }
     }
+
+
+    public void updateSystem(){
+        updateReadersReserveStatus();
+        updateReadersBlockStatus();
+        updateReserves();
+    }
 }

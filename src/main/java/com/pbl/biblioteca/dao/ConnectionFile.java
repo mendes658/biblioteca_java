@@ -14,7 +14,6 @@ public class ConnectionFile {
     protected static  String operatorFileUrl;
     protected static  String bookFileUrl;
     protected static  String librarianFileUrl;
-    protected static  String totalLoansByBookUrl;
     protected static  String bookReserveUrl;
     protected static  String readerUrl;
     protected static  String adminUrl;
@@ -25,7 +24,6 @@ public class ConnectionFile {
     protected static  String defaultOperatorFileUrl = "operators.ser";
     protected static  String defaultBookFileUrl = "books.ser";
     protected static  String defaultLibrarianFileUrl = "librarians.ser";
-    protected static  String defaultTotalLoansByBookUrl = "total_loans.ser";
     protected static  String defaultBookReserveUrl = "book_reserves.ser";
     protected static  String defaultReaderUrl = "reader.ser";
     protected static  String defaultAdminUrl = "admin.ser";
@@ -36,7 +34,6 @@ public class ConnectionFile {
         bookFileUrl = "test_" + defaultBookFileUrl;
         operatorFileUrl = "test_" + defaultOperatorFileUrl;
         librarianFileUrl = "test_" + defaultLibrarianFileUrl;
-        totalLoansByBookUrl = "test_" + defaultTotalLoansByBookUrl;
         bookReserveUrl = "test_" + defaultBookReserveUrl;
         readerUrl = "test_" + defaultReaderUrl;
         adminUrl = "test_" + defaultAdminUrl;
@@ -50,7 +47,6 @@ public class ConnectionFile {
         operatorFileUrl = defaultOperatorFileUrl;
         loanFileUrl = defaultLoanFileUrl;
         bookFileUrl = defaultBookFileUrl;
-        totalLoansByBookUrl = defaultTotalLoansByBookUrl;
         bookReserveUrl = defaultBookReserveUrl;
         readerUrl = defaultReaderUrl;
         adminUrl = defaultAdminUrl;
@@ -63,7 +59,6 @@ public class ConnectionFile {
         saveAnyObject(new HashMap<String, Operator>(),"test_" + defaultOperatorFileUrl);
         saveAnyObject(new HashMap<String, Loan>(),"test_" + defaultLoanFileUrl);
         saveAnyObject(new HashMap<String, Book>(),"test_" + defaultBookFileUrl);
-        saveAnyObject(new HashMap<String, Integer>(),"test_" + defaultTotalLoansByBookUrl);
         saveAnyObject(new HashMap<String, BookReserve>(),"test_" + defaultBookReserveUrl);
         saveAnyObject(new HashMap<String, Reader>(), "test_" + defaultReaderUrl);
         saveAnyObject(new HashMap<String, Admin>(), "test_" + defaultAdminUrl);
@@ -97,7 +92,7 @@ public class ConnectionFile {
     }
 
 
-    protected static boolean saveAnyObject(Object objectHM, String fileUrl) {
+    protected static void saveAnyObject(Object objectHM, String fileUrl) {
         ObjectOutputStream objectOut;
         FileOutputStream fileOut;
 
@@ -108,10 +103,9 @@ public class ConnectionFile {
             objectOut.close();
 
         } catch (IOException e) {
-            return false;
+            e.printStackTrace();
         }
 
-        return true;
     }
 
     protected static String generateId(String idUrl){

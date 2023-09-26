@@ -1,5 +1,6 @@
 package com.pbl.biblioteca.dao.BookReserve;
 
+import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.model.BookReserve;
 import org.junit.jupiter.api.AfterEach;
@@ -17,11 +18,13 @@ class BookReserveFileImplTest {
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();
+        ConnectionMemory.clearMemory();
     }
 
     @AfterEach
     void tearDown() {
         ConnectionFile.cleanTestFiles();
+        ConnectionMemory.clearMemory();
     }
 
     @Test
@@ -73,13 +76,13 @@ class BookReserveFileImplTest {
 
     @Test
     void getReservesFromBookAndByBook() throws InterruptedException{
-        BookReserve r1 = new BookReserve("pedrom", "2222");
+        BookReserve r1 = new BookReserve("pedrom2", "2222");
         Thread.sleep(1200);
-        BookReserve r2 = new BookReserve("pedrom", "3333");
+        BookReserve r2 = new BookReserve("pedrom2", "3333");
         Thread.sleep(1200);
-        BookReserve r3 = new BookReserve("pacopaco", "2222");
+        BookReserve r3 = new BookReserve("pacopaco2", "2222");
         Thread.sleep(1200);
-        BookReserve r4 = new BookReserve("goiabada", "2222");
+        BookReserve r4 = new BookReserve("goiabada2", "2222");
 
         DAO.getBookReserveDAO().create(r1);
         DAO.getBookReserveDAO().create(r2);
@@ -87,14 +90,14 @@ class BookReserveFileImplTest {
         DAO.getBookReserveDAO().create(r4);
 
         ArrayList<BookReserve> queue = DAO.getBookReserveDAO().getReservesFromBook("2222");
-        assertEquals("pedrom", queue.get(0).getUsername());
-        assertEquals("goiabada", queue.get(2).getUsername());
+        assertEquals("pedrom2", queue.get(0).getUsername());
+        assertEquals("goiabada2", queue.get(2).getUsername());
 
         HashMap<String, ArrayList<BookReserve>> byBook = DAO.getBookReserveDAO().getAllByBook();
         ArrayList<BookReserve> queue2 = byBook.get("2222");
 
-        assertEquals("pedrom", queue2.get(0).getUsername());
-        assertEquals("goiabada", queue2.get(2).getUsername());
+        assertEquals("pedrom2", queue2.get(0).getUsername());
+        assertEquals("goiabada2", queue2.get(2).getUsername());
 
         assertNotNull(byBook.get("3333"));
     }

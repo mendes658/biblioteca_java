@@ -1,6 +1,7 @@
 package com.pbl.biblioteca.dao.Book;
 
 import com.pbl.biblioteca.dao.ConnectionFile;
+import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.model.Book;
 import org.junit.jupiter.api.*;
@@ -17,11 +18,13 @@ class BookDAOImplTest {
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();
+        ConnectionMemory.clearMemory();
     }
 
     @AfterEach
     void tearDown() {
         ConnectionFile.cleanTestFiles();
+        ConnectionMemory.clearMemory();
     }
 
     @Test

@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public interface CRUD<T>{
 
-    boolean update(T obj);
-    boolean deleteByPK(String pk);
-    boolean create(T obj);
+    void update(T obj);
+    void deleteByPK(String pk);
+    void create(T obj);
     T getByPK(String pk);
     HashMap<String, T> getAll();
 

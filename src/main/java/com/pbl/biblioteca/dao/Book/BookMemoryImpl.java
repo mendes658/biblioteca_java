@@ -1,57 +1,57 @@
 package com.pbl.biblioteca.dao.Book;
 
-import com.pbl.biblioteca.dao.ConnectionFile;
+import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.model.Book;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BookFileImpl extends ConnectionFile implements BookDAO{
+public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
 
     @Override
     public void create(Book bookObject) {
-        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
         bookHM.put(bookObject.getIsbn(), bookObject);
 
-        saveAnyObject(bookHM, bookFileUrl);
+        saveAnyObject(bookHM, "book");
     }
 
     @Override
     public Book getByPK(String isbn) {
-        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
 
         return bookHM.get(isbn);
     }
 
     @Override
     public void update(Book bookObj) {
-        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
         String isbn = bookObj.getIsbn();
         bookHM.put(isbn, bookObj);
-        saveAnyObject(bookHM, bookFileUrl);
+        saveAnyObject(bookHM, "book");
 
     }
 
     @Override
     public void deleteByPK(String isbn) {
-        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
         if (bookHM.containsKey(isbn)) {
             bookHM.remove(isbn);
-            saveAnyObject(bookHM, bookFileUrl);
+            saveAnyObject(bookHM, "book");
         }
     }
 
     @Override
     public HashMap<String, Book> getAll() {
-        return getAnySavedHashmap(bookFileUrl);
+        return getAnySavedHashmap("book");
     }
 
     @Override
     public ArrayList<Book> getAllBooksFromCategory(String category) {
 
         ArrayList<Book> booksFromCategory = new ArrayList<>();
-        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
-        Book nowBook = null;
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
+        Book nowBook;
 
         for (String isbn : bookHM.keySet()) {
             nowBook = bookHM.get(isbn);
@@ -65,13 +65,13 @@ public class BookFileImpl extends ConnectionFile implements BookDAO{
 
     @Override
     public String generateId() {
-        return generateId(bookFileUrl);
+        return generateId("book");
     }
 
     @Override
     public ArrayList<Book> searchByTitle(String title){
         ArrayList<Book> matches = new ArrayList<>();
-        HashMap<String, Book> bookHM = getAnySavedHashmap(bookFileUrl);
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
         Book nowBook;
         String nowTitle;
         title = title.toLowerCase();
@@ -95,4 +95,5 @@ public class BookFileImpl extends ConnectionFile implements BookDAO{
         return matches;
     }
 }
+
 

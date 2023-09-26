@@ -71,7 +71,7 @@ public class Librarian extends Operator{
         Loan toDelete = DAO.getLoanDAO().getByPK(loanId);
         Book book = DAO.getBookDAO().getByPK(toDelete.getBookIsbn());
         Reader reader = DAO.getReaderDAO().getByPK(toDelete.getUsername());
-        int daysBlock = -1;
+        int daysBlock = 0;
 
         book.retrieveCopy();
 

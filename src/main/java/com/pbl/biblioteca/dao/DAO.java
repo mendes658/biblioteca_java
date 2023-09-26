@@ -2,26 +2,38 @@ package com.pbl.biblioteca.dao;
 
 import com.pbl.biblioteca.dao.Admin.AdminDAO;
 import com.pbl.biblioteca.dao.Admin.AdminFileImpl;
+import com.pbl.biblioteca.dao.Admin.AdminMemoryImpl;
 import com.pbl.biblioteca.dao.Book.BookDAO;
 import com.pbl.biblioteca.dao.Book.BookFileImpl;
 import com.pbl.biblioteca.dao.BookReserve.BookReserveDAO;
 import com.pbl.biblioteca.dao.BookReserve.BookReserveFileImpl;
+import com.pbl.biblioteca.dao.BookReserve.BookReserveMemoryImpl;
 import com.pbl.biblioteca.dao.Librarian.LibrarianDAO;
 import com.pbl.biblioteca.dao.Librarian.LibrarianFileImpl;
+import com.pbl.biblioteca.dao.Librarian.LibrarianMemoryImpl;
 import com.pbl.biblioteca.dao.Loan.LoanDAO;
 import com.pbl.biblioteca.dao.Loan.LoanFileImpl;
+import com.pbl.biblioteca.dao.Loan.LoanMemoryImpl;
 import com.pbl.biblioteca.dao.Operator.OperatorDAO;
 import com.pbl.biblioteca.dao.Operator.OperatorFileImpl;
+import com.pbl.biblioteca.dao.Operator.OperatorMemoryImpl;
 import com.pbl.biblioteca.dao.Reader.ReaderDAO;
 import com.pbl.biblioteca.dao.Reader.ReaderFileImpl;
+import com.pbl.biblioteca.dao.Reader.ReaderMemoryImpl;
 import com.pbl.biblioteca.dao.Report.ReportDAO;
 import com.pbl.biblioteca.dao.Report.ReportFileImpl;
+import com.pbl.biblioteca.dao.Report.ReportMemoryImpl;
 import com.pbl.biblioteca.dao.System.SystemDAO;
 import com.pbl.biblioteca.dao.System.SystemFileImpl;
+import com.pbl.biblioteca.dao.System.SystemMemoryImpl;
 import com.pbl.biblioteca.dao.User.UserDAO;
 import com.pbl.biblioteca.dao.User.UserFileImpl;
+import com.pbl.biblioteca.dao.User.UserMemoryImpl;
 
 public class DAO {
+
+    // 1 - Memória ; 2 - Arquivo
+    private static final int TYPE_OF_STORAGE = 1;
 
     private static BookDAO bookDAO;
     private static LoanDAO loanDAO;
@@ -44,7 +56,11 @@ public class DAO {
 
     public static ReportDAO getReportDAO() {
         if (reportDAO == null){
-            reportDAO = new ReportFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                reportDAO = new ReportMemoryImpl();
+            } else {
+                reportDAO = new ReportMemoryImpl();
+            }
         }
 
         return reportDAO;
@@ -52,7 +68,11 @@ public class DAO {
 
     public static SystemDAO getSystemDAO() {
         if (systemDAO == null){
-            systemDAO = new SystemFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                systemDAO = new SystemMemoryImpl();
+            } else {
+                systemDAO = new SystemFileImpl();
+            }
         }
 
         return systemDAO;
@@ -60,7 +80,11 @@ public class DAO {
 
     public static AdminDAO getAdminDAO() {
         if (adminDAO == null){
-            adminDAO = new AdminFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                adminDAO = new AdminMemoryImpl();
+            } else {
+                adminDAO = new AdminFileImpl();
+            }
         }
 
         return adminDAO;
@@ -68,7 +92,11 @@ public class DAO {
 
     public static ReaderDAO getReaderDAO() {
         if (readerDAO == null){
-            readerDAO = new ReaderFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                readerDAO = new ReaderMemoryImpl();
+            } else {
+                readerDAO = new ReaderFileImpl();
+            }
         }
 
         return readerDAO;
@@ -76,7 +104,11 @@ public class DAO {
 
     public static LoanDAO getLoanDAO() {
         if (loanDAO == null){
-            loanDAO = new LoanFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                loanDAO = new LoanMemoryImpl();
+            } else {
+                loanDAO = new LoanFileImpl();
+            }
         }
 
         return loanDAO;
@@ -84,7 +116,12 @@ public class DAO {
 
     public static OperatorDAO getOperatorDAO() {
         if (operatorDAO == null){
-            operatorDAO = new OperatorFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                operatorDAO = new OperatorMemoryImpl();
+            } else {
+                operatorDAO = new OperatorFileImpl();
+            }
+
         }
 
         return operatorDAO;
@@ -92,7 +129,11 @@ public class DAO {
 
     public static UserDAO getUserDAO() {
         if (userDAO == null){
-            userDAO = new UserFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                userDAO = new UserMemoryImpl();
+            } else {
+                userDAO = new UserFileImpl();
+            }
         }
 
         return userDAO;
@@ -100,7 +141,12 @@ public class DAO {
 
     public static LibrarianDAO getLibrarianDAO() {
         if ( librarianDAO == null){
-            librarianDAO = new LibrarianFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                librarianDAO = new LibrarianMemoryImpl();
+            } else {
+                librarianDAO = new LibrarianFileImpl();
+            }
+
         }
 
         return librarianDAO;
@@ -108,7 +154,11 @@ public class DAO {
 
     public static BookReserveDAO getBookReserveDAO() {
         if (bookReserveDAO == null){
-            bookReserveDAO = new BookReserveFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                bookReserveDAO = new BookReserveMemoryImpl();
+            } else {
+                bookReserveDAO = new BookReserveFileImpl();
+            }
         }
 
         return bookReserveDAO;

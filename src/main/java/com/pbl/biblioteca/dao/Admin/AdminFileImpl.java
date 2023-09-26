@@ -8,18 +8,18 @@ import java.util.HashMap;
 public class AdminFileImpl extends ConnectionFile implements AdminDAO{
 
     @Override
-    public boolean create(Admin adminObject){
-        HashMap<String, Admin> operatorHM = getAnySavedHashmap(adminUrl);
+    public void create(Admin adminObject){
+        HashMap<String, Admin> adminHm = getAnySavedHashmap(adminUrl);
 
-        operatorHM.put(adminObject.getUsername(),adminObject);
+        adminHm.put(adminObject.getUsername(),adminObject);
 
-        return saveAnyObject(operatorHM, adminUrl);
+        saveAnyObject(adminHm, adminUrl);
     }
 
     @Override
     public Admin getByPK(String username) {
-        HashMap<String, Admin> operatorHM = getAnySavedHashmap(adminUrl);
-        return operatorHM.get(username);
+        HashMap<String, Admin> adminHm = getAnySavedHashmap(adminUrl);
+        return adminHm.get(username);
     }
 
     @Override
@@ -28,23 +28,16 @@ public class AdminFileImpl extends ConnectionFile implements AdminDAO{
     }
 
     @Override
-    public boolean update(Admin operatorObj) {
-        HashMap<String, Admin> operatorHM = getAnySavedHashmap(adminUrl);
-        operatorHM.put(operatorObj.getUsername(), operatorObj);
+    public void update(Admin operatorObj) {
+        HashMap<String, Admin> adminHm = getAnySavedHashmap(adminUrl);
+        adminHm.put(operatorObj.getUsername(), operatorObj);
 
-        saveAnyObject(operatorHM, adminUrl);
-        return true;
+        saveAnyObject(adminHm, adminUrl);
     }
 
     @Override
-    public String generateId() {
-        return ConnectionFile.generateId(adminUrl);
-    }
-
-    @Override
-    public boolean deleteByPK(String username) {
-        HashMap<String, Admin> operatorHM = getAnySavedHashmap(adminUrl);
-        operatorHM.remove(username);
-        return true;
+    public void deleteByPK(String username) {
+        HashMap<String, Admin> adminHm = getAnySavedHashmap(adminUrl);
+        adminHm.remove(username);
     }
 }

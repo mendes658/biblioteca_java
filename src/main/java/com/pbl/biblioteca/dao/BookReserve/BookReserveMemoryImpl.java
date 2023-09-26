@@ -1,60 +1,59 @@
 package com.pbl.biblioteca.dao.BookReserve;
 
-import com.pbl.biblioteca.dao.ConnectionFile;
+import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.model.BookReserve;
-import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class BookReserveFileImpl extends ConnectionFile implements BookReserveDAO{
+public class BookReserveMemoryImpl extends ConnectionMemory implements BookReserveDAO{
 
     @Override
     public void create(BookReserve bookReserveObj) {
-        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
 
         bookReserveHM.put(bookReserveObj.getId(),bookReserveObj);
 
-        saveAnyObject(bookReserveHM, bookReserveUrl);
+        saveAnyObject(bookReserveHM, "bookReserve");
     }
 
     @Override
     public void deleteByPK(String id) {
-        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
         bookReserveHM.remove(id);
 
-        saveAnyObject(bookReserveHM, bookReserveUrl);
+        saveAnyObject(bookReserveHM, "bookReserve");
     }
 
     @Override
     public void update(BookReserve bookReserveObj) {
-        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
         bookReserveHM.put(bookReserveObj.getId(), bookReserveObj);
 
-        saveAnyObject(bookReserveHM, bookReserveUrl);
+        saveAnyObject(bookReserveHM, "bookReserve");
     }
 
     @Override
     public BookReserve getByPK(String id) {
-        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
 
         return bookReserveHM.get(id);
     }
 
     @Override
     public HashMap<String, BookReserve> getAll() {
-        return  getAnySavedHashmap(bookReserveUrl);
+        return  getAnySavedHashmap("bookReserve");
     }
 
     @Override
     public String generateId() {
-        return generateId(bookReserveUrl);
+        return generateId("bookReserve");
     }
 
     @Override
     public ArrayList<BookReserve> getReservesFromBook(String bookIsbn) {
-        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
         ArrayList<BookReserve> allFromBook = new ArrayList<>();
 
         for (String key : bookReserveHM.keySet()){
@@ -70,7 +69,7 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
 
     @Override
     public void removeAllFromReader(String username) {
-        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
         ArrayList<String> toRemove = new ArrayList<>();
 
         for (String key : bookReserveHM.keySet()){
@@ -83,12 +82,12 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
             bookReserveHM.remove(key);
         }
 
-        saveAnyObject(bookReserveHM, bookReserveUrl);
+        saveAnyObject(bookReserveHM, "bookReserve");
     }
 
     @Override
     public ArrayList<BookReserve> getAllFromReader(String username) {
-        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
         ArrayList<BookReserve> allFromUser = new ArrayList<>();
 
         for (String key : bookReserveHM.keySet()){
@@ -103,7 +102,7 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
     @Override
     public HashMap<String, ArrayList<BookReserve>> getAllByBook(){
         HashMap<String, ArrayList<BookReserve>> allByBook = new HashMap<>();
-        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
         BookReserve nowReserve;
         ArrayList<BookReserve> nowArray;
 

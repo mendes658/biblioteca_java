@@ -73,7 +73,7 @@ public class Reader extends User implements Serializable {
             }
         }
 
-        throw new notFoundException("No reserve found to current book");
+        throw new notFoundException("No reserve to current book was found");
 
     }
 

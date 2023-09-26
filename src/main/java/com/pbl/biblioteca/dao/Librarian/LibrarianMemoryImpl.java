@@ -1,24 +1,25 @@
 package com.pbl.biblioteca.dao.Librarian;
 
 import com.pbl.biblioteca.dao.ConnectionFile;
+import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.model.Librarian;
 
 import java.util.HashMap;
 
-public class LibrarianFileImpl extends ConnectionFile implements LibrarianDAO{
+public class LibrarianMemoryImpl extends ConnectionMemory implements LibrarianDAO{
 
     @Override
     public void create(Librarian librarianObject){
-        HashMap<String, Librarian> librarianHM = getAnySavedHashmap(librarianFileUrl);
+        HashMap<String, Librarian> librarianHM = getAnySavedHashmap("librarian");
 
         librarianHM.put(librarianObject.getUsername(),librarianObject);
 
-        saveAnyObject(librarianHM, librarianFileUrl);
+        saveAnyObject(librarianHM, "librarian");
     }
 
     @Override
     public Librarian getByPK(String username){
-        HashMap<String, Librarian> librarianHM = getAnySavedHashmap(librarianFileUrl);
+        HashMap<String, Librarian> librarianHM = getAnySavedHashmap("librarian");
 
         return librarianHM.get(username);
     }
@@ -26,23 +27,23 @@ public class LibrarianFileImpl extends ConnectionFile implements LibrarianDAO{
     @Override
     public void update(Librarian librarianObj) {
 
-        HashMap<String, Librarian> librarianHM = getAnySavedHashmap(librarianFileUrl);
+        HashMap<String, Librarian> librarianHM = getAnySavedHashmap("librarian");
         librarianHM.put(librarianObj.getUsername(), librarianObj);
 
-        saveAnyObject(librarianHM, librarianFileUrl);
+        saveAnyObject(librarianHM, "librarian");
     }
 
     @Override
     public void deleteByPK(String username) {
 
-        HashMap<String, Librarian> librarianHM = getAnySavedHashmap(librarianFileUrl);
+        HashMap<String, Librarian> librarianHM = getAnySavedHashmap("librarian");
         librarianHM.remove(username);
 
-        saveAnyObject(librarianHM, librarianFileUrl);
+        saveAnyObject(librarianHM, "librarian");
     }
 
     @Override
     public HashMap<String, Librarian> getAll(){
-        return getAnySavedHashmap(librarianFileUrl);
+        return getAnySavedHashmap("librarian");
     }
 }
