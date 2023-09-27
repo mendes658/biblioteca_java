@@ -72,7 +72,7 @@ class LoanDAOTest {
         DAO.getLoanDAO().create(l4);
         DAO.getLoanDAO().create(l5);
 
-        ArrayList<Pair<String, Integer>> popular = DAO.getLoanDAO().getPopularBooksAllTime();
+        ArrayList<Pair<String, Integer>> popular = DAO.getLoanDAO().getPopularBooksToday();
 
         assertEquals(3, popular.get(0).getValue());
         assertEquals("2222", popular.get(0).getKey());

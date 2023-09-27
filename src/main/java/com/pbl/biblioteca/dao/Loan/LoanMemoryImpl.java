@@ -54,7 +54,7 @@ public class LoanMemoryImpl extends ConnectionMemory implements LoanDAO{
     }
 
     @Override
-    public ArrayList<Pair<String, Integer>> getPopularBooksAllTime() {
+    public ArrayList<Pair<String, Integer>> getPopularBooksToday() {
         HashMap<String, Integer> totalLoansHM = new HashMap<>();
         HashMap<String, Loan> loanHM = getAnySavedHashmap("loan");
         HashMap<String, Book> bookHM = getAnySavedHashmap("loan");

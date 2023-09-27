@@ -39,5 +39,7 @@ public class AdminFileImpl extends ConnectionFile implements AdminDAO{
     public void deleteByPK(String username) {
         HashMap<String, Admin> adminHm = getAnySavedHashmap(adminUrl);
         adminHm.remove(username);
+
+        saveAnyObject(adminHm, adminUrl);
     }
 }

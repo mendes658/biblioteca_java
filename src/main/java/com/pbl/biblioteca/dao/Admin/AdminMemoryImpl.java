@@ -40,5 +40,7 @@ public class AdminMemoryImpl extends ConnectionMemory implements AdminDAO{
     public void deleteByPK(String username) {
         HashMap<String, Admin> adminHm = getAnySavedHashmap("admin");
         adminHm.remove(username);
+
+        saveAnyObject(adminHm, "admin");
     }
 }

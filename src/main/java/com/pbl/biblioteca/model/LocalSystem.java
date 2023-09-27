@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class System implements Serializable {
+public class LocalSystem implements Serializable {
 
     public void updateReserves(){
         HashMap<String, ArrayList<BookReserve>> allReserves = DAO.getBookReserveDAO().getAllByBook();
@@ -17,7 +17,7 @@ public class System implements Serializable {
         LocalDate nowEndReserveDate;
         Reader nowReader;
         int freeCopies; // copias liberadas, para que seja setada a data fim da reserva caso
-        // exista uma copia livre para o emprestimo
+                        // exista uma copia livre para o emprestimo
 
         for(String isbn : allReserves.keySet()){
             nowArray = allReserves.get(isbn);
@@ -38,10 +38,13 @@ public class System implements Serializable {
                     DAO.getBookReserveDAO().deleteByPK(nowReserve.getId());
                 }
 
+                if (nowEndReserveDate != null && nowEndReserveDate.isBefore(LocalDate.now())) {
+                    DAO.getBookReserveDAO().deleteByPK(nowReserve.getId());
+                }
             }
         }
     }
-
+    /*
     public void updateReadersReserveStatus(){
         HashMap<String, ArrayList<BookReserve>> allReserves = DAO.getBookReserveDAO().getAllByBook();
         BookReserve nowReserve;
@@ -66,7 +69,7 @@ public class System implements Serializable {
 
             }
         }
-    }
+    } */
 
 
     public void updateReadersBlockStatus(){
@@ -87,8 +90,10 @@ public class System implements Serializable {
 
 
     public void updateSystem(){
-        updateReadersReserveStatus();
         updateReadersBlockStatus();
         updateReserves();
     }
+
+
+
 }

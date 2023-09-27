@@ -5,6 +5,7 @@ import com.pbl.biblioteca.dao.Admin.AdminFileImpl;
 import com.pbl.biblioteca.dao.Admin.AdminMemoryImpl;
 import com.pbl.biblioteca.dao.Book.BookDAO;
 import com.pbl.biblioteca.dao.Book.BookFileImpl;
+import com.pbl.biblioteca.dao.Book.BookMemoryImpl;
 import com.pbl.biblioteca.dao.BookReserve.BookReserveDAO;
 import com.pbl.biblioteca.dao.BookReserve.BookReserveFileImpl;
 import com.pbl.biblioteca.dao.BookReserve.BookReserveMemoryImpl;
@@ -48,7 +49,11 @@ public class DAO {
 
     public static BookDAO getBookDAO() {
         if (bookDAO == null){
-            bookDAO = new BookFileImpl();
+            if (TYPE_OF_STORAGE == 1){
+                bookDAO = new BookMemoryImpl();
+            } else {
+                bookDAO = new BookFileImpl();
+            }
         }
 
         return bookDAO;
@@ -59,7 +64,7 @@ public class DAO {
             if (TYPE_OF_STORAGE == 1){
                 reportDAO = new ReportMemoryImpl();
             } else {
-                reportDAO = new ReportMemoryImpl();
+                reportDAO = new ReportFileImpl();
             }
         }
 

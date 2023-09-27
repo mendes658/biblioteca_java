@@ -22,7 +22,7 @@ public class Admin extends Operator implements Serializable {
             case "reader" -> {
                 Reader reader = DAO.getReaderDAO().getByPK(username);
 
-                if (reader == null){
+                if (reader != null){
                     throw new usernameAlreadyInUseException("Username in use");
                 }
 
@@ -33,7 +33,7 @@ public class Admin extends Operator implements Serializable {
             case "librarian" -> {
                 Librarian librarian = DAO.getLibrarianDAO().getByPK(username);
 
-                if (librarian == null){
+                if (librarian != null){
                     throw new usernameAlreadyInUseException("Username in use");
                 }
 
@@ -44,7 +44,7 @@ public class Admin extends Operator implements Serializable {
             case "admin" -> {
                 Admin admin = DAO.getAdminDAO().getByPK(username);
 
-                if (admin == null){
+                if (admin != null){
                     throw new usernameAlreadyInUseException("Username in use");
                 }
 
@@ -119,6 +119,19 @@ public class Admin extends Operator implements Serializable {
 
     public void unblockReader(Reader reader){
         reader.setBlocked(false);
+        reader.setDateEndBlock(null);
         DAO.getReaderDAO().update(reader);
+    }
+
+    public void addBookCopies(Book book, Integer total){
+        book.addCopies(total);
+
+        DAO.getBookDAO().update(book);
+    }
+
+    public void removeBookCopies(Book book, Integer total) throws notFoundException{
+        book.removeCopies(total);
+
+        DAO.getBookDAO().update(book);
     }
 }

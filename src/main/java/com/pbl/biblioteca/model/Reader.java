@@ -45,6 +45,13 @@ public class Reader extends User implements Serializable {
         }
 
         ArrayList<BookReserve> reserves = DAO.getBookReserveDAO().getReservesFromBook(book.getIsbn());
+        ArrayList<Loan> loansFromReader = DAO.getLoanDAO().getAllFromUser(this.getUsername());
+
+        for (Loan l : loansFromReader){
+            if (l.getFinalDate().isBefore(LocalDate.now())){
+                throw new readerIsBlockedException("Reader has an active overdue loan");
+            }
+        }
 
         if (reserves.size() > 3){
             throw new fullException("Too many reserves to current book");
@@ -59,6 +66,7 @@ public class Reader extends User implements Serializable {
         }
 
         BookReserve reserve = new BookReserve(this.getUsername(), book.getIsbn());
+
         DAO.getBookReserveDAO().create(reserve);
 
     }

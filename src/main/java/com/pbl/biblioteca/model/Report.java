@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Report {
 
     public ArrayList<Pair<String, Integer>> getPopularBooksAllTime(){
-        return DAO.getLoanDAO().getPopularBooksAllTime();
+        return DAO.getLoanDAO().getPopularBooksToday();
     }
 
     public Integer getTotalLoans(){

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface LoanDAO extends CRUD<Loan> {
     String generateId();
-    ArrayList<Pair<String, Integer>> getPopularBooksAllTime();
+    ArrayList<Pair<String, Integer>> getPopularBooksToday();
 
     Integer getTotalLoans();
 

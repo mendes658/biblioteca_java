@@ -6,4 +6,6 @@ import com.pbl.biblioteca.model.User;
 public interface UserDAO extends CRUD<User> {
 
     String generateId();
+
+
 }

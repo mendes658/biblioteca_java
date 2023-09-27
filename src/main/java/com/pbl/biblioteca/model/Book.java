@@ -1,6 +1,7 @@
 package com.pbl.biblioteca.model;
 
 import com.pbl.biblioteca.dao.Book.BookFileImpl;
+import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.exceptionHandler.notFoundException;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ public class Book implements Serializable {
     private String publisher;
     private Integer year;
     private String category;
-    private String isbn; // unique
+    private final String isbn; // unique
     private final String id;
 
     private Integer totalCopies;
@@ -97,7 +98,21 @@ public class Book implements Serializable {
 
 
     public void addCopies(Integer total){
-        this.totalCopies++;
+        totalCopies ++;
+        availableCopies ++;
+
+        DAO.getBookDAO().update(this);
+    }
+
+    public void removeCopies(Integer total) throws notFoundException{
+        if (total <= availableCopies){
+            totalCopies -= total;
+            availableCopies -= total;
+        } else {
+            throw new notFoundException("No copies available to remove");
+        }
+
+        DAO.getBookDAO().update(this);
     }
 
     public void borrowCopy() throws notFoundException {
@@ -106,10 +121,14 @@ public class Book implements Serializable {
         } else {
             this.availableCopies --;
         }
+
+        DAO.getBookDAO().update(this);
     }
 
     public void retrieveCopy() {
         availableCopies ++;
+
+        DAO.getBookDAO().update(this);
     }
 
 

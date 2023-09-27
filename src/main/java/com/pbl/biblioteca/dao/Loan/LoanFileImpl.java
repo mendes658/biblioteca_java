@@ -53,7 +53,7 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
     }
 
     @Override
-    public ArrayList<Pair<String, Integer>> getPopularBooksAllTime() {
+    public ArrayList<Pair<String, Integer>> getPopularBooksToday() {
         HashMap<String, Integer> totalLoansHM = new HashMap<>();
         HashMap<String, Loan> loanHM = getAnySavedHashmap(loanFileUrl);
 
