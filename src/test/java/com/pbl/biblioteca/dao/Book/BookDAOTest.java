@@ -97,10 +97,10 @@ class BookDAOTest {
 
         assertEquals(2, like.size());
 
-        like = DAO.getBookDAO().searchByTitle("A conversa");
+        like = DAO.getBookDAO().searchByTitle("a CoNveRsa");
 
         assertEquals(3, like.size());
-        assertEquals("a conversa", like.get(0).getTitle());
+        assertEquals("A conversa", like.get(0).getTitle());
 
         like = DAO.getBookDAO().searchByTitle("A vIaGeM dE coiSiNho");
 
