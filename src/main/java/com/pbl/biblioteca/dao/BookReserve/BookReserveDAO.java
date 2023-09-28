@@ -19,4 +19,6 @@ public interface BookReserveDAO extends CRUD<BookReserve> {
 
     HashMap<String, ArrayList<BookReserve>> getAllByBook();
 
+    ArrayList<BookReserve> getAllFromBook(String isbn);
+
 }

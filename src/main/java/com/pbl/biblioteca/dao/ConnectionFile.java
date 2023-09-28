@@ -4,6 +4,7 @@ import com.pbl.biblioteca.model.*;
 import com.pbl.biblioteca.model.Reader;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -36,6 +37,9 @@ public class ConnectionFile {
     }
 
     public static void setTestFileUrls() {
+        new File (BASE_FOLDER).mkdirs();
+        new File (BASE_FOLDER + "/ids/storage").mkdirs();
+
         userFileUrl = BASE_FOLDER + "/test_" + defaultUserFileUrl;
         loanFileUrl = BASE_FOLDER + "/test_" + defaultLoanFileUrl;
         bookFileUrl = BASE_FOLDER + "/test_" + defaultBookFileUrl;
@@ -44,11 +48,12 @@ public class ConnectionFile {
         bookReserveUrl = BASE_FOLDER + "/test_" + defaultBookReserveUrl;
         readerUrl = BASE_FOLDER + "/test_" + defaultReaderUrl;
         adminUrl = BASE_FOLDER + "/test_" + defaultAdminUrl;
-
-
     }
 
     public static void setDefaultFileUrls() {
+        new File (BASE_FOLDER).mkdirs();
+        new File (BASE_FOLDER + "/ids/storage").mkdirs();
+
         userFileUrl = BASE_FOLDER + "/" + defaultUserFileUrl;
         librarianFileUrl = BASE_FOLDER + "/" + defaultLibrarianFileUrl;
         operatorFileUrl = BASE_FOLDER + "/" + defaultOperatorFileUrl;
@@ -60,6 +65,8 @@ public class ConnectionFile {
     }
 
     public static void clearTestFiles(){
+        new File (BASE_FOLDER).mkdirs();
+        new File (BASE_FOLDER + "/ids/storage").mkdirs();
 
         saveAnyObject(new HashMap<String, Reader>() ,BASE_FOLDER + "/test_" + defaultUserFileUrl);
         saveAnyObject(new HashMap<String, Librarian>(),BASE_FOLDER + "/test_" + defaultLibrarianFileUrl);
@@ -75,6 +82,9 @@ public class ConnectionFile {
 
     @SuppressWarnings("unchecked")
     protected static <V> HashMap<String, V> getAnySavedHashmap(String fileUrl) {
+        new File (BASE_FOLDER).mkdirs();
+        new File (BASE_FOLDER + "/ids/storage").mkdirs();
+
         FileInputStream fileIn;
         ObjectInputStream objectIn;
         File testFile = new File(fileUrl);
@@ -100,6 +110,9 @@ public class ConnectionFile {
 
 
     protected static void saveAnyObject(Object objectHM, String fileUrl) {
+        new File (BASE_FOLDER).mkdirs();
+        new File (BASE_FOLDER + "/ids/storage").mkdirs();
+
         ObjectOutputStream objectOut;
         FileOutputStream fileOut;
 
@@ -116,6 +129,9 @@ public class ConnectionFile {
     }
 
     protected static String generateId(String idUrl){
+        new File (BASE_FOLDER).mkdirs();
+        new File (BASE_FOLDER + "/ids/storage").mkdirs();
+
         idUrl = BASE_FOLDER + "/ids" + idUrl;
 
         FileInputStream fileIn;

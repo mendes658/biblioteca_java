@@ -98,8 +98,8 @@ public class Book implements Serializable {
 
 
     public void addCopies(Integer total){
-        totalCopies ++;
-        availableCopies ++;
+        totalCopies += total;
+        availableCopies += total;
 
         DAO.getBookDAO().update(this);
     }

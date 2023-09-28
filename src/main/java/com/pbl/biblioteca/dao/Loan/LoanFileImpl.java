@@ -115,4 +115,18 @@ public class LoanFileImpl extends ConnectionFile implements LoanDAO{
 
         return fromUser;
     }
+
+    @Override
+    public ArrayList<Loan> getAllFromBook(String isbn){
+        HashMap<String, Loan> allLoans = getAnySavedHashmap(loanFileUrl);
+        ArrayList<Loan> fromBook = new ArrayList<>();
+
+        for (String key : allLoans.keySet()){
+            if (allLoans.get(key).getBookIsbn().equals(isbn)){
+                fromBook.add(allLoans.get(key));
+            }
+        }
+
+        return fromBook;
+    }
 }

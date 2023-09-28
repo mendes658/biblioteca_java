@@ -1,11 +1,15 @@
 package com.pbl.biblioteca.model;
 
 import com.pbl.biblioteca.dao.DAO;
+import com.pbl.biblioteca.exceptionHandler.isbnAlreadyInUseException;
 import com.pbl.biblioteca.exceptionHandler.notFoundException;
 import com.pbl.biblioteca.exceptionHandler.usernameAlreadyInUseException;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Admin extends Operator implements Serializable {
 
@@ -132,6 +136,39 @@ public class Admin extends Operator implements Serializable {
     public void removeBookCopies(Book book, Integer total) throws notFoundException{
         book.removeCopies(total);
 
+        DAO.getBookDAO().update(book);
+    }
+
+    public Book createBook(String title, String author, String publisher,
+                           Integer year, String category, String isbn, Integer totalCopies)
+    throws isbnAlreadyInUseException {
+
+        if (DAO.getBookDAO().getByPK(isbn) != null){
+            throw new isbnAlreadyInUseException("The given isbn is already in use");
+        }
+
+        Book b1 = new Book(title, author, publisher, year, category, isbn, totalCopies);
+        DAO.getBookDAO().create(b1);
+
+        return b1;
+    }
+
+    public void deleteBook(Book book){
+        ArrayList<BookReserve> reservesBook = DAO.getBookReserveDAO().getAllFromBook(book.getIsbn());
+        ArrayList<Loan> loansBook = DAO.getLoanDAO().getAllFromBook(book.getIsbn());
+
+        for(BookReserve reserve : reservesBook){
+            DAO.getBookDAO().deleteByPK(reserve.getId());
+        }
+
+        for(Loan lo : loansBook){
+            DAO.getLoanDAO().deleteByPK(lo.getId());
+        }
+
+        DAO.getBookDAO().deleteByPK(book.getIsbn());
+    }
+
+    public void updateBook(Book book){
         DAO.getBookDAO().update(book);
     }
 }

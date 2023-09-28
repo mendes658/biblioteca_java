@@ -128,4 +128,19 @@ public class BookReserveMemoryImpl extends ConnectionMemory implements BookReser
     public Integer getTotalReserves(){
         return getAll().size();
     }
+
+
+    @Override
+    public ArrayList<BookReserve> getAllFromBook(String isbn) {
+        HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap("bookReserve");
+        ArrayList<BookReserve> allFromBook = new ArrayList<>();
+
+        for (String key : bookReserveHM.keySet()){
+            if (bookReserveHM.get(key).getBookIsbn().equals(isbn)){
+                allFromBook.add(bookReserveHM.get(key));
+            }
+        }
+
+        return allFromBook;
+    }
 }

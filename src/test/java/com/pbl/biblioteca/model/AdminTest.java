@@ -3,8 +3,7 @@ package com.pbl.biblioteca.model;
 import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.dao.DAO;
-import com.pbl.biblioteca.exceptionHandler.notFoundException;
-import com.pbl.biblioteca.exceptionHandler.usernameAlreadyInUseException;
+import com.pbl.biblioteca.exceptionHandler.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -102,4 +101,72 @@ class AdminTest {
         assertNull(r1.getDateEndBlock());
     }
 
+    @Test
+    void crudBookAndCopies(){
+        Admin adm = new Admin("pedro", "12345", "rua", "75", "pedrom");
+        Book b1 = null;
+        Librarian l1 = null;
+        Reader r1 = null;
+
+        try {
+            b1 = adm.createBook("Teco teleco teco", "Amarelo", "Vermelho",
+                    2002, "Mistério", "11111", 2);
+            l1 = (Librarian) adm.createUser("pedro", "12345",
+                    "rua", "75", "pedrom", "librarian");
+            r1 = (Reader) adm.createUser("pedro", "12345",
+                    "rua", "75", "pedrom", "reader");
+
+        } catch (isbnAlreadyInUseException | usernameAlreadyInUseException e){
+            e.printStackTrace();
+        }
+
+        b1 = DAO.getBookDAO().getByPK(b1.getIsbn());
+
+        assertEquals(2, b1.getTotalCopies());
+
+        adm.addBookCopies(b1, 3);
+        b1 = DAO.getBookDAO().getByPK(b1.getIsbn());
+
+        assertEquals(5, b1.getTotalCopies());
+
+        try {
+            l1.createBookLoan(b1, r1, 7);
+            l1.createBookLoan(b1, r1, 7);
+            l1.createBookLoan(b1, r1, 7);
+        }catch (readerIsBlockedException | notFoundException | fullException |
+                    tooManyReservesException e){
+            e.printStackTrace();
+        }
+
+        try {
+            adm.removeBookCopies(b1, 1);
+        } catch (notFoundException e){
+            e.printStackTrace();
+        }
+
+
+        b1 = DAO.getBookDAO().getByPK(b1.getIsbn());
+        assertEquals(4, b1.getTotalCopies());
+        assertEquals(1, b1.getAvailableCopies());
+
+        boolean excep = false;
+        try {
+            adm.removeBookCopies(b1, 2);
+        } catch (notFoundException e){
+            excep = true;
+        }
+
+        assertTrue(excep);
+
+        b1.setTitle("Capim");
+        adm.updateBook(b1);
+
+        b1 = DAO.getBookDAO().getByPK(b1.getIsbn());
+        assertEquals("Capim", b1.getTitle());
+
+        adm.deleteBook(b1);
+        b1 = DAO.getBookDAO().getByPK(b1.getIsbn());
+
+        assertNull(b1);
+    }
 }

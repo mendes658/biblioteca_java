@@ -24,9 +24,9 @@ import com.pbl.biblioteca.dao.Reader.ReaderMemoryImpl;
 import com.pbl.biblioteca.dao.Report.ReportDAO;
 import com.pbl.biblioteca.dao.Report.ReportFileImpl;
 import com.pbl.biblioteca.dao.Report.ReportMemoryImpl;
-import com.pbl.biblioteca.dao.System.SystemDAO;
-import com.pbl.biblioteca.dao.System.SystemFileImpl;
-import com.pbl.biblioteca.dao.System.SystemMemoryImpl;
+import com.pbl.biblioteca.dao.LocalSystem.LocalSystemDAO;
+import com.pbl.biblioteca.dao.LocalSystem.LocalSystemFileImpl;
+import com.pbl.biblioteca.dao.LocalSystem.LocalSystemMemoryImpl;
 import com.pbl.biblioteca.dao.User.UserDAO;
 import com.pbl.biblioteca.dao.User.UserFileImpl;
 import com.pbl.biblioteca.dao.User.UserMemoryImpl;
@@ -44,7 +44,7 @@ public class DAO {
     private static BookReserveDAO bookReserveDAO;
     private static ReaderDAO readerDAO;
     private static AdminDAO adminDAO;
-    private static SystemDAO systemDAO;
+    private static LocalSystemDAO localSystemDAO;
     private static ReportDAO reportDAO;
 
     public static BookDAO getBookDAO() {
@@ -71,16 +71,16 @@ public class DAO {
         return reportDAO;
     }
 
-    public static SystemDAO getSystemDAO() {
-        if (systemDAO == null){
+    public static LocalSystemDAO getSystemDAO() {
+        if (localSystemDAO == null){
             if (TYPE_OF_STORAGE == 1){
-                systemDAO = new SystemMemoryImpl();
+                localSystemDAO = new LocalSystemMemoryImpl();
             } else {
-                systemDAO = new SystemFileImpl();
+                localSystemDAO = new LocalSystemFileImpl();
             }
         }
 
-        return systemDAO;
+        return localSystemDAO;
     }
 
     public static AdminDAO getAdminDAO() {
