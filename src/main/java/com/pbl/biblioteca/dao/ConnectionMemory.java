@@ -85,7 +85,7 @@ public class ConnectionMemory {
             }
         }
 
-        return new HashMap<String, V>();
+        return new HashMap<>();
     }
 
     @SuppressWarnings("unchecked")

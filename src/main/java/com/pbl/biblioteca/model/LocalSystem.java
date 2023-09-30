@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class LocalSystem implements Serializable {
 
-    public void updateReserves(){
+    public static void updateReserves(){
         HashMap<String, ArrayList<BookReserve>> allReserves = DAO.getBookReserveDAO().getAllByBook();
         Book nowBook;
         BookReserve nowReserve;
@@ -72,7 +72,7 @@ public class LocalSystem implements Serializable {
     } */
 
 
-    public void updateReadersBlockStatus(){
+    public static void updateReadersBlockStatus(){
         HashMap<String, Reader> all = DAO.getReaderDAO().getAll();
         Reader nowReader;
 
@@ -89,7 +89,7 @@ public class LocalSystem implements Serializable {
     }
 
 
-    public void updateSystem(){
+    public static void updateSystem(){
         updateReadersBlockStatus();
         updateReserves();
     }

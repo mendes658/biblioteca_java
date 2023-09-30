@@ -149,14 +149,14 @@ class AdminTest {
         assertEquals(4, b1.getTotalCopies());
         assertEquals(1, b1.getAvailableCopies());
 
-        boolean excep = false;
+        boolean notFound = false;
         try {
             adm.removeBookCopies(b1, 2);
         } catch (notFoundException e){
-            excep = true;
+            notFound = true;
         }
 
-        assertTrue(excep);
+        assertTrue(notFound);
 
         b1.setTitle("Capim");
         adm.updateBook(b1);

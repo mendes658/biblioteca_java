@@ -20,13 +20,22 @@ public class Librarian extends Operator{
             readerIsBlockedException, notFoundException, fullException,
             tooManyReservesException{
 
+        ArrayList<Loan> allFromUser = DAO.getLoanDAO().getAllFromUser(reader.getUsername());
+
+        for (Loan loan : allFromUser){
+            if (loan.getUsername().equals(reader.getUsername())){
+                throw new fullException("Reader is already borrowing this book");
+            }
+        }
+
         if (reader.getBlocked()) {
             throw new readerIsBlockedException("Reader is blocked.");
         }
 
-        if (DAO.getLoanDAO().getAllFromUser(reader.getUsername()).size() > 3){
+        if (allFromUser.size() > 3){
             throw new fullException("Reader has too many active loans");
         }
+
 
         if (book.getAvailableCopies() < 1){
             throw new notFoundException("There are no copies available");
@@ -57,11 +66,17 @@ public class Librarian extends Operator{
             }
         }
 
+        if (reserveIndex != -1){
+            DAO.getBookReserveDAO().deleteByPK(reserves.get(reserveIndex).getId());
+        }
+
         book.borrowCopy();
         Loan newLoan = new Loan(book.getIsbn(), reader.getUsername(), days, this.getUsername());
 
         DAO.getLoanDAO().create(newLoan);
         DAO.getBookDAO().update(book);
+
+
 
         return newLoan;
     }

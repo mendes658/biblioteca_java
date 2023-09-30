@@ -51,6 +51,15 @@ public class Reader extends User implements Serializable {
             if (l.getFinalDate().isBefore(LocalDate.now())){
                 throw new readerIsBlockedException("Reader has an active overdue loan");
             }
+            if (l.getBookIsbn().equals(book.getIsbn())){
+                throw new readerIsBlockedException("Reader is already borrowing this book");
+            }
+        }
+
+        for (BookReserve reserve : reserves){
+            if (reserve.getUsername().equals(this.getUsername())){
+                throw new readerIsBlockedException("Reader already reserved this book");
+            }
         }
 
         if (reserves.size() > 3){
