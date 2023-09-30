@@ -234,7 +234,8 @@ class LibrarianTest {
 
     @Test
     void searchByTitle(){
-        Guest g1 = new Guest();
+        Librarian l1 = new Librarian("pedromendes",
+                "12345", "rua rua", "5259", "Joao");
 
         Book b1 = new Book("A viagem de coisinho", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111", 2);
@@ -253,16 +254,16 @@ class LibrarianTest {
         DAO.getBookDAO().create(b4);
         DAO.getBookDAO().create(b5);
 
-        ArrayList<Book> like = g1.searchBookByTitle("A viagem de");
+        ArrayList<Book> like = l1.searchBookByTitle("A viagem de");
 
         assertEquals(2, like.size());
 
-        like = g1.searchBookByTitle("A coNveRsA");
+        like = l1.searchBookByTitle("A coNveRsA");
 
         assertEquals(3, like.size());
         assertEquals("A conversa", like.get(0).getTitle());
 
-        like = g1.searchBookByTitle("A vIaGeM dE coiSiNho");
+        like = l1.searchBookByTitle("A vIaGeM dE coiSiNho");
 
         assertEquals(1, like.size());
     }

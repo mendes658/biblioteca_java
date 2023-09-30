@@ -46,33 +46,6 @@ public class LocalSystem implements Serializable {
             }
         }
     }
-    /*
-    public void updateReadersReserveStatus(){
-        HashMap<String, ArrayList<BookReserve>> allReserves = DAO.getBookReserveDAO().getAllByBook();
-        BookReserve nowReserve;
-        ArrayList<BookReserve> nowArray;
-        LocalDate nowEndReserveDate;
-        Reader nowReader;
-
-        for(String isbn : allReserves.keySet()){
-            nowArray = allReserves.get(isbn);
-
-            for (BookReserve bookReserve : nowArray) {
-                nowReserve = bookReserve;
-                nowEndReserveDate = nowReserve.getDateEndReserve();
-                nowReader = DAO.getReaderDAO().getByPK(nowReserve.getUsername());
-
-                if (nowEndReserveDate != null && nowEndReserveDate.isBefore(LocalDate.now())) {
-                    nowReader.setBlocked(true);
-                    nowReader.setDateEndBlock(LocalDate.now().plusDays(7));
-
-                    DAO.getReaderDAO().update(nowReader);
-                }
-
-            }
-        }
-    } */
-
 
     public static void updateReadersBlockStatus(){
         HashMap<String, Reader> all = DAO.getReaderDAO().getAll();

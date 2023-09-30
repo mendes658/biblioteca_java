@@ -7,23 +7,23 @@ import java.util.ArrayList;
 
 public class Report {
 
-    public ArrayList<Pair<String, Integer>> getPopularBooksAllTime(){
+    public static ArrayList<Pair<String, Integer>> getPopularBooksToday(){
         return DAO.getLoanDAO().getPopularBooksToday();
     }
 
-    public Integer getTotalLoans(){
+    public static Integer getTotalLoans(){
         return DAO.getLoanDAO().getTotalLoans();
     }
 
-    public Integer getTotalOverdueLoans(){
+    public static Integer getTotalOverdueLoans(){
         return DAO.getLoanDAO().getTotalOverdueLoans(null);
     }
 
-    public Integer getTotalReserves(){
+    public static Integer getTotalReserves(){
         return DAO.getBookReserveDAO().getTotalReserves();
     }
 
-    public ArrayList<Loan> getAllLoansFromUser(String username){
+    public static ArrayList<Loan> getAllLoansFromUser(String username){
         return DAO.getLoanDAO().getAllFromUser(username);
     }
 }
