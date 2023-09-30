@@ -96,7 +96,7 @@ public class LocalSystem implements Serializable {
         updateReserves();
     }
 
-    public User login(String username, String password, String type) throws
+    public static User login(String username, String password, String type) throws
             wrongPasswordException, notFoundException{
 
         return DAO.getUserDAO().login(username, password, type);
