@@ -51,9 +51,10 @@ class LibrarianTest {
 
 
         // Criação de empréstimos
+        Loan loanR2 = null;
         try {
             l1.createBookLoan(b1, r1, 7);
-            l1.createBookLoan(b1, r2, 7);
+            loanR2 = l1.createBookLoan(b1, r2, 7);
         }catch (readerIsBlockedException | notFoundException | fullException |
                 tooManyReservesException e){
             e.printStackTrace();
@@ -111,7 +112,7 @@ class LibrarianTest {
         }
         assertTrue(notFoundException);
 
-        l1.deleteBookLoan(DAO.getLoanDAO().getAllFromUser(r2.getUsername()).get(0).getId());
+        l1.deleteBookLoan(loanR2.getId());
 
         r2.setBlocked(true);
         DAO.getReaderDAO().update(r2);

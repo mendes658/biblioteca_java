@@ -98,4 +98,7 @@ public class Reader extends User implements Serializable {
         return DAO.getBookDAO().searchByTitle(title);
     }
 
+    public void renewLoan(Loan loan) throws alreadyRenewedException, tooManyReservesException{
+        loan.renew();
+    }
 }

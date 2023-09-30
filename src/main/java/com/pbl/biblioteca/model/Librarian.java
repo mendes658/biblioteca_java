@@ -26,6 +26,9 @@ public class Librarian extends Operator{
             if (loan.getUsername().equals(reader.getUsername())){
                 throw new fullException("Reader is already borrowing this book");
             }
+            if (loan.getFinalDate().isBefore(LocalDate.now())){
+                throw new readerIsBlockedException("Reader has an active overdue loan");
+            }
         }
 
         if (reader.getBlocked()) {

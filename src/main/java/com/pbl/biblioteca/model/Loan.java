@@ -1,6 +1,9 @@
 package com.pbl.biblioteca.model;
 
+import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.dao.Loan.LoanFileImpl;
+import com.pbl.biblioteca.exceptionHandler.alreadyRenewedException;
+import com.pbl.biblioteca.exceptionHandler.tooManyReservesException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,9 +13,9 @@ public class Loan implements Serializable {
     private final String bookIsbn;
     private String username;
     private final LocalDate initialDate;
-    private final LocalDate finalDate;
+    private LocalDate finalDate;
     private final String librarianUsername;
-
+    private boolean alreadyRenew;
 
     public Loan(String bookIsbn, String userUsername, Integer loanDays,
                 String librarianUsername){
@@ -23,6 +26,7 @@ public class Loan implements Serializable {
         this.initialDate = LocalDate.now();
         this.finalDate = LocalDate.now().plusDays(loanDays);
         this.librarianUsername = librarianUsername;
+        this.alreadyRenew = false;
     }
 
     // Getters
@@ -54,6 +58,22 @@ public class Loan implements Serializable {
         this.username = username;
     }
 
+    public void renew() throws alreadyRenewedException, tooManyReservesException {
+        if (this.alreadyRenew){
+            throw new alreadyRenewedException("This loan has been renewed before");
+        }
+
+        if (! DAO.getBookReserveDAO().getReservesFromBook(this.bookIsbn).isEmpty()){
+            throw new tooManyReservesException("There are reserves to current book, can't renew");
+        }
+
+        this.alreadyRenew = true;
+        if (this.finalDate != null){
+            this.finalDate = this.finalDate.plusDays(7);
+        }
+
+        DAO.getLoanDAO().update(this);
+    }
 
 
 }
