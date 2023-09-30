@@ -1,6 +1,8 @@
 package com.pbl.biblioteca.model;
 
 import com.pbl.biblioteca.dao.DAO;
+import com.pbl.biblioteca.exceptionHandler.notFoundException;
+import com.pbl.biblioteca.exceptionHandler.wrongPasswordException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -92,6 +94,12 @@ public class LocalSystem implements Serializable {
     public static void updateSystem(){
         updateReadersBlockStatus();
         updateReserves();
+    }
+
+    public User login(String username, String password, String type) throws
+            wrongPasswordException, notFoundException{
+
+        return DAO.getUserDAO().login(username, password, type);
     }
 
 
