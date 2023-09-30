@@ -107,13 +107,20 @@ class AdminTest {
         Book b1 = null;
         Librarian l1 = null;
         Reader r1 = null;
+        Reader r2 = null;
+        Reader r3 = null;
+
 
         try {
             b1 = adm.createBook("Teco teleco teco", "Amarelo", "Vermelho",
                     2002, "Mistério", "11111", 2);
             l1 = (Librarian) adm.createUser("pedro", "12345",
                     "rua", "75", "pedrom", "librarian");
-            r1 = (Reader) adm.createUser("pedro", "12345",
+            r1 = (Reader) adm.createUser("pedro25", "12345",
+                    "rua", "75", "pedrom", "reader");
+            r2 = (Reader) adm.createUser("pedro26", "12345",
+                    "rua", "75", "pedrom", "reader");
+            r3 = (Reader) adm.createUser("pedro27", "12345",
                     "rua", "75", "pedrom", "reader");
 
         } catch (isbnAlreadyInUseException | usernameAlreadyInUseException e){
@@ -131,8 +138,8 @@ class AdminTest {
 
         try {
             l1.createBookLoan(b1, r1, 7);
-            l1.createBookLoan(b1, r1, 7);
-            l1.createBookLoan(b1, r1, 7);
+            l1.createBookLoan(b1, r2, 7);
+            l1.createBookLoan(b1, r3, 7);
         }catch (readerIsBlockedException | notFoundException | fullException |
                     tooManyReservesException e){
             e.printStackTrace();
