@@ -3,7 +3,6 @@ package com.pbl.biblioteca.dao.Reader;
 import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.dao.DAO;
-import com.pbl.biblioteca.model.Librarian;
 import com.pbl.biblioteca.model.Reader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReaderDAOTest {
+class ReaderMemoryAndFileTest {
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();

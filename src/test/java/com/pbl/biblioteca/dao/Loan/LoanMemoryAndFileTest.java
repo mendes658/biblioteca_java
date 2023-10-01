@@ -3,7 +3,6 @@ package com.pbl.biblioteca.dao.Loan;
 import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.dao.DAO;
-import com.pbl.biblioteca.model.Book;
 import com.pbl.biblioteca.model.Loan;
 import javafx.util.Pair;
 import org.junit.jupiter.api.AfterEach;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LoanDAOTest {
+class LoanMemoryAndFileTest {
 
     @BeforeEach
     void setUp() {
