@@ -48,7 +48,7 @@ public class LibrarianMemoryImpl extends ConnectionMemory implements LibrarianDA
 
     /**
      * Deleta um objeto Librarian de um arquivo
-     * @param  username Primary key da reserva que será deletada
+     * @param  username Primary key do Librarian
      */
     @Override
     public void deleteByPK(String username) {
