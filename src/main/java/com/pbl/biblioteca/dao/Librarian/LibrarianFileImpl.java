@@ -7,6 +7,10 @@ import java.util.HashMap;
 
 public class LibrarianFileImpl extends ConnectionFile implements LibrarianDAO{
 
+    /**
+     * Salva um objeto Librarian em um arquivo
+     * @param  librarianObject Librarian que será salvo
+     */
     @Override
     public void create(Librarian librarianObject){
         HashMap<String, Librarian> librarianHM = getAnySavedHashmap(librarianFileUrl);
@@ -16,6 +20,11 @@ public class LibrarianFileImpl extends ConnectionFile implements LibrarianDAO{
         saveAnyObject(librarianHM, librarianFileUrl);
     }
 
+    /**
+     * Pega um objeto Librarian salvo, através da primary key
+     * @param  username O username é a primary key dos Users
+     * @return Retorna o objeto Librarian
+     */
     @Override
     public Librarian getByPK(String username){
         HashMap<String, Librarian> librarianHM = getAnySavedHashmap(librarianFileUrl);
@@ -23,6 +32,10 @@ public class LibrarianFileImpl extends ConnectionFile implements LibrarianDAO{
         return librarianHM.get(username);
     }
 
+    /**
+     * Atualiza um objeto Librarian em um arquivo
+     * @param  librarianObj Librarian que será atualizado
+     */
     @Override
     public void update(Librarian librarianObj) {
 
@@ -32,6 +45,10 @@ public class LibrarianFileImpl extends ConnectionFile implements LibrarianDAO{
         saveAnyObject(librarianHM, librarianFileUrl);
     }
 
+    /**
+     * Deleta um objeto Librarian de um arquivo
+     * @param  username Primary key da reserva que será deletada
+     */
     @Override
     public void deleteByPK(String username) {
 
@@ -41,6 +58,10 @@ public class LibrarianFileImpl extends ConnectionFile implements LibrarianDAO{
         saveAnyObject(librarianHM, librarianFileUrl);
     }
 
+    /**
+     * Pega todos os Librarians salvos atualmente
+     * @return Retorna um Hashmap com todos as Librarians, a key é o username
+     */
     @Override
     public HashMap<String, Librarian> getAll(){
         return getAnySavedHashmap(librarianFileUrl);

@@ -49,7 +49,7 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
 
     /**
      * Pega um objeto BookReserve salvo, através da primary key
-     * @param  id O id é a primary key dos Users
+     * @param  id O id é a primary key
      * @return Retorna o objeto BookReserve
      */
     @Override
