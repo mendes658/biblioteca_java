@@ -88,6 +88,7 @@
                         --add-opens com.pbl.biblioteca/com.pbl.biblioteca.model=ALL-UNNAMED
                         --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Report=ALL-UNNAMED
                         --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Reader=ALL-UNNAMED
+                        --add-opens com.pbl.biblioteca/com.pbl.biblioteca.dao.Admin=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>

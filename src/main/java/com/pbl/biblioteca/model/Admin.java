@@ -6,10 +6,8 @@ import com.pbl.biblioteca.exceptionHandler.notFoundException;
 import com.pbl.biblioteca.exceptionHandler.usernameAlreadyInUseException;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Admin extends Operator implements Serializable {
 
