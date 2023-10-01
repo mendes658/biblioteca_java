@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
 
     /**
-     * Salva um objeto Book em um arquivo
+     * Salva um objeto Book na memória
      * @param  bookObject Book que será salvo
      */
     @Override
@@ -33,7 +33,7 @@ public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
     }
 
     /**
-     * Atualiza um objeto Book em um arquivo
+     * Atualiza um objeto Book na memória
      * @param  bookObj Book que será atualizado
      */
     @Override
@@ -46,7 +46,7 @@ public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
     }
 
     /**
-     * Deleta um objeto Book em um arquivo
+     * Deleta um objeto Book na memória
      * @param  isbn Primary key do livro que será deletado
      */
     @Override

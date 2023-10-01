@@ -10,6 +10,10 @@ import java.util.HashMap;
 
 public class BookReserveFileImpl extends ConnectionFile implements BookReserveDAO{
 
+    /**
+     * Salva um objeto BookReserve em um arquivo
+     * @param  bookReserveObj BookReserve que será salvo
+     */
     @Override
     public void create(BookReserve bookReserveObj) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
@@ -19,6 +23,10 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         saveAnyObject(bookReserveHM, bookReserveUrl);
     }
 
+    /**
+     * Deleta um objeto BookReserve em um arquivo
+     * @param  id Primary key da reserva que será deletada
+     */
     @Override
     public void deleteByPK(String id) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
@@ -27,6 +35,10 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         saveAnyObject(bookReserveHM, bookReserveUrl);
     }
 
+    /**
+     * Atualiza um objeto BookReserve em um arquivo
+     * @param  bookReserveObj BookReserve que será atualizado
+     */
     @Override
     public void update(BookReserve bookReserveObj) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
@@ -35,6 +47,11 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         saveAnyObject(bookReserveHM, bookReserveUrl);
     }
 
+    /**
+     * Pega um objeto BookReserve salvo, através da primary key
+     * @param  id O id é a primary key dos Users
+     * @return Retorna o objeto BookReserve
+     */
     @Override
     public BookReserve getByPK(String id) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
@@ -42,16 +59,29 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         return bookReserveHM.get(id);
     }
 
+    /**
+     * Pega todas as reservas salvas atualmente
+     * @return Retorna um Hashmap com todos as reservas, a key é o id
+     */
     @Override
     public HashMap<String, BookReserve> getAll() {
         return  getAnySavedHashmap(bookReserveUrl);
     }
 
+    /**
+     * Gera um novo id para a reserva
+     * @return Retorna o id numa String
+     */
     @Override
     public String generateId() {
         return generateId(bookReserveUrl);
     }
 
+    /**
+     * Busca por todas as reservas de um livro
+     * @param  bookIsbn O isbn do livro
+     * @return Retorna um array com todas as reservas
+     */
     @Override
     public ArrayList<BookReserve> getReservesFromBook(String bookIsbn) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
@@ -68,6 +98,10 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         return allFromBook;
     }
 
+    /**
+     * Deleta todas as reservas de um Reader
+     * @param  username A primary key do Reader
+     */
     @Override
     public void removeAllFromReader(String username) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
@@ -86,6 +120,11 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         saveAnyObject(bookReserveHM, bookReserveUrl);
     }
 
+    /**
+     * Busca por todas as reservas de um Reader
+     * @param  username A primary key do Reader
+     * @return Retorna um array com todas as reservas
+     */
     @Override
     public ArrayList<BookReserve> getAllFromReader(String username) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);
@@ -100,6 +139,11 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         return allFromUser;
     }
 
+    /**
+     * Pega todas as reservas, organizadas livro a livro
+     * @return Retorna um HashMap, a chave é o isbn do livro,
+     * o valor é um Array com todas as reservas daquele livro
+     */
     @Override
     public HashMap<String, ArrayList<BookReserve>> getAllByBook(){
         HashMap<String, ArrayList<BookReserve>> allByBook = new HashMap<>();
@@ -125,12 +169,21 @@ public class BookReserveFileImpl extends ConnectionFile implements BookReserveDA
         return allByBook;
     }
 
+    /**
+     * Pega o total de reservas ativas
+     * @return Retorna um Inteiro com o total de reservas
+     */
     @Override
     public Integer getTotalReserves(){
         return getAll().size();
     }
 
 
+    /**
+     * Busca por todas as reservas de um livro
+     * @param  isbn A primary key do livro
+     * @return Retorna um array com todas as reservas
+     */
     @Override
     public ArrayList<BookReserve> getAllFromBook(String isbn) {
         HashMap<String, BookReserve> bookReserveHM = getAnySavedHashmap(bookReserveUrl);

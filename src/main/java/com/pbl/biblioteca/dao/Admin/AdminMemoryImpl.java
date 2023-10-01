@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class AdminMemoryImpl extends ConnectionMemory implements AdminDAO{
 
     /**
-     * Salva um objeto Admin em um arquivo
+     * Salva um objeto Admin na memória
      * @param  adminObject Admin que será salvo
      */
     @Override
@@ -42,7 +42,7 @@ public class AdminMemoryImpl extends ConnectionMemory implements AdminDAO{
     }
 
     /**
-     * Atualiza um objeto Admin em um arquivo
+     * Atualiza um objeto Admin na memória
      * @param  adminObject Admin que será atualizado
      */
     @Override
@@ -54,7 +54,7 @@ public class AdminMemoryImpl extends ConnectionMemory implements AdminDAO{
     }
 
     /**
-     * Deleta um objeto Admin em um arquivo
+     * Deleta um objeto Admin da memória
      * @param  username Primary key do Admin que será deletado
      */
     @Override
