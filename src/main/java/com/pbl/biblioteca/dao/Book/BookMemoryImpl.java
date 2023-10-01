@@ -8,6 +8,10 @@ import java.util.HashMap;
 
 public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
 
+    /**
+     * Salva um objeto Book em um arquivo
+     * @param  bookObject Book que será salvo
+     */
     @Override
     public void create(Book bookObject) {
         HashMap<String, Book> bookHM = getAnySavedHashmap("book");
@@ -16,6 +20,11 @@ public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
         saveAnyObject(bookHM, "book");
     }
 
+    /**
+     * Pega um objeto Book salvo, através da primary key
+     * @param  isbn O isbn é a primary key dos Users
+     * @return Retorna o objeto Book
+     */
     @Override
     public Book getByPK(String isbn) {
         HashMap<String, Book> bookHM = getAnySavedHashmap("book");
@@ -23,6 +32,10 @@ public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
         return bookHM.get(isbn);
     }
 
+    /**
+     * Atualiza um objeto Book em um arquivo
+     * @param  bookObj Book que será atualizado
+     */
     @Override
     public void update(Book bookObj) {
         HashMap<String, Book> bookHM = getAnySavedHashmap("book");
@@ -32,6 +45,10 @@ public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
 
     }
 
+    /**
+     * Deleta um objeto Book em um arquivo
+     * @param  isbn Primary key do livro que será deletado
+     */
     @Override
     public void deleteByPK(String isbn) {
         HashMap<String, Book> bookHM = getAnySavedHashmap("book");
@@ -41,11 +58,20 @@ public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
         }
     }
 
+    /**
+     * Pega todos os livros salvos atualmente
+     * @return Retorna um Hashmap com todos os livros, a key é o isbn
+     */
     @Override
     public HashMap<String, Book> getAll() {
         return getAnySavedHashmap("book");
     }
 
+    /**
+     * Pega todos os livros de uma determinada categoria
+     * @param  category A categoria dos livros
+     * @return Retorna um array com todos os livros
+     */
     @Override
     public ArrayList<Book> getAllBooksFromCategory(String category) {
 
