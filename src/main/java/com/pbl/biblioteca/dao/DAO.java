@@ -34,7 +34,7 @@ import com.pbl.biblioteca.dao.User.UserMemoryImpl;
 public class DAO {
 
     // 1 - Memória ; 2 - Arquivo
-    private static final int TYPE_OF_STORAGE = 2;
+    private static final int TYPE_OF_STORAGE = 1;
 
     private static BookDAO bookDAO;
     private static LoanDAO loanDAO;

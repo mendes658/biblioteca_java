@@ -163,24 +163,28 @@ class ReportTest {
         Loan l3 = new Loan("3333", "ped1", 7, "men1");
         Loan l4 = new Loan("1111", "ped2", 7, "men2");
         Loan l5 = new Loan("2222", "ped6", 7, "men3");
+        Loan l6 = new Loan("3333", "ped6", 7, "men3");
 
         DAO.getLoanDAO().create(l1);
         DAO.getLoanDAO().create(l2);
         DAO.getLoanDAO().create(l3);
         DAO.getLoanDAO().create(l4);
         DAO.getLoanDAO().create(l5);
+        DAO.getLoanDAO().create(l6);
 
         DAO.getReportDAO().logNewLoan(l1);
         DAO.getReportDAO().logNewLoan(l2);
         DAO.getReportDAO().logNewLoan(l3);
         DAO.getReportDAO().logNewLoan(l4);
         DAO.getReportDAO().logNewLoan(l5);
+        DAO.getReportDAO().logNewLoan(l6);
 
         DAO.getLoanDAO().deleteByPK(l1.getId());
         DAO.getLoanDAO().deleteByPK(l2.getId());
         DAO.getLoanDAO().deleteByPK(l3.getId());
         DAO.getLoanDAO().deleteByPK(l4.getId());
         DAO.getLoanDAO().deleteByPK(l5.getId());
+        DAO.getLoanDAO().deleteByPK(l6.getId());
 
         ArrayList<Pair<String, Integer>> popular = Report.getPopularBooksAllTime();
         assertEquals(3, popular.get(0).getValue());

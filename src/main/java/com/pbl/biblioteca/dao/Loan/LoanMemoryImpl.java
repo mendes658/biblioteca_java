@@ -57,15 +57,11 @@ public class LoanMemoryImpl extends ConnectionMemory implements LoanDAO{
     public ArrayList<Pair<String, Integer>> getPopularBooksToday() {
         HashMap<String, Integer> totalLoansHM = new HashMap<>();
         HashMap<String, Loan> loanHM = getAnySavedHashmap("loan");
-        HashMap<String, Book> bookHM = getAnySavedHashmap("loan");
 
         String newKey;
-        Book nowBook;
 
         for (String key : loanHM.keySet()){
-
-            nowBook = bookHM.get(loanHM.get(key).getBookIsbn());
-            newKey = nowBook.getIsbn();
+            newKey = loanHM.get(key).getBookIsbn();
 
             if (totalLoansHM.get(newKey) == null){
                 totalLoansHM.put(newKey, 1);

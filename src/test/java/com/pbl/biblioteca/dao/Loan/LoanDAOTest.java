@@ -3,6 +3,7 @@ package com.pbl.biblioteca.dao.Loan;
 import com.pbl.biblioteca.dao.ConnectionFile;
 import com.pbl.biblioteca.dao.ConnectionMemory;
 import com.pbl.biblioteca.dao.DAO;
+import com.pbl.biblioteca.model.Book;
 import com.pbl.biblioteca.model.Loan;
 import javafx.util.Pair;
 import org.junit.jupiter.api.AfterEach;
@@ -65,12 +66,14 @@ class LoanDAOTest {
         Loan l3 = new Loan("3333", "ped1", 7, "men1");
         Loan l4 = new Loan("1111", "ped2", 7, "men2");
         Loan l5 = new Loan("2222", "ped6", 7, "men3");
+        Loan l6 = new Loan("3333", "ped6", 7, "men3");
 
         DAO.getLoanDAO().create(l1);
         DAO.getLoanDAO().create(l2);
         DAO.getLoanDAO().create(l3);
         DAO.getLoanDAO().create(l4);
         DAO.getLoanDAO().create(l5);
+        DAO.getLoanDAO().create(l6);
 
         ArrayList<Pair<String, Integer>> popular = DAO.getLoanDAO().getPopularBooksToday();
 
