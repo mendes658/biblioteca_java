@@ -18,6 +18,10 @@ public class ConnectionFile {
     protected static  String bookReserveUrl;
     protected static  String readerUrl;
     protected static  String adminUrl;
+    protected static  String loanLogUrl;
+    protected static  String userLogUrl;
+    protected static  String bookLogUrl;
+    protected static  String reserveLogUrl;
 
     private static final String BASE_FOLDER = "./storage";
 
@@ -29,6 +33,10 @@ public class ConnectionFile {
     protected static  String defaultBookReserveUrl = "book_reserves.ser";
     protected static  String defaultReaderUrl = "reader.ser";
     protected static  String defaultAdminUrl = "admin.ser";
+    protected static  String defaultLoanLogUrl = "loan_log.ser";
+    protected static  String defaultUserLogUrl = "user_log.ser";
+    protected static  String defaultBookLogUrl = "book_log.ser";
+    protected static  String defaultReserveLogUrl = "reserve_log.ser";
 
 
     public ConnectionFile(){
@@ -48,6 +56,10 @@ public class ConnectionFile {
         bookReserveUrl = BASE_FOLDER + "/test_" + defaultBookReserveUrl;
         readerUrl = BASE_FOLDER + "/test_" + defaultReaderUrl;
         adminUrl = BASE_FOLDER + "/test_" + defaultAdminUrl;
+        loanLogUrl = BASE_FOLDER + "/test_" + defaultLoanLogUrl;
+        userLogUrl = BASE_FOLDER + "/test_" + defaultUserLogUrl;
+        bookLogUrl = BASE_FOLDER + "/test_" + defaultBookLogUrl;
+        reserveLogUrl = BASE_FOLDER + "/test_" + defaultReserveLogUrl;
     }
 
     public static void setDefaultFileUrls() {
@@ -62,6 +74,10 @@ public class ConnectionFile {
         bookReserveUrl = BASE_FOLDER + "/" + defaultBookReserveUrl;
         readerUrl = BASE_FOLDER + "/" + defaultReaderUrl;
         adminUrl = BASE_FOLDER + "/" + defaultAdminUrl;
+        loanLogUrl = BASE_FOLDER + "/" + defaultLoanLogUrl;
+        userLogUrl = BASE_FOLDER + "/" + defaultUserLogUrl;
+        bookLogUrl = BASE_FOLDER + "/" + defaultBookLogUrl;
+        reserveLogUrl = BASE_FOLDER + "/" + defaultReserveLogUrl;
     }
 
     public static void clearTestFiles(){
@@ -76,6 +92,10 @@ public class ConnectionFile {
         saveAnyObject(new HashMap<String, BookReserve>(),BASE_FOLDER + "/test_" + defaultBookReserveUrl);
         saveAnyObject(new HashMap<String, Reader>(), BASE_FOLDER + "/test_" + defaultReaderUrl);
         saveAnyObject(new HashMap<String, Admin>(), BASE_FOLDER + "/test_" + defaultAdminUrl);
+        saveAnyObject(new HashMap<String, Loan>(), BASE_FOLDER + "/test_" + defaultLoanLogUrl);
+        saveAnyObject(new HashMap<String, User>(), BASE_FOLDER + "/test_" + defaultUserLogUrl);
+        saveAnyObject(new HashMap<String, Book>(), BASE_FOLDER + "/test_" + defaultBookLogUrl);
+        saveAnyObject(new HashMap<String, BookReserve>(), BASE_FOLDER + "/test_" + defaultReserveLogUrl);
 
     }
 

@@ -17,6 +17,10 @@ public class ConnectionMemory {
     private static HashMap<String, BookReserve> bookReserveHM;
     private static HashMap<String, Reader> readerHM;
     private static HashMap<String, Admin> adminHM;
+    private static HashMap<String, Loan> loanLogHM;
+    private static HashMap<String, User> userLogHM;
+    private static HashMap<String, Book> bookLogHM;
+    private static HashMap<String, BookReserve> reserveLogHM;
 
     private static Integer userId;
     private static Integer loanId;
@@ -49,6 +53,10 @@ public class ConnectionMemory {
         bookHM = new HashMap<>();
         bookReserveHM = new HashMap<>();
         readerHM = new HashMap<>();
+        loanLogHM = new HashMap<>();
+        userLogHM = new HashMap<>();
+        bookLogHM = new HashMap<>();
+        reserveLogHM = new HashMap<>();
 
         userId = 0;
         loanId = 0;
@@ -82,6 +90,18 @@ public class ConnectionMemory {
             }
             case "user" -> {
                 return (HashMap<String, V>) userHM;
+            }
+            case "userlog" -> {
+                return (HashMap<String, V>) userLogHM;
+            }
+            case "loanlog" -> {
+                return (HashMap<String, V>) loanLogHM;
+            }
+            case "booklog" -> {
+                return (HashMap<String, V>) bookLogHM;
+            }
+            case "reservelog" -> {
+                return (HashMap<String, V>) reserveLogHM;
             }
         }
 
