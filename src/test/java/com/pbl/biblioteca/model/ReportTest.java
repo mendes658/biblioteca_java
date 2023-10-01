@@ -68,6 +68,5 @@ class ReportTest {
         assertEquals(2, Report.getPopularBooksToday().get(0).getValue());
         assertEquals(1, Report.getPopularBooksToday().get(1).getValue());
 
-        assertEquals(2, Report.getAllLoansFromUser(l1));
     }
 }

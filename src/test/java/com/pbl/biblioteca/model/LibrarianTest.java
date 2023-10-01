@@ -144,9 +144,10 @@ class LibrarianTest {
 
         try {
             r1.createBookReserve(b1);
+            Thread.sleep(1001);
             r2.createBookReserve(b1);
         } catch (readerIsBlockedException |fullException |
-                copyAvailableException e){
+                copyAvailableException | InterruptedException e){
             e.printStackTrace();
         }
 

@@ -79,11 +79,11 @@ class BookReserveDAOTest {
     @Test
     void getReservesFromBookAndByBook() throws InterruptedException{
         BookReserve r1 = new BookReserve("pedrom2", "2222");
-        Thread.sleep(1200);
+        Thread.sleep(1001);
         BookReserve r2 = new BookReserve("pedrom2", "3333");
-        Thread.sleep(1200);
+        Thread.sleep(1001);
         BookReserve r3 = new BookReserve("pacopaco2", "2222");
-        Thread.sleep(1200);
+        Thread.sleep(1001);
         BookReserve r4 = new BookReserve("goiabada2", "2222");
 
         DAO.getBookReserveDAO().create(r1);
