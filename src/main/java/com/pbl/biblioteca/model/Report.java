@@ -27,4 +27,40 @@ public class Report {
     public static ArrayList<Loan> getUserActiveLoans(String username){
         return DAO.getLoanDAO().getAllFromUser(username);
     }
+
+    public static ArrayList<Loan> getAllLoanHistory(){
+        return DAO.getReportDAO().getAllLoanHistory();
+    }
+
+    public static ArrayList<User> getAllUserHistory(){
+        return DAO.getReportDAO().getAllUserHistory();
+    }
+
+    public static  ArrayList<Book> getAllBookHistory(){
+        return DAO.getReportDAO().getAllBookHistory();
+    }
+
+    public static ArrayList<BookReserve> getAllReserveHistory(){
+        return DAO.getReportDAO().getAllReserveHistory();
+    }
+
+    public static ArrayList<Loan> getReaderLoanHistory(String username){
+        return DAO.getReportDAO().getReaderLoanHistory(username);
+    }
+
+    public static ArrayList<BookReserve> getReaderReserveHistory(String username){
+        return DAO.getReportDAO().getReaderReserveHistory(username);
+    }
+
+    public static ArrayList<Pair<String, Integer>> getPopularBooksAllTime(){
+        return DAO.getReportDAO().getPopularBooksAllTime();
+    }
+
+    public static Integer getTotalReservesAllTime(){
+        return DAO.getReportDAO().getAllReserveHistory().size();
+    }
+
+    public static Integer getTotalLoansAllTime(){
+        return DAO.getReportDAO().getAllLoanHistory().size();
+    }
 }

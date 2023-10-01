@@ -59,7 +59,7 @@ class LoanDAOTest {
     }
 
     @Test
-    void getPopularBooksAllTime(){
+    void getPopularBooksToday(){
         Loan l1 = new Loan("2222", "pedrom", 7, "mendes");
         Loan l2 = new Loan("2222", "ped", 7, "men");
         Loan l3 = new Loan("3333", "ped1", 7, "men1");
