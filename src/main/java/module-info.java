@@ -8,7 +8,6 @@ module com.pbl.biblioteca {
 
     opens com.pbl.biblioteca.view to javafx.fxml;
     exports com.pbl.biblioteca.view;
-
     //exports com.pbl.biblioteca;
     opens com.pbl.biblioteca to javafx.fxml;
 }

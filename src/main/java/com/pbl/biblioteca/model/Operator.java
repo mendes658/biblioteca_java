@@ -1,5 +1,4 @@
 package com.pbl.biblioteca.model;
-import com.pbl.biblioteca.dao.Operator.OperatorFileImpl;
 
 import java.io.Serializable;
 
