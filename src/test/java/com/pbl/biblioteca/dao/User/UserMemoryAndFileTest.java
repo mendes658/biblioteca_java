@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserDAOTest {
+class UserMemoryAndFileTest {
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();
