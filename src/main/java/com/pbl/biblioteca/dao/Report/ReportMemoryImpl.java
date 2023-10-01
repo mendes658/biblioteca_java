@@ -6,8 +6,10 @@ import com.pbl.biblioteca.model.Book;
 import com.pbl.biblioteca.model.BookReserve;
 import com.pbl.biblioteca.model.Loan;
 import com.pbl.biblioteca.model.User;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
@@ -119,5 +121,33 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         }
 
         return fromUser;
+    }
+
+    @Override
+    public ArrayList<Pair<String, Integer>> getPopularBooksAllTime() {
+        HashMap<String, Integer> totalLoansHM = new HashMap<>();
+        HashMap<String, Loan> loanHM = getAnySavedHashmap("loanlog");
+
+        String newKey;
+
+        for (String key : loanHM.keySet()){
+            newKey = loanHM.get(key).getBookIsbn();
+
+            if (totalLoansHM.get(newKey) == null){
+                totalLoansHM.put(newKey, 1);
+            } else {
+                totalLoansHM.put(newKey, totalLoansHM.get(newKey) + 1);
+            }
+        }
+
+        ArrayList<Pair<String, Integer>> popularOrdered = new ArrayList<>();
+
+        for (String key : totalLoansHM.keySet()){
+            popularOrdered.add(new Pair<>(key, totalLoansHM.get(key)));
+        }
+
+        popularOrdered.sort(Comparator.comparingInt(Pair<String, Integer>::getValue).reversed());
+
+        return popularOrdered;
     }
 }

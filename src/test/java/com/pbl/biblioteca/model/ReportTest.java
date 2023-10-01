@@ -62,7 +62,7 @@ class ReportTest {
             e.printStackTrace();
         }
 
-        assertEquals(2, Report.getTotalLoans());
+        assertEquals(2, Report.getTotalActiveLoans());
         assertEquals(b1.getIsbn(), Report.getPopularBooksToday().get(0).getKey());
         assertEquals(b2.getIsbn(), Report.getPopularBooksToday().get(1).getKey());
         assertEquals(2, Report.getPopularBooksToday().get(0).getValue());

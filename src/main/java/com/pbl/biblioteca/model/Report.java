@@ -12,7 +12,7 @@ public class Report {
         return DAO.getLoanDAO().getPopularBooksToday();
     }
 
-    public static Integer getTotalLoans(){
+    public static Integer getTotalActiveLoans(){
         return DAO.getLoanDAO().getTotalLoans();
     }
 
@@ -20,11 +20,11 @@ public class Report {
         return DAO.getLoanDAO().getTotalOverdueLoans(now);
     }
 
-    public static Integer getTotalReserves(){
+    public static Integer getTotalActiveReserves(){
         return DAO.getBookReserveDAO().getTotalReserves();
     }
 
-    public static ArrayList<Loan> getAllLoansFromUser(String username){
+    public static ArrayList<Loan> getUserActiveLoans(String username){
         return DAO.getLoanDAO().getAllFromUser(username);
     }
 }

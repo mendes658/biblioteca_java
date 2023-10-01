@@ -5,6 +5,7 @@ import com.pbl.biblioteca.model.Book;
 import com.pbl.biblioteca.model.BookReserve;
 import com.pbl.biblioteca.model.Loan;
 import com.pbl.biblioteca.model.User;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 
@@ -22,4 +23,6 @@ public interface ReportDAO {
 
     ArrayList<Loan> getReaderLoanHistory(String username);
     ArrayList<BookReserve> getReaderReserveHistory(String username);
+
+    ArrayList<Pair<String, Integer>> getPopularBooksAllTime();
 }
