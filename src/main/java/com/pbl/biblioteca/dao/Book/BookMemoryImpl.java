@@ -89,11 +89,20 @@ public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
         return booksFromCategory;
     }
 
+    /**
+     * Gera um novo id para o livro
+     * @return Retorna o id em uma String
+     */
     @Override
     public String generateId() {
         return generateId("book");
     }
 
+    /**
+     * Busca por livros que possuam um título parecido com o param
+     * @param  title Parte do título do livro
+     * @return Retorna um array com todos os matches
+     */
     @Override
     public ArrayList<Book> searchByTitle(String title){
         ArrayList<Book> matches = new ArrayList<>();
