@@ -16,6 +16,20 @@ public class Librarian extends Operator{
 
     }
 
+    /**
+     * Cria um novo empréstimo
+     * @param  book Livro que será emprestado
+     * @param  reader Reader que pegará o livro emprestado
+     * @param  days Dias até o fim do empréstimo
+     * @return Retorna o objeto Loan do empréstimo
+     * @throws readerIsBlockedException Caso exista algum status do usuário impedindo-o de efetuar
+     * o empréstimo, por exemplo, empréstimos em atraso ou status de bloqueado
+     * @throws notFoundException Caso não existam cópias disponíveis
+     * @throws fullException Caso o usuário já tenha este livro emprestado, ou ele tenha atingido
+     * o limite de 3 empréstimos
+     * @throws tooManyReservesException Caso existam reservas para o livro, e o reader não tenha uma
+     * posição liberada na fila
+     */
     public Loan createBookLoan(Book book, Reader reader, Integer days) throws
             readerIsBlockedException, notFoundException, fullException,
             tooManyReservesException{
@@ -84,6 +98,10 @@ public class Librarian extends Operator{
         return newLoan;
     }
 
+    /**
+     * Deleta um empréstimo
+     * @param loanId Id do empréstimo
+     */
     public int deleteBookLoan(String loanId){
         Loan toDelete = DAO.getLoanDAO().getByPK(loanId);
         Book book = DAO.getBookDAO().getByPK(toDelete.getBookIsbn());
@@ -105,6 +123,11 @@ public class Librarian extends Operator{
         return daysBlock;
     }
 
+    /**
+     * Busca por livros que possuam um título parecido com o param
+     * @param  title O título do livro
+     * @return Retorna um array com todos os matches
+     */
     public ArrayList<Book> searchBookByTitle(String title){
         return DAO.getBookDAO().searchByTitle(title);
     }

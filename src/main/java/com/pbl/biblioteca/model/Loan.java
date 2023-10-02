@@ -58,6 +58,11 @@ public class Loan implements Serializable {
         this.username = username;
     }
 
+    /**
+     * Renova o empréstimo para mais 7 dias a partir do dia atual
+     * @throws alreadyRenewedException Caso este empréstimo já tenha sido renovado
+     * @throws tooManyReservesException Caso existam reservas para o livro
+     */
     public void renew() throws alreadyRenewedException, tooManyReservesException {
         if (this.alreadyRenew){
             throw new alreadyRenewedException("This loan has been renewed before");
@@ -69,7 +74,7 @@ public class Loan implements Serializable {
 
         this.alreadyRenew = true;
         if (this.finalDate != null){
-            this.finalDate = this.finalDate.plusDays(7);
+            this.finalDate = LocalDate.now().plusDays(7);
         }
 
         DAO.getLoanDAO().update(this);

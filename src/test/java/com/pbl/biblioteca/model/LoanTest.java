@@ -48,6 +48,6 @@ class LoanTest {
         }
 
         assertTrue(alreadyRenewed);
-        assertEquals(l1.getFinalDate(), LocalDate.now().plusDays(14));
+        assertEquals(l1.getFinalDate(), LocalDate.now().plusDays(7));
     }
 }
