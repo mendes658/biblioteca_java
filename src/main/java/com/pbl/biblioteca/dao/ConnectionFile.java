@@ -44,6 +44,10 @@ public class ConnectionFile {
         new File (BASE_FOLDER + "/ids/storage").mkdirs();
     }
 
+    /**
+     * Troca as URLs padrão para as urls de teste, para que seja possível
+     * testar o programa sem apagar os dados reais inseridos no armazenamento
+     */
     public static void setTestFileUrls() {
         new File (BASE_FOLDER).mkdirs();
         new File (BASE_FOLDER + "/ids/storage").mkdirs();
@@ -62,6 +66,9 @@ public class ConnectionFile {
         reserveLogUrl = BASE_FOLDER + "/test_" + defaultReserveLogUrl;
     }
 
+    /**
+     * Coloca o valor padrão nas urls
+     */
     public static void setDefaultFileUrls() {
         new File (BASE_FOLDER).mkdirs();
         new File (BASE_FOLDER + "/ids/storage").mkdirs();
@@ -80,6 +87,9 @@ public class ConnectionFile {
         reserveLogUrl = BASE_FOLDER + "/" + defaultReserveLogUrl;
     }
 
+    /**
+     * Limpa os arquivos de teste
+     */
     public static void clearTestFiles(){
         new File (BASE_FOLDER).mkdirs();
         new File (BASE_FOLDER + "/ids/storage").mkdirs();
@@ -100,6 +110,12 @@ public class ConnectionFile {
     }
 
 
+    /**
+     * Pega o hashmap salvo na url enviada, caso não exista,
+     * um novo hashmap é criad e salvo
+     * @param  fileUrl A url do hashmap salvo
+     * @return Retorna o HashMap com a PK na key e o Objeto no value
+     */
     @SuppressWarnings("unchecked")
     protected static <V> HashMap<String, V> getAnySavedHashmap(String fileUrl) {
         new File (BASE_FOLDER).mkdirs();
@@ -129,6 +145,11 @@ public class ConnectionFile {
     }
 
 
+    /**
+     * Salva um objeto qualquer na url enviada
+     * @param objectHM O objeto a ser salvo
+     * @param  fileUrl A url onde ele deve ser armazenado
+     */
     protected static void saveAnyObject(Object objectHM, String fileUrl) {
         new File (BASE_FOLDER).mkdirs();
         new File (BASE_FOLDER + "/ids/storage").mkdirs();
@@ -148,6 +169,13 @@ public class ConnectionFile {
 
     }
 
+    /**
+     * Acessa a url onde está salvo o objeto que armazena os Ids,
+     * vê o valor salvo nesse objeto, adiciona 1, salva o objeto novamente
+     * e retorna o Id no tipo String
+     * @param  idUrl A url do objeto com o último Id
+     * @return Retorna o Id num tipo String
+     */
     protected static String generateId(String idUrl){
         new File (BASE_FOLDER).mkdirs();
         new File (BASE_FOLDER + "/ids/storage").mkdirs();

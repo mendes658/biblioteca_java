@@ -48,6 +48,9 @@ public class ConnectionMemory {
         bookReserveId = 0;
     }
 
+    /**
+     * Limpa todos os dados salvos na memória
+     */
     public static void clearMemory(){
         userHM = new HashMap<>();
         loanHM = new HashMap<>();
@@ -68,6 +71,11 @@ public class ConnectionMemory {
         bookReserveId = 0;
     }
 
+    /**
+     * Pega o hashmap salvo de acordo com o tipo enviado
+     * @param  type O tipo do value do hashmap a ser resgatado
+     * @return Retorna o HashMap com a PK na key e o Objeto no value
+     */
     @SuppressWarnings("unchecked")
     public static <V> HashMap<String, V> getAnySavedHashmap(String type) {
         switch (type){
@@ -112,6 +120,11 @@ public class ConnectionMemory {
         return new HashMap<>();
     }
 
+    /**
+     * Salva um objeto qualquer de acordo com o tipo enviado
+     * @param objectHM O objeto a ser salvo
+     * @param type O tipo de objeto a ser salvo
+     */
     @SuppressWarnings("unchecked")
     public static void saveAnyObject(Object objectHM, String type) {
         switch (type){
@@ -130,6 +143,13 @@ public class ConnectionMemory {
 
     }
 
+    /**
+     * Acessa o objeto que armazena os Ids, de acordo com o tipo
+     * vê o valor salvo nesse objeto, adiciona 1, salva o objeto novamente
+     * e retorna o Id no tipo String
+     * @param  type O tipo do objeto que possui a Id
+     * @return Retorna o Id num tipo String
+     */
     public static String generateId(String type){
         switch (type){
             case "book" -> {
