@@ -81,14 +81,17 @@ public class Admin extends Operator implements Serializable {
     public void deleteUser(User user){
        String type = user.getType();
 
-        ArrayList<BookReserve> reservesUser = DAO.getBookReserveDAO().getAllFromReader(user.getUsername());
 
-        for(BookReserve reserve : reservesUser){
-            DAO.getBookReserveDAO().deleteByPK(reserve.getId());
-        }
 
        switch (type){
-           case "reader" -> DAO.getReaderDAO().deleteByPK(user.getUsername());
+           case "reader" -> {
+               DAO.getReaderDAO().deleteByPK(user.getUsername());
+               ArrayList<BookReserve> reservesUser = DAO.getBookReserveDAO().getAllFromReader(user.getUsername());
+
+               for(BookReserve reserve : reservesUser){
+                   DAO.getBookReserveDAO().deleteByPK(reserve.getId());
+               }
+           }
            case "admin" -> DAO.getAdminDAO().deleteByPK(user.getUsername());
            case "librarian" -> DAO.getLibrarianDAO().deleteByPK(user.getUsername());
        }
