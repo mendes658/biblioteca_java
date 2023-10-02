@@ -81,8 +81,6 @@ public class Admin extends Operator implements Serializable {
     public void deleteUser(User user){
        String type = user.getType();
 
-
-
        switch (type){
            case "reader" -> {
                DAO.getReaderDAO().deleteByPK(user.getUsername());
