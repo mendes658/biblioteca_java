@@ -17,6 +17,17 @@ public class Admin extends Operator implements Serializable {
 
     }
 
+    /**
+     * Cria e salva um usuário
+     * @param  username Username do usuário
+     * @param  password Senha do usuário
+     * @param  address Endereço do usuário
+     * @param  telephone Telefone do usuário
+     * @param  name Nome do usuário
+     * @param  type Tipo do usuário (reader, admin ou librarian)
+     * @return Retorna o objeto User de acordo
+     * @throws usernameAlreadyInUseException Caso já exista um usuário de mesmo tipo e username
+     */
     public User createUser(String username, String password, String address, String telephone,
                            String name, String type) throws usernameAlreadyInUseException {
 
@@ -59,39 +70,47 @@ public class Admin extends Operator implements Serializable {
         return null;
     }
 
-
+    /**
+     * Deleta um usuário, bem como suas reservas
+     * @param user User a ser deletado
+     */
     public void deleteUser(User user){
        String type = user.getType();
 
+        ArrayList<BookReserve> reservesUser = DAO.getBookReserveDAO().getAllFromReader(user.getUsername());
+
+        for(BookReserve reserve : reservesUser){
+            DAO.getBookReserveDAO().deleteByPK(reserve.getId());
+        }
+
        switch (type){
-           case "reader" -> {
-               DAO.getReaderDAO().deleteByPK(user.getUsername());
-           }
-           case "admin" -> {
-               DAO.getAdminDAO().deleteByPK(user.getUsername());
-           }
-           case "librarian" -> {
-               DAO.getLibrarianDAO().deleteByPK(user.getUsername());
-           }
+           case "reader" -> DAO.getReaderDAO().deleteByPK(user.getUsername());
+           case "admin" -> DAO.getAdminDAO().deleteByPK(user.getUsername());
+           case "librarian" -> DAO.getLibrarianDAO().deleteByPK(user.getUsername());
        }
     }
 
+    /**
+     * Atualiza um usuário
+     * @param user User a ser atualizado
+     */
     public void updateUser(User user){
         String type = user.getType();
 
         switch (type){
-            case "reader" -> {
-                DAO.getReaderDAO().update((Reader) user);
-            }
-            case "admin" -> {
-                DAO.getAdminDAO().update((Admin) user);
-            }
-            case "librarian" -> {
-                DAO.getLibrarianDAO().update((Librarian) user);
-            }
+            case "reader" -> DAO.getReaderDAO().update((Reader) user);
+            case "admin" -> DAO.getAdminDAO().update((Admin) user);
+            case "librarian" -> DAO.getLibrarianDAO().update((Librarian) user);
         }
     }
 
+    /**
+     * Pega um objeto User salvo, através da primary key e do tipo
+     * @param  username O username é a primary key
+     * @param  type Tipo (reader, librarian ou admin)
+     * @return Retorna o objeto User
+     * @throws notFoundException Caso o tipo informado seja inválido
+     */
     public User getUser(String username, String type) throws notFoundException {
         switch (type){
             case "reader" -> {
@@ -105,9 +124,15 @@ public class Admin extends Operator implements Serializable {
             }
         }
 
-        throw new notFoundException("User not found");
+        throw new notFoundException("Wrong type");
     }
 
+    /**
+     * Bloqueia um Reader
+     * @param  reader Reader a ser bloqueado
+     * @param days Dias que ele ficará bloqueado, se days = -1,
+     *             o bloqueio tem o fim indeterminado
+     */
     public void blockReader(Reader reader, Integer days){
         if (days == -1){
             reader.setDateEndBlock(null);
@@ -119,24 +144,52 @@ public class Admin extends Operator implements Serializable {
         DAO.getReaderDAO().update(reader);
     }
 
+    /**
+     * Desbloqueia um Reader
+     * @param  reader Reader a ser desbloqueado
+     */
     public void unblockReader(Reader reader){
         reader.setBlocked(false);
         reader.setDateEndBlock(null);
         DAO.getReaderDAO().update(reader);
     }
 
+    /**
+     * Adiciona novas cópias à um livro
+     * @param  book Livro em questão
+     * @param total Total de cópias adicionadas
+     */
     public void addBookCopies(Book book, Integer total){
         book.addCopies(total);
 
         DAO.getBookDAO().update(book);
     }
 
+    /**
+     * Remove cópias de um livro
+     * @param  book Livro em questão
+     * @param total Total de cópias removidas
+     * @throws notFoundException Caso a quantidade de cópias disponíveis seja menor que o total
+     */
     public void removeBookCopies(Book book, Integer total) throws notFoundException{
         book.removeCopies(total);
 
         DAO.getBookDAO().update(book);
     }
 
+
+    /**
+     * Cria e salva um livro
+     * @param  title Título
+     * @param  author Autor
+     * @param  publisher Editora
+     * @param  year Ano
+     * @param  category Categoria
+     * @param  isbn Isbn (Primary Key)
+     * @param  totalCopies Total de cópias do livro
+     * @return Retorna o objeto User de acordo
+     * @throws isbnAlreadyInUseException Caso já exista um livro com o isbn informado
+     */
     public Book createBook(String title, String author, String publisher,
                            Integer year, String category, String isbn, Integer totalCopies)
     throws isbnAlreadyInUseException {
@@ -151,12 +204,16 @@ public class Admin extends Operator implements Serializable {
         return b1;
     }
 
+    /**
+     * Deleta um livro, bem como suas reservas e empréstimos
+     * @param book Livro a ser deletado
+     */
     public void deleteBook(Book book){
         ArrayList<BookReserve> reservesBook = DAO.getBookReserveDAO().getAllFromBook(book.getIsbn());
         ArrayList<Loan> loansBook = DAO.getLoanDAO().getAllFromBook(book.getIsbn());
 
         for(BookReserve reserve : reservesBook){
-            DAO.getBookDAO().deleteByPK(reserve.getId());
+            DAO.getBookReserveDAO().deleteByPK(reserve.getId());
         }
 
         for(Loan lo : loansBook){
