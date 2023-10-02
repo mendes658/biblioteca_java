@@ -1,0 +1,13 @@
+module:com.pbl.biblioteca
+com.pbl.biblioteca.dao
+com.pbl.biblioteca.dao.Admin
+com.pbl.biblioteca.dao.Book
+com.pbl.biblioteca.dao.BookReserve
+com.pbl.biblioteca.dao.Librarian
+com.pbl.biblioteca.dao.Loan
+com.pbl.biblioteca.dao.Reader
+com.pbl.biblioteca.dao.Report
+com.pbl.biblioteca.dao.User
+com.pbl.biblioteca.exceptionHandler
+com.pbl.biblioteca.model
+com.pbl.biblioteca.view

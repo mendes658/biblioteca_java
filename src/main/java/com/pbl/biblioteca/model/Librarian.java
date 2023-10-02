@@ -53,7 +53,7 @@ public class Librarian extends Operator{
             throw new readerIsBlockedException("Reader is blocked.");
         }
 
-        if (allFromUser.size() > 3){
+        if (allFromUser.size() > 2){
             throw new fullException("Reader has too many active loans");
         }
 
@@ -105,6 +105,7 @@ public class Librarian extends Operator{
     /**
      * Deleta um empréstimo
      * @param loanId Id do empréstimo
+     * @return Quantidade de dias que o usuário ficará multado
      */
     public int deleteBookLoan(String loanId){
         Loan toDelete = DAO.getLoanDAO().getByPK(loanId);

@@ -74,7 +74,7 @@ public class Reader extends User implements Serializable {
             }
         }
 
-        if (reserves.size() > 3){
+        if (reserves.size() > 2){
             throw new fullException("Too many reserves to current book");
         }
 
