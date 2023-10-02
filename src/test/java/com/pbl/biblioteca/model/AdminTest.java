@@ -127,7 +127,6 @@ class AdminTest {
             e.printStackTrace();
         }
 
-        b1 = DAO.getBookDAO().getByPK(b1.getIsbn());
 
         assertEquals(2, b1.getTotalCopies());
 

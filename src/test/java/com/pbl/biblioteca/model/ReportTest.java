@@ -116,12 +116,14 @@ class ReportTest {
         Loan l2 = new Loan("3333", "pedrom", 7, "mendes");
         Loan l3 = new Loan("2222", "peped", 7, "mendes");
 
-        DAO.getLoanDAO().create(l1);
-        DAO.getLoanDAO().create(l2);
-        DAO.getLoanDAO().create(l3);
         DAO.getReportDAO().logNewLoan(l1);
         DAO.getReportDAO().logNewLoan(l2);
         DAO.getReportDAO().logNewLoan(l3);
+
+        DAO.getLoanDAO().create(l1);
+        DAO.getLoanDAO().create(l2);
+        DAO.getLoanDAO().create(l3);
+
 
         assertEquals("2222", Report.getPopularBooksToday().get(0).getKey());
         assertEquals(2, Report.getUserActiveLoans("pedrom").size());

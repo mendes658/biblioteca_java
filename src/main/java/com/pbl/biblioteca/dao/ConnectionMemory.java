@@ -37,6 +37,10 @@ public class ConnectionMemory {
         bookHM = new HashMap<>();
         bookReserveHM = new HashMap<>();
         readerHM = new HashMap<>();
+        loanLogHM = new HashMap<>();
+        userLogHM = new HashMap<>();
+        bookLogHM = new HashMap<>();
+        reserveLogHM = new HashMap<>();
 
         userId = 0;
         loanId = 0;
@@ -65,7 +69,7 @@ public class ConnectionMemory {
     }
 
     @SuppressWarnings("unchecked")
-    protected static <V> HashMap<String, V> getAnySavedHashmap(String type) {
+    public static <V> HashMap<String, V> getAnySavedHashmap(String type) {
         switch (type){
             case "admin" -> {
                 return (HashMap<String, V>) adminHM;
@@ -109,7 +113,7 @@ public class ConnectionMemory {
     }
 
     @SuppressWarnings("unchecked")
-    protected static void saveAnyObject(Object objectHM, String type) {
+    public static void saveAnyObject(Object objectHM, String type) {
         switch (type){
             case "admin" -> adminHM = (HashMap<String, Admin>) objectHM;
             case "reader" -> readerHM = (HashMap<String, Reader>) objectHM;
@@ -118,11 +122,15 @@ public class ConnectionMemory {
             case "operator" -> operatorHM = (HashMap<String, Operator>) objectHM;
             case "librarian" -> librarianHM = (HashMap<String, Librarian>) objectHM;
             case "loan" -> loanHM = (HashMap<String, Loan>) objectHM;
+            case "loanlog" -> loanLogHM = (HashMap<String, Loan>) objectHM;
+            case "booklog" -> bookLogHM = (HashMap<String, Book>) objectHM;
+            case "userlog" -> userLogHM = (HashMap<String, User>) objectHM;
+            case "reservelog" -> reserveLogHM = (HashMap<String, BookReserve>) objectHM;
         }
 
     }
 
-    protected static String generateId(String type){
+    public static String generateId(String type){
         switch (type){
             case "book" -> {
                 bookId ++;
