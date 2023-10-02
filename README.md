@@ -42,6 +42,8 @@ Para realizar todos os testes de uma vez, é possível rodar o arquivo "mainTest
 ### Release 2
 A única diferença da segunda release para a primeira, é a mudança no valor da constante "TYPE_OF_STORAGE".
 
+Os testes dos dois tipos de armazenamento são idênticos, basta escolher o tipo na variável citada acima e eles rodam de acordo com ela.
+
 ## Diagrams
 ### Use Cases
 ![Use Cases Diagram](docs/diagrams/use_cases_diagram.png)
