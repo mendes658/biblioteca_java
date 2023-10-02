@@ -78,16 +78,16 @@ class BookMemoryAndFileTest {
     }
 
     @Test
-    void searchByTitle(){
+    void searchBook(){
         Book b1 = new Book("A viagem de coisinho", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111", 2);
         Book b2 = new Book("A viagem de coisão", "Preto", "Azul",
                 2002, "Mistério", "22222", 2);
-        Book b3 = new Book("A conversa fiada 2", "Preto", "Azul",
+        Book b3 = new Book("A conversa fiada 2", "Verde", "Azul",
                 2002, "Ação", "33333", 2);
-        Book b4 = new Book("A conversa fiada", "Preto", "Azul",
+        Book b4 = new Book("A conversa fiada", "Azul", "Azul",
                 2002, "Ação", "44444", 2);
-        Book b5 = new Book("A conversa", "Preto", "Azul",
+        Book b5 = new Book("A conversa", "Verde", "Azul",
                 2002, "Ação", "55555", 2);
 
         DAO.getBookDAO().create(b1);
@@ -106,6 +106,18 @@ class BookMemoryAndFileTest {
         assertEquals("A conversa", like.get(0).getTitle());
 
         like = DAO.getBookDAO().searchByTitle("A vIaGeM dE coiSiNho");
+
+        assertEquals(1, like.size());
+
+        like = DAO.getBookDAO().searchByAuthor("verd");
+
+        assertEquals(2, like.size());
+
+        like = DAO.getBookDAO().searchByCategory("ação");
+
+        assertEquals(3, like.size());
+
+        like = DAO.getBookDAO().searchByIsbn("2222");
 
         assertEquals(1, like.size());
     }

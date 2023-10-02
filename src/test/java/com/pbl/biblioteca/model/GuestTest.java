@@ -32,18 +32,18 @@ class GuestTest {
     }
 
     @Test
-    void searchByTitle(){
+    void searchBook(){
         Guest g1 = new Guest();
 
         Book b1 = new Book("A viagem de coisinho", "Amarelo", "Vermelho",
                 2002, "Mistério", "11111", 2);
         Book b2 = new Book("A viagem de coisão", "Preto", "Azul",
                 2002, "Mistério", "22222", 2);
-        Book b3 = new Book("A conversa fiada 2", "Preto", "Azul",
+        Book b3 = new Book("A conversa fiada 2", "Verde", "Azul",
                 2002, "Ação", "33333", 2);
-        Book b4 = new Book("A conversa fiada", "Preto", "Azul",
+        Book b4 = new Book("A conversa fiada", "Azul", "Azul",
                 2002, "Ação", "44444", 2);
-        Book b5 = new Book("A conversa", "Preto", "Azul",
+        Book b5 = new Book("A conversa", "Verde", "Azul",
                 2002, "Ação", "55555", 2);
 
         DAO.getBookDAO().create(b1);
@@ -62,6 +62,18 @@ class GuestTest {
         assertEquals("A conversa", like.get(0).getTitle());
 
         like = g1.searchBookByTitle("A vIaGeM dE coiSiNho");
+
+        assertEquals(1, like.size());
+
+        like = g1.searchBookByAuthor("verd");
+
+        assertEquals(2, like.size());
+
+        like = g1.searchBookByCategory("ação");
+
+        assertEquals(3, like.size());
+
+        like = g1.searchBookByIsbn("2222");
 
         assertEquals(1, like.size());
     }

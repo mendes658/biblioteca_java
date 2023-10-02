@@ -151,7 +151,7 @@ class ReaderTest {
     }
 
     @Test
-    void searchByTitle(){
+    void searchBook(){
         Reader r1 = new Reader("pedrom",
                 "12345", "rua rua", "5259", "pedrin");
 
@@ -159,11 +159,11 @@ class ReaderTest {
                 2002, "Mistério", "11111", 2);
         Book b2 = new Book("A viagem de coisão", "Preto", "Azul",
                 2002, "Mistério", "22222", 2);
-        Book b3 = new Book("A conversa fiada 2", "Preto", "Azul",
+        Book b3 = new Book("A conversa fiada 2", "Verde", "Azul",
                 2002, "Ação", "33333", 2);
-        Book b4 = new Book("A conversa fiada", "Preto", "Azul",
+        Book b4 = new Book("A conversa fiada", "Azul", "Azul",
                 2002, "Ação", "44444", 2);
-        Book b5 = new Book("A conversa", "Preto", "Azul",
+        Book b5 = new Book("A conversa", "Verde", "Azul",
                 2002, "Ação", "55555", 2);
 
         DAO.getBookDAO().create(b1);
@@ -182,6 +182,18 @@ class ReaderTest {
         assertEquals("A conversa", like.get(0).getTitle());
 
         like = r1.searchBookByTitle("A vIaGeM dE coiSiNho");
+
+        assertEquals(1, like.size());
+
+        like = r1.searchBookByAuthor("verd");
+
+        assertEquals(2, like.size());
+
+        like = r1.searchBookByCategory("ação");
+
+        assertEquals(3, like.size());
+
+        like = r1.searchBookByIsbn("2222");
 
         assertEquals(1, like.size());
     }

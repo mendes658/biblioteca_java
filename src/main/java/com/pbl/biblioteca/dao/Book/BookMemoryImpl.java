@@ -133,6 +133,102 @@ public class BookMemoryImpl extends ConnectionMemory implements BookDAO{
 
         return matches;
     }
+
+    /**
+     * Busca por livros que possuam um isbn parecido com o param
+     * @param  isbn O isbn do livro
+     * @return Retorna um array com todos os matches
+     */
+    @Override
+    public ArrayList<Book> searchByIsbn(String isbn) {
+        ArrayList<Book> matches = new ArrayList<>();
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
+        Book nowBook;
+        String nowIsbn;
+        isbn = isbn.toLowerCase();
+
+        for (String key : bookHM.keySet()){
+            nowBook = bookHM.get(key);
+            nowIsbn = nowBook.getIsbn().toLowerCase();
+
+            if(nowIsbn.equals(isbn)){ // Acerto exato sempre ficará em primeiro
+                if (matches.isEmpty()){
+                    matches.add(nowBook);
+                } else {
+                    matches.add(matches.get(0));
+                    matches.set(0, nowBook);
+                }
+            } else if (nowIsbn.matches(".*" + isbn + ".*")){
+                matches.add(nowBook);
+            }
+        }
+
+        return matches;
+    }
+
+    /**
+     * Busca por livros que possuam um autor parecido com o param
+     * @param  author O autor do livro
+     * @return Retorna um array com todos os matches
+     */
+    @Override
+    public ArrayList<Book> searchByAuthor(String author) {
+        ArrayList<Book> matches = new ArrayList<>();
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
+        Book nowBook;
+        String nowAuthor;
+        author = author.toLowerCase();
+
+        for (String key : bookHM.keySet()){
+            nowBook = bookHM.get(key);
+            nowAuthor = nowBook.getAuthor().toLowerCase();
+
+            if(nowAuthor.equals(author)){ // Acerto exato sempre ficará em primeiro
+                if (matches.isEmpty()){
+                    matches.add(nowBook);
+                } else {
+                    matches.add(matches.get(0));
+                    matches.set(0, nowBook);
+                }
+            } else if (nowAuthor.matches(".*" + author + ".*")){
+                matches.add(nowBook);
+            }
+        }
+
+        return matches;
+    }
+
+    /**
+     * Busca por livros que possuam uma categoria parecida com o param
+     * @param  category A categoria do livro
+     * @return Retorna um array com todos os matches
+     */
+    @Override
+    public ArrayList<Book> searchByCategory(String category) {
+        ArrayList<Book> matches = new ArrayList<>();
+        HashMap<String, Book> bookHM = getAnySavedHashmap("book");
+        Book nowBook;
+        String nowCategory;
+        category = category.toLowerCase();
+
+        for (String key : bookHM.keySet()){
+            nowBook = bookHM.get(key);
+            nowCategory = nowBook.getCategory().toLowerCase();
+
+            if(nowCategory.equals(category)){ // Acerto exato sempre ficará em primeiro
+                if (matches.isEmpty()){
+                    matches.add(nowBook);
+                } else {
+                    matches.add(matches.get(0));
+                    matches.set(0, nowBook);
+                }
+            } else if (nowCategory.matches(".*" + category + ".*")){
+                matches.add(nowBook);
+            }
+        }
+
+        return matches;
+    }
 }
 
 

@@ -30,4 +30,28 @@ public interface BookDAO extends CRUD<Book> {
      * @return Retorna um array com todos os matches
      */
     ArrayList<Book> searchByTitle(String title);
+
+    /**
+     * Busca por livros que possuam um isbn parecido com o param
+     * @param  isbn O isbn do livro
+     * @return Retorna um array com todos os matches
+     */
+    ArrayList<Book> searchByIsbn(String isbn);
+
+    /**
+     * Busca por livros que possuam um autor parecido com o param
+     * @param  author O autor do livro
+     * @return Retorna um array com todos os matches
+     */
+    ArrayList<Book> searchByAuthor(String author);
+
+    /**
+     * Busca por livros que possuam uma categoria parecido com o param
+     * @param  category A categoria do livro
+     * @return Retorna um array com todos os matches
+     */
+    ArrayList<Book> searchByCategory(String category);
+
+
+
 }

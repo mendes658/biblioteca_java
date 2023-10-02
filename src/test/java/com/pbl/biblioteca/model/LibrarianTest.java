@@ -239,7 +239,7 @@ class LibrarianTest {
 
 
     @Test
-    void searchByTitle(){
+    void searchBook(){
         Librarian l1 = new Librarian("pedromendes",
                 "12345", "rua rua", "5259", "Joao");
 
@@ -247,11 +247,11 @@ class LibrarianTest {
                 2002, "Mistério", "11111", 2);
         Book b2 = new Book("A viagem de coisão", "Preto", "Azul",
                 2002, "Mistério", "22222", 2);
-        Book b3 = new Book("A conversa fiada 2", "Preto", "Azul",
+        Book b3 = new Book("A conversa fiada 2", "Verde", "Azul",
                 2002, "Ação", "33333", 2);
-        Book b4 = new Book("A conversa fiada", "Preto", "Azul",
+        Book b4 = new Book("A conversa fiada", "Azul", "Azul",
                 2002, "Ação", "44444", 2);
-        Book b5 = new Book("A conversa", "Preto", "Azul",
+        Book b5 = new Book("A conversa", "Verde", "Azul",
                 2002, "Ação", "55555", 2);
 
         DAO.getBookDAO().create(b1);
@@ -270,6 +270,18 @@ class LibrarianTest {
         assertEquals("A conversa", like.get(0).getTitle());
 
         like = l1.searchBookByTitle("A vIaGeM dE coiSiNho");
+
+        assertEquals(1, like.size());
+
+        like = l1.searchBookByAuthor("verd");
+
+        assertEquals(2, like.size());
+
+        like = l1.searchBookByCategory("ação");
+
+        assertEquals(3, like.size());
+
+        like = l1.searchBookByIsbn("2222");
 
         assertEquals(1, like.size());
     }
