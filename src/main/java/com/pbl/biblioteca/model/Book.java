@@ -96,7 +96,10 @@ public class Book implements Serializable {
         this.category = category;
     }
 
-
+    /**
+     * Adiciona novas cópias ao livro
+     * @param total Total de cópias adicionadas
+     */
     public void addCopies(Integer total){
         totalCopies += total;
         availableCopies += total;
@@ -104,6 +107,11 @@ public class Book implements Serializable {
         DAO.getBookDAO().update(this);
     }
 
+    /**
+     * Remove cópias do livro
+     * @param total Total de cópias removidas
+     * @throws notFoundException Caso a quantidade de cópias disponíveis seja menor que o total
+     */
     public void removeCopies(Integer total) throws notFoundException{
         if (total <= availableCopies){
             totalCopies -= total;
@@ -115,6 +123,10 @@ public class Book implements Serializable {
         DAO.getBookDAO().update(this);
     }
 
+    /**
+     * Empresta uma cópia do livro
+     * @throws notFoundException Caso não possuam cópias disponíveis para empréstimo
+     */
     public void borrowCopy() throws notFoundException {
         if (this.availableCopies < 1){
             throw new notFoundException("No copy found");
@@ -125,6 +137,9 @@ public class Book implements Serializable {
         DAO.getBookDAO().update(this);
     }
 
+    /**
+     * Devolve uma cópia do livro
+     */
     public void retrieveCopy() {
         availableCopies ++;
 
