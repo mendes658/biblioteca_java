@@ -38,6 +38,14 @@ public class Reader extends User implements Serializable {
         return dateEndBlock;
     }
 
+    /**
+     * Cria uma nova reserva
+     * @param  book Livro que será reservado
+     * @throws readerIsBlockedException Caso exista algum status do usuário impedindo-o de efetuar
+     * a reserva, por exemplo, empréstimos em atraso ou status de bloqueado
+     * @throws fullException Caso já existam muitas reservas para o livro, ou do usuário em geral
+     * @throws copyAvailableException Caso exista uma cópia disponível para empréstimo
+     */
     public void createBookReserve(Book book) throws readerIsBlockedException, fullException,
             copyAvailableException{
         if (this.blocked){
@@ -80,6 +88,11 @@ public class Reader extends User implements Serializable {
 
     }
 
+    /**
+     * Deleta a reserva do usuário para um livro
+     * @param  book Livro que terá sua reserva deletada
+     * @throws notFoundException Caso não exista uma reserva do usuário para o livro indicado
+     */
     public void removeReserve(Book book) throws notFoundException{
         ArrayList<BookReserve> reserves = DAO.getBookReserveDAO().getAllFromReader(this.getUsername());
 
@@ -94,10 +107,20 @@ public class Reader extends User implements Serializable {
 
     }
 
+    /**
+     * Busca por livros que possuam um título parecido com o param
+     * @param  title O título do livro
+     * @return Retorna um array com todos os matches
+     */
     public ArrayList<Book> searchBookByTitle(String title){
         return DAO.getBookDAO().searchByTitle(title);
     }
 
+    /**
+     * Renova o empréstimo para mais 7 dias a partir do dia atual
+     * @throws alreadyRenewedException Caso este empréstimo já tenha sido renovado
+     * @throws tooManyReservesException Caso existam reservas para o livro
+     */
     public void renewLoan(Loan loan) throws alreadyRenewedException, tooManyReservesException{
         loan.renew();
     }
