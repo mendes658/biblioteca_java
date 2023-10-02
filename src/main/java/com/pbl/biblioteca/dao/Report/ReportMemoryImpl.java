@@ -15,6 +15,10 @@ import java.util.HashMap;
 public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
 
 
+    /**
+     * Salva um log da criação de um Loan
+     * @param  loan O Loan a ser salvo
+     */
     @Override
     public void logNewLoan(Loan loan) {
         HashMap<String, Loan> loanLogHM = getAnySavedHashmap("loanlog");
@@ -23,6 +27,10 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         saveAnyObject(loanLogHM, "loanlog");
     }
 
+    /**
+     * Salva um log da criação de um User
+     * @param  user O User a ser salvo
+     */
     @Override
     public void logNewUser(User user) {
         HashMap<String, User> userLogHM = getAnySavedHashmap("userlog");
@@ -31,6 +39,10 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         saveAnyObject(userLogHM, "userlog");
     }
 
+    /**
+     * Salva um log da criação de um Book
+     * @param  book O Book a ser salvo
+     */
     @Override
     public void logNewBook(Book book) {
         HashMap<String, Book> bookLogHM = getAnySavedHashmap("booklog");
@@ -39,6 +51,10 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         saveAnyObject(bookLogHM, "booklog");
     }
 
+    /**
+     * Salva um log da criação de um BookReserve
+     * @param  reserve O BookReserve a ser salvo
+     */
     @Override
     public void logNewReserve(BookReserve reserve) {
         HashMap<String, BookReserve> reserveLogHM = getAnySavedHashmap("reservelog");
@@ -47,6 +63,10 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         saveAnyObject(reserveLogHM, "reservelog");
     }
 
+    /**
+     * Pega o histórico com todos os empréstimos já criados
+     * @return Retorna um ArrayList com todos os Loans
+     */
     @Override
     public ArrayList<Loan> getAllLoanHistory() {
         HashMap<String, Loan> allLoanHM = getAnySavedHashmap("loanlog");
@@ -59,6 +79,10 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         return allLoan;
     }
 
+    /**
+     * Pega o histórico com todos os usuários já criados
+     * @return Retorna um ArrayList com todos os Users
+     */
     @Override
     public ArrayList<User> getAllUserHistory() {
         HashMap<String, User> allUserHM = getAnySavedHashmap("userlog");
@@ -71,6 +95,10 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         return allUser;
     }
 
+    /**
+     * Pega o histórico com todos os livros já criados
+     * @return Retorna um ArrayList com todos os Books
+     */
     @Override
     public ArrayList<Book> getAllBookHistory() {
         HashMap<String, Book> allBookHM = getAnySavedHashmap("booklog");
@@ -83,6 +111,10 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         return allBook;
     }
 
+    /**
+     * Pega o histórico com todas as reservas já criadas
+     * @return Retorna um ArrayList com todos os BookReserves
+     */
     @Override
     public ArrayList<BookReserve> getAllReserveHistory() {
         HashMap<String, BookReserve> allBookReserveHM = getAnySavedHashmap("reservelog");
@@ -95,6 +127,11 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         return allBookReserve;
     }
 
+    /**
+     * Pega o histórico com todos os empréstimos já criados por um Reader
+     * @param  username O username é a primary key
+     * @return Retorna um ArrayList com todos os Loans do Reader
+     */
     @Override
     public ArrayList<Loan> getReaderLoanHistory(String username) {
         HashMap<String, Loan> allLoans = getAnySavedHashmap("loanlog");
@@ -109,6 +146,11 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         return fromUser;
     }
 
+    /**
+     * Pega o histórico com todas as reservas já criados por um Reader
+     * @param  username O username é a primary key
+     * @return Retorna um ArrayList com todos os BookReserves do Reader
+     */
     @Override
     public ArrayList<BookReserve> getReaderReserveHistory(String username) {
         HashMap<String, BookReserve> allReservesHM = getAnySavedHashmap("reservelog");
@@ -123,6 +165,11 @@ public class ReportMemoryImpl extends ConnectionMemory implements ReportDAO{
         return fromUser;
     }
 
+    /**
+     * Pega o histórico com todos os livros, em ordem de popularidade
+     * @return Retorna um ArrayList de Pairs, a key é o isbn do livro,
+     * o value é a quantidade de empréstimos já feitos para esse livro
+     */
     @Override
     public ArrayList<Pair<String, Integer>> getPopularBooksAllTime() {
         HashMap<String, Integer> totalLoansHM = new HashMap<>();
