@@ -7,6 +7,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class BookReserve implements Serializable {
     private String username;
     private final String bookIsbn;

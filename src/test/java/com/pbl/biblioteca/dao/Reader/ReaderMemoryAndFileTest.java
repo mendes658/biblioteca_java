@@ -10,7 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 class ReaderMemoryAndFileTest {
+
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();

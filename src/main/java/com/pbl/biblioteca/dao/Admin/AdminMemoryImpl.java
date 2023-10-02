@@ -6,6 +6,10 @@ import com.pbl.biblioteca.model.Admin;
 
 import java.util.HashMap;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class AdminMemoryImpl extends ConnectionMemory implements AdminDAO{
 
     /**

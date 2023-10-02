@@ -6,6 +6,10 @@ import com.pbl.biblioteca.model.Book;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class BookFileImpl extends ConnectionFile implements BookDAO{
 
     /**

@@ -25,6 +25,10 @@ import com.pbl.biblioteca.dao.User.UserDAO;
 import com.pbl.biblioteca.dao.User.UserFileImpl;
 import com.pbl.biblioteca.dao.User.UserMemoryImpl;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class DAO {
 
     /**

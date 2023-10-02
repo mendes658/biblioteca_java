@@ -9,6 +9,10 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public interface ReportDAO {
 
     /**

@@ -7,6 +7,10 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class Librarian extends Operator{
 
 

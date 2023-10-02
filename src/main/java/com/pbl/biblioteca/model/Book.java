@@ -6,6 +6,10 @@ import com.pbl.biblioteca.exceptionHandler.notFoundException;
 
 import java.io.Serializable;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class Book implements Serializable {
 
     private String title;

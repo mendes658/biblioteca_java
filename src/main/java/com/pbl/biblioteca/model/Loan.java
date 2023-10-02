@@ -8,6 +8,10 @@ import com.pbl.biblioteca.exceptionHandler.tooManyReservesException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class Loan implements Serializable {
     private final String id;
     private final String bookIsbn;

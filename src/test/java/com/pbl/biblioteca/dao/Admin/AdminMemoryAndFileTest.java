@@ -11,10 +11,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @author      Pedro Oliveira <mendes@ecomp.uefs.br>
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
  * @version     1.0
  */
-
 class AdminMemoryAndFileTest {
     @BeforeEach
     void setUp() {

@@ -9,6 +9,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class Admin extends Operator implements Serializable {
 
     public Admin(String username, String password, String address, String telephone,

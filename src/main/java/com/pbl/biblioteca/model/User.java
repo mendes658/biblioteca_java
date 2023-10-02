@@ -4,6 +4,10 @@ import com.pbl.biblioteca.dao.DAO;
 
 import java.io.Serializable;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class User implements Serializable {
 
     private final String username;

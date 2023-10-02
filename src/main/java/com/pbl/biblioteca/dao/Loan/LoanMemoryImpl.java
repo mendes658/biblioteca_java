@@ -9,6 +9,10 @@ import javafx.util.Pair;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class LoanMemoryImpl extends ConnectionMemory implements LoanDAO{
 
     /**

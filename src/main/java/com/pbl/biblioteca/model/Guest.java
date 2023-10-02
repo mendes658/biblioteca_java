@@ -5,6 +5,10 @@ import com.pbl.biblioteca.dao.DAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class Guest implements Serializable {
 
     /**

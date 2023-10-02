@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class BookReserveMemoryImpl extends ConnectionMemory implements BookReserveDAO{
 
     /**

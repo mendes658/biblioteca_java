@@ -6,7 +6,10 @@ import com.pbl.biblioteca.model.Reader;
 
 import java.util.HashMap;
 
-
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class ConnectionMemory {
 
     private static HashMap<String, User> userHM;

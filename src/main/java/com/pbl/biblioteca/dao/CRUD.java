@@ -2,8 +2,11 @@ package com.pbl.biblioteca.dao;
 
 import java.util.HashMap;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public interface CRUD<T>{
-
 
     /**
      * Atualiza um objeto salvo

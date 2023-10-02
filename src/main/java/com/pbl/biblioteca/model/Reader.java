@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.exceptionHandler.*;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 public class Reader extends User implements Serializable {
 
     private Boolean blocked;

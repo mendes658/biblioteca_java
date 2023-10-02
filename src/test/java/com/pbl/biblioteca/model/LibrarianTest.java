@@ -12,7 +12,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author      Pedro Mendes <mendes @ ecomp.uefs.br>
+ * @version     1.0
+ */
 class LibrarianTest {
+
     @BeforeEach
     void setUp() {
         ConnectionFile.setTestFileUrls();
