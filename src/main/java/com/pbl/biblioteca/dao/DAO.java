@@ -36,7 +36,7 @@ public class DAO {
      * 1 = Memória
      * 2 = Arquivo
      */
-    private static final int TYPE_OF_STORAGE = 1;
+    private static final int TYPE_OF_STORAGE = 2;
 
     public static BookDAO bookDAO;
     private static LoanDAO loanDAO;
