@@ -27,7 +27,11 @@ import com.pbl.biblioteca.dao.User.UserMemoryImpl;
 
 public class DAO {
 
-    // 1 - Memória ; 2 - Arquivo
+    /**
+     * Escolhe se os dados serão salvos na memória ou em um arquivo
+     * 1 = Memória
+     * 2 = Arquivo
+     */
     private static final int TYPE_OF_STORAGE = 1;
 
     public static BookDAO bookDAO;
@@ -39,6 +43,11 @@ public class DAO {
     private static AdminDAO adminDAO;
     private static ReportDAO reportDAO;
 
+    /**
+     * Retorna a implementação do bookDAO, de acordo com a TYPE_OF_STORAGE
+     * setada como constante nessa classe
+     * @return Retorna o DAO correspondente
+     */
     public static BookDAO getBookDAO() {
         if (bookDAO == null){
             if (TYPE_OF_STORAGE == 1){
@@ -51,6 +60,11 @@ public class DAO {
         return bookDAO;
     }
 
+    /**
+     * Retorna a implementação do reportDAO, de acordo com a TYPE_OF_STORAGE
+     * setada como constante nessa classe
+     * @return Retorna o DAO correspondente
+     */
     public static ReportDAO getReportDAO() {
         if (reportDAO == null){
             if (TYPE_OF_STORAGE == 1){
@@ -63,6 +77,11 @@ public class DAO {
         return reportDAO;
     }
 
+    /**
+     * Retorna a implementação do adminDAO, de acordo com a TYPE_OF_STORAGE
+     * setada como constante nessa classe
+     * @return Retorna o DAO correspondente
+     */
     public static AdminDAO getAdminDAO() {
         if (adminDAO == null){
             if (TYPE_OF_STORAGE == 1){
@@ -75,6 +94,11 @@ public class DAO {
         return adminDAO;
     }
 
+    /**
+     * Retorna a implementação do readerDAO, de acordo com a TYPE_OF_STORAGE
+     * setada como constante nessa classe
+     * @return Retorna o DAO correspondente
+     */
     public static ReaderDAO getReaderDAO() {
         if (readerDAO == null){
             if (TYPE_OF_STORAGE == 1){
@@ -87,6 +111,11 @@ public class DAO {
         return readerDAO;
     }
 
+    /**
+     * Retorna a implementação do loanDAO, de acordo com a TYPE_OF_STORAGE
+     * setada como constante nessa classe
+     * @return Retorna o DAO correspondente
+     */
     public static LoanDAO getLoanDAO() {
         if (loanDAO == null){
             if (TYPE_OF_STORAGE == 1){
@@ -99,7 +128,11 @@ public class DAO {
         return loanDAO;
     }
 
-
+    /**
+     * Retorna a implementação do userDAO, de acordo com a TYPE_OF_STORAGE
+     * setada como constante nessa classe
+     * @return Retorna o DAO correspondente
+     */
     public static UserDAO getUserDAO() {
         if (userDAO == null){
             if (TYPE_OF_STORAGE == 1){
@@ -112,6 +145,11 @@ public class DAO {
         return userDAO;
     }
 
+    /**
+     * Retorna a implementação do librarianDAO, de acordo com a TYPE_OF_STORAGE
+     * setada como constante nessa classe
+     * @return Retorna o DAO correspondente
+     */
     public static LibrarianDAO getLibrarianDAO() {
         if ( librarianDAO == null){
             if (TYPE_OF_STORAGE == 1){
@@ -125,6 +163,11 @@ public class DAO {
         return librarianDAO;
     }
 
+    /**
+     * Retorna a implementação do bookReserveDAO, de acordo com a TYPE_OF_STORAGE
+     * setada como constante nessa classe
+     * @return Retorna o DAO correspondente
+     */
     public static BookReserveDAO getBookReserveDAO() {
         if (bookReserveDAO == null){
             if (TYPE_OF_STORAGE == 1){
