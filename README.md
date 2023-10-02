@@ -49,7 +49,7 @@ Os testes dos dois tipos de armazenamento são idênticos, basta escolher o tipo
 ![Use Cases Diagram](docs/diagrams/use_cases_diagram.png)
 
 ### Classes
-![Classes Diagram](docs/diagrams/class_diagram.png)
+![Classes Diagram](docs/diagrams/classes_diagram.png)
 
 ## Project Structure
 
