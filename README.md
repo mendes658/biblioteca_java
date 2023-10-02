@@ -42,6 +42,13 @@ Para realizar todos os testes de uma vez, é possível rodar o arquivo "mainTest
 ### Release 2
 A única diferença da segunda release para a primeira, é a mudança no valor da constante "TYPE_OF_STORAGE".
 
+## Diagrams
+### Use Cases
+![Use Cases Diagram](docs/diagrams/use_cases_diagram.png)
+
+### Classes
+![Classes Diagram](docs/diagrams/class_diagram.png)
+
 ## Project Structure
 
 ### Versions
