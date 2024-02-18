@@ -11,11 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -24,17 +21,16 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class LoginController implements Initializable {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    private static final int ADMIN = 0;
+    private static final int GUEST = 1;
+    private static final int LIBRARIAN = 2;
+    private static final int READER = 3;
 
-
-    @FXML
-    private Label welcomeText;
 
     @FXML
     private TextField usernameInput;
@@ -53,14 +49,32 @@ public class MainController implements Initializable {
         userType.getItems().removeAll(userType.getItems());
         userType.getItems().addAll("Admin", "Bibliotecário", "Leitor");
         warning.setTextAlignment(TextAlignment.CENTER);
+        warning.set
     }
 
-    protected void changeToAdminScene(ActionEvent ev) throws IOException{
-        root = FXMLLoader.load(View.class.getResource
-                ("/com/pbl/biblioteca/admin.fxml"));
+    protected void changeScene(ActionEvent ev, int type) throws IOException{
 
-        stage = (Stage)((Node)ev.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Parent root;
+
+        switch (type) {
+
+            case ADMIN -> root = FXMLLoader.load(Objects.requireNonNull(View.class.getResource
+                    ("/com/pbl/biblioteca/admin.fxml")));
+            case READER -> root = FXMLLoader.load(Objects.requireNonNull(View.class.getResource
+                    ("/com/pbl/biblioteca/reader.fxml")));
+            case LIBRARIAN -> root = FXMLLoader.load(Objects.requireNonNull(View.class.getResource
+                    ("/com/pbl/biblioteca/librarian.fxml")));
+            case GUEST -> root = FXMLLoader.load(Objects.requireNonNull(View.class.getResource
+                    ("/com/pbl/biblioteca/guest.fxml")));
+            default -> {
+                root = FXMLLoader.load(Objects.requireNonNull(View.class.getResource
+                        ("/com/pbl/biblioteca/login.fxml")));
+            }
+        }
+
+
+        Stage stage = (Stage) ((Node) ev.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -74,44 +88,45 @@ public class MainController implements Initializable {
         if (chosenType != null){
             try {
 
-                if ( chosenType.equals("Admin")) {
-                    LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "admin");
-                    changeToAdminScene(ev);
-
-                } else if ( chosenType.equals("Bibliotecário")) {
-                    LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "librarian");
-
-
-                } else if ( chosenType.equals("Leitor")) {
-                    LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "reader");
-
-
+                switch (chosenType) {
+                    case "Admin" -> {
+                        LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "admin");
+                        changeScene(ev, ADMIN);
+                    }
+                    case "Bibliotecário" -> {
+                        LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "librarian");
+                        changeScene(ev, LIBRARIAN);
+                    }
+                    case "Leitor" -> {
+                        LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "reader");
+                        changeScene(ev, READER);
+                    }
                 }
 
             } catch (notFoundException e){
                 System.out.println("Nao existe");
-                warning.setText("                              ");
+                warning.setText("");
                 warning.setText("Usuário inexistente");
 
             } catch (wrongPasswordException e){
-                warning.setText("                       ");
+                warning.setText("");
                 warning.setText("Senha inválida");
 
             }
         } else {
-            warning.setText("                              ");
+            warning.setText("");
             warning.setText("Escolha um tipo de usuário");
         }
 
         PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(event ->
-                warning.setText("                         "));
+                warning.setText(""));
         pause.play();
 
     }
 
     @FXML
-    protected void guestLogin(){
-
+    protected void guestLogin(ActionEvent ev) throws IOException{
+        changeScene(ev, GUEST);
     }
 }

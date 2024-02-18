@@ -10,4 +10,6 @@ module com.pbl.biblioteca {
     exports com.pbl.biblioteca.view;
     //exports com.pbl.biblioteca;
     opens com.pbl.biblioteca to javafx.fxml;
+    exports com.pbl.biblioteca.controller;
+    opens com.pbl.biblioteca.controller to javafx.fxml;
 }
