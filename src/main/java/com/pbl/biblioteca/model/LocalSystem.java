@@ -14,6 +14,16 @@ import java.util.HashMap;
  */
 public class LocalSystem implements Serializable {
 
+    public static User getNowUser() {
+        return nowUser;
+    }
+
+    public static void setNowUser(User nowUser) {
+        LocalSystem.nowUser = nowUser;
+    }
+
+    public static User nowUser;
+
     /**
      * Atualiza as reservas, deletando as que possuem usuários bloqueados, ou que já bateram no prazo
      * Seta a data final das reservas que já possuem cópias livres para empréstimo

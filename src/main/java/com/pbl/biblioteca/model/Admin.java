@@ -119,13 +119,16 @@ public class Admin extends Operator implements Serializable {
     public User getUser(String username, String type) throws notFoundException {
         switch (type){
             case "reader" -> {
-                return DAO.getReaderDAO().getByPK(username);
+                User u = DAO.getReaderDAO().getByPK(username);
+                if (u != null){return u;}
             }
             case "admin" -> {
-                return DAO.getAdminDAO().getByPK(username);
+                User u = DAO.getAdminDAO().getByPK(username);
+                if (u != null){return u;}
             }
             case "librarian" -> {
-                return DAO.getLibrarianDAO().getByPK(username);
+                User u = DAO.getLibrarianDAO().getByPK(username);
+                if (u != null){return u;}
             }
         }
 

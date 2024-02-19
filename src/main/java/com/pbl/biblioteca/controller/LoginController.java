@@ -3,7 +3,9 @@ package com.pbl.biblioteca.controller;
 import com.pbl.biblioteca.exceptionHandler.notFoundException;
 import com.pbl.biblioteca.exceptionHandler.wrongPasswordException;
 
+import com.pbl.biblioteca.model.Admin;
 import com.pbl.biblioteca.model.LocalSystem;
+import com.pbl.biblioteca.model.User;
 import com.pbl.biblioteca.view.View;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -49,7 +51,6 @@ public class LoginController implements Initializable {
         userType.getItems().removeAll(userType.getItems());
         userType.getItems().addAll("Admin", "Bibliotecário", "Leitor");
         warning.setTextAlignment(TextAlignment.CENTER);
-        warning.set
     }
 
     protected void changeScene(ActionEvent ev, int type) throws IOException{
@@ -90,15 +91,18 @@ public class LoginController implements Initializable {
 
                 switch (chosenType) {
                     case "Admin" -> {
-                        LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "admin");
+                        User a = LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "admin");
+                        LocalSystem.setNowUser(a);
                         changeScene(ev, ADMIN);
                     }
                     case "Bibliotecário" -> {
-                        LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "librarian");
+                        User a = LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "librarian");
+                        LocalSystem.setNowUser(a);
                         changeScene(ev, LIBRARIAN);
                     }
                     case "Leitor" -> {
-                        LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "reader");
+                        User a = LocalSystem.login(usernameInput.getText(), passwordInput.getText(), "reader");
+                        LocalSystem.setNowUser(a);
                         changeScene(ev, READER);
                     }
                 }

@@ -1,50 +1,346 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.biblioteca.controller.AdminController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.biblioteca.controller.AdminController">
    <children>
-      <AnchorPane layoutY="27.0" prefHeight="376.0" prefWidth="600.0">
+      <AnchorPane fx:id="paneCrudUser" layoutY="27.0" prefHeight="574.0" prefWidth="800.0" visible="false">
          <children>
-            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criar Novo Usuário">
+            <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criar Usuário">
                <font>
-                  <Font size="14.0" />
+                  <Font size="21.0" />
                </font>
             </Text>
-            <TextField layoutX="14.0" layoutY="43.0" />
+            <Text layoutX="16.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="createUserTypeCB" layoutX="16.0" layoutY="109.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text layoutX="16.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createUsernameTF" layoutX="16.0" layoutY="173.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text layoutX="16.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="16.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createNameTF" layoutX="16.0" layoutY="300.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text layoutX="16.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createAddressTF" layoutX="16.0" layoutY="370.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text layoutX="16.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createPhoneTF" layoutX="16.0" layoutY="440.0" prefHeight="25.0" prefWidth="227.0" />
+            <PasswordField fx:id="createPasswordPF" layoutX="16.0" layoutY="235.0" prefHeight="25.0" prefWidth="227.0" />
+            <Button fx:id="createUserBtn" layoutX="202.0" layoutY="483.0" mnemonicParsing="false" onAction="#createUser" text="Criar" />
+            <Text fx:id="warningCreateUser" fill="RED" layoutX="16.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="180.0" />
+            <Text layoutX="400.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deletar Usuário">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text layoutX="400.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="deleteUsernameTF" layoutX="400.0" layoutY="173.0" prefHeight="25.0" prefWidth="227.0" />
+            <Button fx:id="deleteUserBtn" layoutX="567.0" layoutY="209.0" mnemonicParsing="false" onAction="#deleteUser" text="Deletar" />
+            <Text fx:id="warningDeleteUser" fill="RED" layoutX="400.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="160.47705078125" />
+            <ComboBox fx:id="deleteUserCB" layoutX="400.0" layoutY="109.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text layoutX="400.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-      <MenuBar blendMode="DARKEN" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+      <MenuBar blendMode="DARKEN" layoutY="2.0" prefHeight="25.0" prefWidth="800.0">
         <menus>
           <Menu mnemonicParsing="false" text="Usuários">
             <items>
-              <MenuItem mnemonicParsing="false" text="Criar Novo Usuário" />
-                  <MenuItem mnemonicParsing="false" text="Deletar Usuário" />
+              <MenuItem fx:id="menuCrudUser" mnemonicParsing="false" onAction="#goToCrudUser" text="Criar/Deletar Usuário" />
+                  <MenuItem fx:id="menuUpdateUser" mnemonicParsing="false" onAction="#goToUpdateUser" text="Gerenciar Usuários" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Livros">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="menuCrudBook" mnemonicParsing="false" onAction="#goToCrudBook" text="Criar/Deletar Livro" />
+                  <MenuItem fx:id="menuUpdateBook" mnemonicParsing="false" onAction="#goToUpdateBook" text="Gerenciar Livros" />
+                  <MenuItem fx:id="menuSearchBook" mnemonicParsing="false" onAction="#goToSearchBook" text="Pesquisar Livros" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Estatísticas">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Meu Perfil">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-               </items>
-            </Menu>
+            <Menu fx:id="menuReport" mnemonicParsing="false" text="Estatísticas" />
+            <Menu fx:id="menuMyProfile" mnemonicParsing="false" text="Meu Perfil" />
         </menus>
       </MenuBar>
+      <AnchorPane fx:id="paneUpdateUser" layoutY="27.0" prefHeight="574.0" prefWidth="800.0" visible="false">
+         <children>
+            <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciamento de Usuários">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="searchUpdateUserCB" layoutX="264.0" layoutY="86.0" prefHeight="25.0" prefWidth="136.0" />
+            <Text layoutX="15.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="warningUpdateUser" fill="RED" layoutX="156.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="227.0" />
+            <Text layoutX="16.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuário Selecionado:">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text layoutX="16.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="searchUpdateUserTF" layoutX="16.0" layoutY="86.0" prefHeight="25.0" prefWidth="227.0" />
+            <Button fx:id="searchUpdateUserBtn" layoutX="349.0" layoutY="123.0" mnemonicParsing="false" onAction="#searchUserToUpdate" text="Buscar" />
+            <Text layoutX="14.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="editNameBtn" layoutX="466.0" layoutY="246.0" mnemonicParsing="false" onAction="#allowEditName" text="Editar" />
+            <Text layoutX="15.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="editPhoneBtn" layoutX="466.0" layoutY="287.0" mnemonicParsing="false" onAction="#allowEditPhone" text="Editar" />
+            <Text layoutX="14.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="editAddressBtn" layoutX="466.0" layoutY="328.0" mnemonicParsing="false" onAction="#allowEditAddress" text="Editar" />
+            <Text layoutX="264.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="statusShowText" layoutX="14.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="updateUsernameTF" layoutX="142.0" layoutY="204.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="updatePhoneTF" layoutX="142.0" layoutY="287.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="updateNameTF" layoutX="142.0" layoutY="246.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="updateAddressTF" layoutX="142.0" layoutY="328.0" prefHeight="25.0" prefWidth="317.0" />
+            <Button fx:id="blockUserBtn" layoutX="16.0" layoutY="417.0" mnemonicParsing="false" onAction="#blockUser" prefHeight="25.0" prefWidth="127.0" text="Bloquear" />
+            <Button fx:id="saveChangesBtn" layoutX="386.0" layoutY="417.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="25.0" prefWidth="127.0" text="Salvar Alterações" />
+            <Text fx:id="userStatusText" layoutX="142.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="317.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="warningSearchUpdateUser" fill="RED" layoutX="15.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="317.0" />
+            <TextField fx:id="blockDaysTF" layoutX="159.0" layoutY="417.0" prefHeight="25.0" prefWidth="94.0" promptText="Dias " />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneCrudBook" layoutX="5.0" layoutY="27.0" prefHeight="574.0" prefWidth="800.0" visible="false">
+         <children>
+            <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criar Livro">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text layoutX="16.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createTitleTF" layoutX="16.0" layoutY="114.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text layoutX="19.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="16.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createAuthorTF" layoutX="16.0" layoutY="230.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text layoutX="16.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editora">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createPublisherTF" layoutX="16.0" layoutY="286.0" prefHeight="25.0" prefWidth="227.0" />
+            <Button fx:id="createBookBtn" layoutX="202.0" layoutY="501.0" mnemonicParsing="false" onAction="#createBook" text="Criar" />
+            <Text layoutX="400.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deletar Livro">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text layoutX="400.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="deleteIsbnTF" layoutX="400.0" layoutY="114.0" prefHeight="25.0" prefWidth="227.0" />
+            <Button fx:id="deleteBookBtn" layoutX="572.0" layoutY="147.0" mnemonicParsing="false" onAction="#deleteBook" text="Deletar" />
+            <Text fx:id="warningDeleteBook" fill="RED" layoutX="400.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="168.984375" />
+            <Text layoutX="19.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="16.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createCategoryTF" layoutX="16.0" layoutY="401.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text layoutX="16.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total de Cópias">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="createTotalCopiesTF" layoutX="16.0" layoutY="457.0" prefHeight="25.0" prefWidth="227.0" />
+            <Text fx:id="warningCreateBook" fill="RED" layoutX="14.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.0" />
+            <TextField fx:id="createIsbnTF" layoutX="16.0" layoutY="169.0" prefHeight="25.0" prefWidth="227.0" />
+            <TextField fx:id="createYearTF" layoutX="16.0" layoutY="340.0" prefHeight="25.0" prefWidth="227.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneUpdateBook" layoutY="27.0" prefHeight="574.0" prefWidth="800.0" visible="false">
+         <children>
+            <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciamento de Livros">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="warningUpdateBook" fill="RED" layoutX="540.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="227.0" />
+            <Text layoutX="14.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Livro Selecionado:">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text layoutX="16.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="searchUpdateBookTextField" layoutX="16.0" layoutY="86.0" prefHeight="25.0" prefWidth="227.0" />
+            <Button fx:id="searchUpdateBookButton" layoutX="248.0" layoutY="86.0" mnemonicParsing="false" onAction="#searchBookToUpdate" text="Buscar" />
+            <Text layoutX="14.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="editTitleBtn" layoutX="466.0" layoutY="246.0" mnemonicParsing="false" onAction="#allowEditTitle" text="Editar" />
+            <Text layoutX="15.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editora:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="editPublisherBtn" layoutX="466.0" layoutY="287.0" mnemonicParsing="false" onAction="#allowEditPublisher" text="Editar" />
+            <Text layoutX="14.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="editCategoryBtn" layoutX="466.0" layoutY="328.0" mnemonicParsing="false" onAction="#allowEditCategory" text="Editar" />
+            <TextField fx:id="isbnTextField" editable="false" layoutX="142.0" layoutY="168.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="publisherTextField" editable="false" layoutX="142.0" layoutY="287.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="titleTextField" editable="false" layoutX="142.0" layoutY="246.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="categoryTextField" editable="false" layoutX="142.0" layoutY="328.0" prefHeight="25.0" prefWidth="317.0" />
+            <Button fx:id="addCopiesBtn" layoutX="144.0" layoutY="496.0" mnemonicParsing="false" onAction="#addCopy" prefHeight="25.0" prefWidth="75.0" text="Adicionar" />
+            <Button fx:id="saveUpdateBookBtn" layoutX="387.0" layoutY="496.0" mnemonicParsing="false" onAction="#updateBook" prefHeight="25.0" prefWidth="127.0" text="Salvar Alterações" />
+            <Text layoutX="14.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="editYearBtn" layoutX="466.0" layoutY="372.0" mnemonicParsing="false" onAction="#allowEditYear" text="Editar" />
+            <Text layoutX="15.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total de Cópias:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="totalCopiesTextField" editable="false" layoutX="142.0" layoutY="413.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="yearTextField" editable="false" layoutX="142.0" layoutY="372.0" prefHeight="25.0" prefWidth="317.0" />
+            <Text layoutX="16.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar / Remover Cópias">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="copiesQttTextField" layoutX="16.0" layoutY="496.0" prefHeight="25.0" prefWidth="117.0" promptText="Quantidade" />
+            <Button fx:id="removeCopiesBtn" layoutX="224.0" layoutY="496.0" mnemonicParsing="false" onAction="#removeCopy" prefHeight="25.0" prefWidth="75.0" text="Remover" />
+            <Text layoutX="15.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="authorTextField" editable="false" layoutX="142.0" layoutY="206.0" prefHeight="25.0" prefWidth="317.0" />
+            <Button fx:id="editAuthorBtn" layoutX="466.0" layoutY="206.0" mnemonicParsing="false" onAction="#allowEditAuthor" text="Editar" />
+            <Text fx:id="warningSearchUpdateBook" layoutX="313.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="227.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneSearchBook" layoutY="27.0" prefHeight="574.0" prefWidth="800.0">
+         <children>
+            <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesquisa de Livros">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="searchBookTextField" layoutX="14.0" layoutY="74.0" prefHeight="25.0" prefWidth="227.0" promptText="Digite todo ou parte do atributo" />
+            <Button fx:id="searchBookButton" layoutX="361.0" layoutY="114.0" mnemonicParsing="false" onAction="#searchBook" text="Buscar" />
+            <Text fx:id="searchBookAlert" layoutX="14.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="227.0" />
+            <ComboBox fx:id="searchBookComboBox" layoutX="260.0" layoutY="74.0" prefWidth="150.0" />
+            <Text layoutX="260.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atributo">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tableBook" layoutX="14.0" layoutY="158.0" prefHeight="387.0" prefWidth="759.0">
+              <columns>
+                <TableColumn fx:id="titleCol" prefWidth="131.0" text="Título" />
+                <TableColumn fx:id="authorCol" prefWidth="109.0" text="Autor" />
+                  <TableColumn fx:id="yearCol" prefWidth="74.0" text="Ano" />
+                  <TableColumn fx:id="publisherCol" prefWidth="97.0" text="Editora" />
+                  <TableColumn fx:id="categoryCol" prefWidth="153.0" text="Categoria" />
+                  <TableColumn fx:id="isbnCol" prefWidth="194.0" text="ISBN" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
