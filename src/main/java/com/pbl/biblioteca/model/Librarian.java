@@ -93,6 +93,7 @@ public class Librarian extends Operator{
         book.borrowCopy();
         Loan newLoan = new Loan(book.getIsbn(), reader.getUsername(), days, this.getUsername());
 
+        DAO.getReportDAO().logNewLoan(newLoan);
         DAO.getLoanDAO().create(newLoan);
         DAO.getBookDAO().update(book);
 

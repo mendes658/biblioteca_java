@@ -1,9 +1,7 @@
 package com.pbl.biblioteca.controller;
 
 import com.pbl.biblioteca.dao.DAO;
-import com.pbl.biblioteca.exceptionHandler.isbnAlreadyInUseException;
-import com.pbl.biblioteca.exceptionHandler.notFoundException;
-import com.pbl.biblioteca.exceptionHandler.usernameAlreadyInUseException;
+import com.pbl.biblioteca.exceptionHandler.*;
 import com.pbl.biblioteca.model.*;
 import com.pbl.biblioteca.model.Book;
 import javafx.animation.PauseTransition;
@@ -17,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -25,6 +24,36 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
+
+    public static class LoanTable{
+        private  String isbn;
+        private  String initialDate;
+        private  String endDate;
+        private  String librarianUsername;
+
+        public LoanTable(String isbn, String initialDate, String endDate, String librarianUsername){
+            this.initialDate = initialDate;
+            this.endDate = endDate;
+            this.isbn = isbn;
+            this.librarianUsername = librarianUsername;
+        }
+
+        public String getEndDate() {
+            return endDate;
+        }
+
+        public String getInitialDate() {
+            return initialDate;
+        }
+
+        public String getIsbn() {
+            return isbn;
+        }
+
+        public String getLibrarianUsername() {
+            return librarianUsername;
+        }
+    }
 
     private Admin nowAdmin;
 
@@ -65,6 +94,67 @@ public class AdminController implements Initializable {
 
     @FXML
     private TextField copiesQttTextField;
+
+    @FXML
+    private TextField profileUsername;
+
+    @FXML
+    private TextField profileName;
+
+    @FXML
+    private TextField profilePhone;
+
+    @FXML
+    private TextField activeLoansTF;
+
+    @FXML
+    private TextField overdueLoanTF;
+
+    @FXML
+    private TextField activeReservesTF;
+
+    @FXML
+    private TextField totalLoansTF;
+
+    @FXML
+    private TextField totalReservesTF;
+
+    @FXML
+    private TextField searchHistoryLoanTF;
+
+    @FXML
+    private Button searchHistoryBtn;
+
+    @FXML
+    private TableView<Book> tablePopularBook;
+
+    @FXML
+    private TableColumn<Book, String> titlePopularCol;
+
+    @FXML
+    private TableColumn<Book, String> isbnPopularCol;
+
+    @FXML
+    private TableView<LoanTable> tableLoan;
+
+    @FXML
+    private TableColumn<LoanTable, String> isbnLoanCol;
+
+    @FXML
+    private TableColumn<LoanTable, String> initalDateLoanCol;
+
+    @FXML
+    private TableColumn<LoanTable, String> finalDateLoanCol;
+
+    @FXML
+    private TableColumn<LoanTable, String> librarianLoanCol;
+
+
+    @FXML
+    private TextField profileAddress;
+
+    @FXML
+    private TextField profileType;
 
     @FXML
     private TableView<Book> tableBook;
@@ -214,7 +304,13 @@ public class AdminController implements Initializable {
     private AnchorPane paneUpdateUser;
 
     @FXML
+    private AnchorPane paneMyProfile;
+
+    @FXML
     private AnchorPane paneSearchBook;
+
+    @FXML
+    private AnchorPane paneReport;
 
     @FXML
     private TextField publisherTextField;
@@ -356,6 +452,18 @@ public class AdminController implements Initializable {
         disableTF(yearTextField);
         disableTF(totalCopiesTextField);
 
+        disableTF(profileUsername);
+        disableTF(profileAddress);
+        disableTF(profileName);
+        disableTF(profilePhone);
+        disableTF(profileType);
+
+        disableTF(activeLoansTF);
+        disableTF(activeReservesTF);
+        disableTF(totalLoansTF);
+        disableTF(totalReservesTF);
+        disableTF(overdueLoanTF);
+
         editName = 1;
         editAddress = 1;
         editPhone = 1;
@@ -371,6 +479,14 @@ public class AdminController implements Initializable {
         yearCol.setCellValueFactory(new PropertyValueFactory<Book, Integer>("year"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
         isbnCol.setCellValueFactory(new PropertyValueFactory<Book, String>("isbn"));
+
+        librarianLoanCol.setCellValueFactory(new PropertyValueFactory<LoanTable, String>("librarianUsername"));
+        isbnLoanCol.setCellValueFactory(new PropertyValueFactory<LoanTable, String>("isbn"));
+        initalDateLoanCol.setCellValueFactory(new PropertyValueFactory<LoanTable, String>("initialDate"));
+        finalDateLoanCol.setCellValueFactory(new PropertyValueFactory<LoanTable, String>("endDate"));
+
+        titlePopularCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        isbnPopularCol.setCellValueFactory(new PropertyValueFactory<Book, String>("isbn"));
 
         goToCrudUser();
     }
@@ -901,50 +1017,130 @@ public class AdminController implements Initializable {
         pause.play();
     }
 
-    // Métodos de troca de telas do menu
+    // Métodos do Meu Perfil
+    @FXML private void setMyProfileInfo(){
+        nowAdmin = (Admin) LocalSystem.getNowUser();
+
+        profileUsername.setText(nowAdmin.getUsername());
+        profileAddress.setText(nowAdmin.getAddress());
+        profileName.setText(nowAdmin.getName());
+        profilePhone.setText(nowAdmin.getTelephone());
+    }
+
+    // Métodos do relatório
+    @FXML private void fillLoanTable(){
+        nowAdmin = (Admin) LocalSystem.getNowUser();
+        String toSearch = searchHistoryLoanTF.getText();
+        ArrayList<Loan> searched;
+        LoanTable tableRow;
+        ObservableList<LoanTable> toShow = FXCollections.observableArrayList();
+        String initialDate;
+        String finalDate;
+
+        if (toSearch != null){
+            searched = DAO.getReportDAO().getReaderLoanHistory(toSearch);
+
+            for (Loan l : searched){
+                initialDate = l.getInitialDate().getDayOfMonth() + "/" +
+                        l.getInitialDate().getMonthValue() + "/" + l.getInitialDate().getYear();
+
+                finalDate = l.getFinalDate().getDayOfMonth() + "/" +
+                        l.getFinalDate().getMonthValue() + "/" + l.getFinalDate().getYear();
+
+                tableRow = new LoanTable(l.getBookIsbn(), initialDate, finalDate, l.getLibrarianUsername());
+                toShow.add(tableRow);
+            }
+
+            tableLoan.setItems(toShow);
+        }
+
+
+    }
+
     @FXML
-    protected void goToCrudUser(){
-        paneCrudUser.setVisible(true);
+    private void fillGeneralReport(){
+        activeLoansTF.setText(Report.getTotalActiveLoans().toString());
+        overdueLoanTF.setText(Report.getTotalOverdueLoans(LocalDate.now()).toString());
+        activeReservesTF.setText(Report.getTotalActiveReserves().toString());
+        totalLoansTF.setText(Report.getTotalLoansAllTime().toString());
+        totalReservesTF.setText(Report.getTotalReservesAllTime().toString());
+
+        fillPopularBooks();
+    }
+
+    private void fillPopularBooks(){
+        ObservableList<Book> toShow = FXCollections.observableArrayList();
+        ArrayList<Pair<String, Integer>> toFill = DAO.getReportDAO().getPopularBooksAllTime();
+        Book b;
+
+        if (toFill != null){
+
+            for (Pair<String, Integer> p : toFill){
+                b = DAO.getBookDAO().getByPK(p.getKey());
+                if (b != null ){
+                    toShow.add(b);
+                }
+            }
+        }
+
+        tablePopularBook.setItems(toShow);
+    }
+
+    // Métodos de troca de telas do menu
+
+    private void turnAllPanesInvisible(){
+        paneCrudUser.setVisible(false);
         paneCrudBook.setVisible(false);
         paneUpdateBook.setVisible(false);
         paneUpdateUser.setVisible(false);
         paneSearchBook.setVisible(false);
+        paneMyProfile.setVisible(false);
+        paneReport.setVisible(false);
+    }
+
+    @FXML
+    protected void goToReport(){
+        turnAllPanesInvisible();
+        fillGeneralReport();
+        paneReport.setVisible(true);
+    }
+
+    @FXML
+    protected void goToCrudUser(){
+        turnAllPanesInvisible();
+        paneCrudUser.setVisible(true);
     }
 
     @FXML
     protected void goToUpdateUser(){
-        paneCrudUser.setVisible(false);
-        paneCrudBook.setVisible(false);
-        paneUpdateBook.setVisible(false);
+        turnAllPanesInvisible();
         paneUpdateUser.setVisible(true);
-        paneSearchBook.setVisible(false);
     }
 
     @FXML
     protected void goToCrudBook(){
-        paneCrudUser.setVisible(false);
+        turnAllPanesInvisible();
         paneCrudBook.setVisible(true);
-        paneUpdateBook.setVisible(false);
-        paneUpdateUser.setVisible(false);
-        paneSearchBook.setVisible(false);
     }
 
     @FXML
     protected void goToUpdateBook(){
-        paneCrudUser.setVisible(false);
-        paneCrudBook.setVisible(false);
+        turnAllPanesInvisible();
         paneUpdateBook.setVisible(true);
-        paneUpdateUser.setVisible(false);
-        paneSearchBook.setVisible(false);
     }
 
     @FXML
     protected void goToSearchBook(){
-        paneCrudUser.setVisible(false);
-        paneCrudBook.setVisible(false);
-        paneUpdateBook.setVisible(false);
-        paneUpdateUser.setVisible(false);
+        turnAllPanesInvisible();
         paneSearchBook.setVisible(true);
     }
+
+    @FXML
+    protected void goToMyProfile(){
+        setMyProfileInfo();
+        turnAllPanesInvisible();
+        paneMyProfile.setVisible(true);
+    }
+
 
 }

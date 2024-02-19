@@ -14,7 +14,6 @@ public class View extends Application {
 
     @Override
     public void init(){
-        System.out.println("opa22");
         setDefaultFileUrls();
     }
 

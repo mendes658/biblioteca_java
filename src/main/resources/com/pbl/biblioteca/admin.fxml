@@ -81,7 +81,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <MenuBar blendMode="DARKEN" layoutY="2.0" prefHeight="25.0" prefWidth="800.0">
+      <MenuBar blendMode="DARKEN" layoutY="2.0" prefHeight="25.0" prefWidth="805.0">
         <menus>
           <Menu mnemonicParsing="false" text="Usuários">
             <items>
@@ -96,8 +96,14 @@
                   <MenuItem fx:id="menuSearchBook" mnemonicParsing="false" onAction="#goToSearchBook" text="Pesquisar Livros" />
             </items>
           </Menu>
-            <Menu fx:id="menuReport" mnemonicParsing="false" text="Estatísticas" />
-            <Menu fx:id="menuMyProfile" mnemonicParsing="false" text="Meu Perfil" />
+            <Menu fx:id="menuReport" mnemonicParsing="false" text="Estatísticas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToReport" text="Gerar Relatório" />
+               </items></Menu>
+            <Menu fx:id="menuMyProfile" mnemonicParsing="false" onAction="#goToMyProfile" text="Meu Perfil">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToMyProfile" text="Meu Perfil" />
+               </items></Menu>
         </menus>
       </MenuBar>
       <AnchorPane fx:id="paneUpdateUser" layoutY="27.0" prefHeight="574.0" prefWidth="800.0" visible="false">
@@ -314,7 +320,7 @@
             <Text fx:id="warningSearchUpdateBook" layoutX="313.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="227.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneSearchBook" layoutY="27.0" prefHeight="574.0" prefWidth="800.0">
+      <AnchorPane fx:id="paneSearchBook" layoutY="27.0" prefHeight="574.0" prefWidth="800.0" visible="false">
          <children>
             <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesquisa de Livros">
                <font>
@@ -339,6 +345,124 @@
                   <TableColumn fx:id="categoryCol" prefWidth="153.0" text="Categoria" />
                   <TableColumn fx:id="isbnCol" prefWidth="194.0" text="ISBN" />
               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneMyProfile" layoutX="5.0" layoutY="27.0" prefHeight="574.0" prefWidth="800.0" visible="false">
+         <children>
+            <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meu Perfil">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="warningUpdateUser1" fill="RED" layoutX="156.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="227.0" />
+            <Text layoutX="14.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="profileUsername" layoutX="142.0" layoutY="73.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="profilePhone" layoutX="142.0" layoutY="156.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="profileName" layoutX="142.0" layoutY="115.0" prefHeight="25.0" prefWidth="317.0" />
+            <TextField fx:id="profileAddress" layoutX="142.0" layoutY="197.0" prefHeight="25.0" prefWidth="317.0" />
+            <Text fx:id="userStatusText1" layoutX="142.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="317.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="warningSearchUpdateUser1" fill="RED" layoutX="15.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="317.0" />
+            <Text layoutX="14.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="profileType" layoutX="142.0" layoutY="238.0" prefHeight="25.0" prefWidth="317.0" text="Administrador" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneReport" layoutX="5.0" layoutY="27.0" prefHeight="574.0" prefWidth="800.0">
+         <children>
+            <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatísticas Gerais">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="activeLoansTF" alignment="CENTER_RIGHT" layoutX="252.0" layoutY="62.0" prefHeight="25.0" prefWidth="82.0" />
+            <Button fx:id="searchHistoryBtn" layoutX="226.0" layoutY="420.0" mnemonicParsing="false" onAction="#fillLoanTable" text="Buscar" />
+            <Text fx:id="searchBookAlert1" layoutX="14.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="227.0" />
+            <Text layoutX="14.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total de empréstimos ativos:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tablePopularBook" layoutX="356.0" layoutY="62.0" prefHeight="199.0" prefWidth="414.0">
+               <columns>
+                  <TableColumn fx:id="titlePopularCol" prefWidth="285.0" text="Título" />
+                  <TableColumn fx:id="isbnPopularCol" prefWidth="127.0" text="ISBN" />
+               </columns>
+            </TableView>
+            <TextField fx:id="overdueLoanTF" alignment="CENTER_RIGHT" layoutX="252.0" layoutY="106.0" prefHeight="25.0" prefWidth="82.0" />
+            <Text layoutX="14.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total de empréstimos atrasados:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="activeReservesTF" alignment="CENTER_RIGHT" layoutX="252.0" layoutY="148.0" prefHeight="25.0" prefWidth="82.0" />
+            <Text fx:id="searchBookAlert11" layoutX="14.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="227.0" />
+            <Text layoutX="14.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total de reservas ativas:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="totalLoansTF" alignment="CENTER_RIGHT" layoutX="252.0" layoutY="192.0" prefHeight="25.0" prefWidth="82.0" />
+            <Text layoutX="14.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total de empréstimos realizados:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="totalReservesTF" alignment="CENTER_RIGHT" layoutX="252.0" layoutY="236.0" prefHeight="25.0" prefWidth="82.0" />
+            <Text layoutX="14.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total de reservas realizadas:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="356.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Livros Mais Populares:">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Histórico de Empréstimos">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="searchHistoryLoanTF" layoutX="14.0" layoutY="387.0" prefHeight="25.0" prefWidth="264.0" />
+            <Text layoutX="14.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tableLoan" layoutX="294.0" layoutY="319.0" prefHeight="199.0" prefWidth="478.0">
+               <columns>
+                  <TableColumn fx:id="isbnLoanCol" prefWidth="123.0" text="ISBN" />
+                  <TableColumn fx:id="initalDateLoanCol" prefWidth="88.0" text="Data Início" />
+                  <TableColumn fx:id="finalDateLoanCol" prefWidth="106.0" text="Data Fim" />
+                  <TableColumn fx:id="librarianLoanCol" prefWidth="160.0" text="Bibliotecário Realizador" />
+               </columns>
             </TableView>
          </children>
       </AnchorPane>

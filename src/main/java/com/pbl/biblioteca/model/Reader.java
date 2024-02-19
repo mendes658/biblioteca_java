@@ -89,6 +89,7 @@ public class Reader extends User implements Serializable {
         BookReserve reserve = new BookReserve(this.getUsername(), book.getIsbn());
 
         DAO.getBookReserveDAO().create(reserve);
+        DAO.getReportDAO().logNewReserve(reserve);
 
     }
 
