@@ -81,7 +81,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <MenuBar blendMode="DARKEN" layoutY="2.0" prefHeight="25.0" prefWidth="805.0">
+      <MenuBar fx:id="menuBar" blendMode="DARKEN" layoutY="2.0" prefHeight="25.0" prefWidth="805.0">
         <menus>
           <Menu mnemonicParsing="false" text="Usuários">
             <items>
@@ -104,6 +104,11 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#goToMyProfile" text="Meu Perfil" />
                </items></Menu>
+            <Menu fx:id="menuMyProfile1" mnemonicParsing="false" onAction="#goToMyProfile" text="Sair">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="Sair" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <AnchorPane fx:id="paneUpdateUser" layoutY="27.0" prefHeight="574.0" prefWidth="800.0" visible="false">

@@ -4,23 +4,32 @@ import com.pbl.biblioteca.dao.DAO;
 import com.pbl.biblioteca.exceptionHandler.*;
 import com.pbl.biblioteca.model.*;
 import com.pbl.biblioteca.model.Book;
+import com.pbl.biblioteca.view.View;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
@@ -281,6 +290,9 @@ public class AdminController implements Initializable {
 
     @FXML
     private Menu menuReport;
+
+    @FXML
+    private MenuBar menuBar;
 
     @FXML
     private MenuItem menuSearchBook;
@@ -916,7 +928,7 @@ public class AdminController implements Initializable {
 
     @FXML
     protected void searchBook(){
-        nowAdmin = (Admin) LocalSystem.getNowUser();
+
         Reader guestReader = new Reader("a", "a", "a", "a", "a");
         ObservableList<Book> list = FXCollections.observableArrayList();
 
@@ -1142,5 +1154,15 @@ public class AdminController implements Initializable {
         paneMyProfile.setVisible(true);
     }
 
+    @FXML
+    protected void logout(ActionEvent ev) throws IOException {
 
+        Parent root;
+        root = FXMLLoader.load(Objects.requireNonNull(View.class.getResource
+                ("/com/pbl/biblioteca/login.fxml")));
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
