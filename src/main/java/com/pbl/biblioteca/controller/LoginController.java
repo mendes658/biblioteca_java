@@ -1,6 +1,7 @@
 package com.pbl.biblioteca.controller;
 
 import com.pbl.biblioteca.exceptionHandler.notFoundException;
+import com.pbl.biblioteca.exceptionHandler.usernameAlreadyInUseException;
 import com.pbl.biblioteca.exceptionHandler.wrongPasswordException;
 
 import com.pbl.biblioteca.model.Admin;
@@ -83,7 +84,7 @@ public class LoginController implements Initializable {
 
 
     @FXML
-    protected void login(ActionEvent ev) throws IOException {
+    protected void login(ActionEvent ev) throws IOException{
         String chosenType = userType.getValue();
 
         if (chosenType != null){
