@@ -44,6 +44,19 @@ A única diferença da segunda release para a primeira, é a mudança no valor d
 
 Os testes dos dois tipos de armazenamento são idênticos, basta escolher o tipo na variável citada acima e eles rodam de acordo com ela.
 
+### Release 3
+Interface em JavaFX concluída. 
+
+Existem três usuários criados inicialmente:
+
+Tipo: Leitor, Username: leitor, Senha: leitor
+
+Tipo: Administrador, Username: admin, Senha: admin
+
+Tipo: Bibliotecário, Username: biblio, Senha: biblio
+
+Para iniciar o programa, execute o arquivo "View" na camada view do MVC
+
 ## Diagrams
 ### Use Cases
 ![Use Cases Diagram](docs/diagrams/use_cases_diagram.png)
